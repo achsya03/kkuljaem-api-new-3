@@ -205,9 +205,10 @@ class SubsController extends Controller
             ]);
         }
 		$act_subs = Models\Subs::where('id_packet',$packet[0]->id)
-					->where('id_user',$user->id)->get();
+					->where('id_user',$user->id)
+					->orderBy('tgl_subs','ASC')->get();
 		for($i=0;$i<count($act_subs);$i++){
-			if(date_format(date_create($act_subs[$i]->tgl_akhir_bayar),"Y/m/d H:i:s") > date('Y/m/d H:i:s') || $act_subs[$i]->subs_status != "EXPIRE"){
+			if(date_format(date_create($act_subs[$i]->tgl_akhir_bayar),"Y/m/d H:i:s") > date('Y/m/d H:i:s') && $act_subs[$i]->subs_status == "UNPAID"){
 				//return $act_subs[$i];
 				$packet = Models\Packet::select([
 					'lama_paket',
