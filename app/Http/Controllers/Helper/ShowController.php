@@ -340,8 +340,8 @@ class ShowController extends Controller
 
         $arr = [];
         $cont = [];
-        $content = Models\Content::where('id_class',$classes[0]->id)->orderBy('number', 'ASC')->get();
-        $content_id = Models\Content::where('id_class',$classes[0]->id)->orderBy('number', 'ASC')->get();
+        $content = Models\Content::where('id_class',$classes[0]->id)->orderBy('type', 'DESC')->orderBy('number', 'ASC')->get();
+        $content_id = Models\Content::where('id_class',$classes[0]->id)->orderBy('type', 'DESC')->orderBy('number', 'ASC')->get();
         $count_vid = 0;
         $count_quiz = 0;
         //$arr['stat_pengguna'] = $this->userCheck($uuidUser,$date);
