@@ -69,9 +69,46 @@ class AdminController extends Controller
             //     continue;
             // }
             $classes = $videoTheme->video->content->classes->nama;
+            $bad_word = Models\BadWord::select('kata')->get();
+
+            $arr_badWord = [];
+            for($k=0;$k<count($bad_word);$k++){
+                $arr_badWord[$k] = strtolower($bad_word[$k]->kata);
+            }
+            $judul = '';
+            $juduls = explode(" ", $qna[$i]->judul);
+            for($l=0;$l<count($juduls);$l++){
+                if(in_array(strtolower($juduls[$l]),$arr_badWord)){
+                    $len = strlen($juduls[$l]);
+                    $juduls[$l] = '';
+                    for($j=0;$j<$len;$j++){
+                        $juduls[$l] = $juduls[$l].'*';
+                    }
+                }
+                $judul = $judul.$juduls[$l];
+                if($l<count($juduls)-1){
+                    $judul = $judul.' ';
+                }
+            }
+
+            $deskripsi = '';
+            $deskripsis = explode(" ", $qna[$i]->deskripsi);
+            for($l=0;$l<count($deskripsis);$l++){
+                if(in_array(strtolower($deskripsis[$l]),$arr_badWord)){
+                    $len = strlen($deskripsis[$l]);
+                    $deskripsis[$l] = '';
+                    for($j=0;$j<$len;$j++){
+                        $deskripsis[$l] = $deskripsis[$l].'*';
+                    }
+                }
+                $deskripsi = $deskripsi.$deskripsis[$l];
+                if($l<count($deskripsis)-1){
+                    $deskripsi = $deskripsi.' ';
+                }
+            }
             $arr1 = [
                 'nama' => $qna[$i]->user->nama,
-                'deskripsi' => $qna[$i]->deskripsi,
+                'deskripsi' => $deskripsi,
                 'class-nama' => $classes,
                 'qna-uuid' => $qna[$i]->uuid
             ];
@@ -83,9 +120,46 @@ class AdminController extends Controller
         // $post = Controllers\Post\PostController::getPost($qna);
         for($i=0;$i<count($forum);$i++){
             $arr01 = [];
+            $bad_word = Models\BadWord::select('kata')->get();
+
+            $arr_badWord = [];
+            for($k=0;$k<count($bad_word);$k++){
+                $arr_badWord[$k] = strtolower($bad_word[$k]->kata);
+            }
+            $judul = '';
+            $juduls = explode(" ", $forum[$i]->judul);
+            for($l=0;$l<count($juduls);$l++){
+                if(in_array(strtolower($juduls[$l]),$arr_badWord)){
+                    $len = strlen($juduls[$l]);
+                    $juduls[$l] = '';
+                    for($j=0;$j<$len;$j++){
+                        $juduls[$l] = $juduls[$l].'*';
+                    }
+                }
+                $judul = $judul.$juduls[$l];
+                if($l<count($juduls)-1){
+                    $judul = $judul.' ';
+                }
+            }
+
+            $deskripsi = '';
+            $deskripsis = explode(" ", $forum[$i]->deskripsi);
+            for($l=0;$l<count($deskripsis);$l++){
+                if(in_array(strtolower($deskripsis[$l]),$arr_badWord)){
+                    $len = strlen($deskripsis[$l]);
+                    $deskripsis[$l] = '';
+                    for($j=0;$j<$len;$j++){
+                        $deskripsis[$l] = $deskripsis[$l].'*';
+                    }
+                }
+                $deskripsi = $deskripsi.$deskripsis[$l];
+                if($l<count($deskripsis)-1){
+                    $deskripsi = $deskripsi.' ';
+                }
+            }
             $arr01 = [
                 'nama' => $forum[$i]->user->nama,
-                'judul' => $forum[$i]->judul,
+                'judul' => $judul,
                 'forum-uuid' => $forum[$i]->uuid
             ];
             $arr0[$i] = $arr01;

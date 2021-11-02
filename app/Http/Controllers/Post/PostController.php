@@ -422,7 +422,7 @@ class PostController extends Controller
             ]);
         }
 
-        $post_image = $post->postImage;
+        $post_image = $post[0]->postImage;
         for($i=0;$i<count($post_image);$i++){
             Cloudinary::destroy($post_image[$i]->gambar_id);
         }

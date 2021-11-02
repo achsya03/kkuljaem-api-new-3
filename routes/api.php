@@ -141,7 +141,9 @@ Route::group(['prefix' => 'api/user'], function () {
     // Route::get('/',         [User\UserController::class, 'allData']);
     // Route::post('/',        [User\UserController::class, 'addData']);
 });
-
+Route::group(['prefix' => 'api/force'], function () {
+    Route::get('subs',      [Helper\ForceController::class,'forceSubs']);
+});    
 Route::group(['prefix' => 'api/user/packet'], function () {
     Route::get('/',         [Packet\PacketController::class,'allData']);
     //Route::get('/detail',         [Packet\PacketController::class,'detailSelect']);
