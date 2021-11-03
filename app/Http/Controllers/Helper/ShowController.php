@@ -220,7 +220,7 @@ class ShowController extends Controller
        
         //$result['stat_pengguna'] = $this->userCheck($request->user()->uuid,$date);
 
-        $category = Models\ClassesCategory::all();
+        $category = Models\ClassesCategory::orderBy('nama','ASC')->get();
         $arr0 = [];
         for($i = 0;$i < count($category);$i++){
             $arr = [];
