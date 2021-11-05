@@ -262,7 +262,7 @@ Route::group(['prefix' => 'api/admin/setting'], function () {
 });
 
 Route::group(['prefix' => 'api/user/notification'], function () {
-    Route::post('/update',        [User\UserController::class,'updateDeviceID']);
+    Route::post('/update',        [User\WebController::class,'updateDeviceID']);
     Route::get('/',               [Notification\NotificationController::class,'getData']);
     Route::delete('/',               [Notification\NotificationController::class,'deleteData']);
     Route::post('/read',               [Notification\NotificationController::class,'updateRead']);

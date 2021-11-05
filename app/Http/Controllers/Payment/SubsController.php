@@ -517,8 +517,8 @@ class SubsController extends Controller
 			'payment_uuid' => $subs->uuid
 		];
 
-		$paymentNotification = new \Midtrans\Notification();
-		$subs = Models\Subs::where('uuid', $paymentNotification->order_id)->firstOrFail();
+		//$paymentNotification = $request->paymentNotification;
+		$subs = Models\Subs::where('uuid', $request->order_id)->firstOrFail();
 
 		if ($subs->subs_status == 'PAID') {
 			return response()->json([
@@ -528,31 +528,26 @@ class SubsController extends Controller
 			]);
 		}
 
-		$transaction = $paymentNotification->transaction_status;
-		$type = $paymentNotification->payment_type;
-		$orderId = $paymentNotification->order_id;
-		$fraud = $paymentNotification->fraud_status;
+		$transaction = 'settlement';
+		$type = $request->payment_type;
+		$orderId = $request->order_id;
+		//$fraud = $paymentNotification->fraud_status;
 
-		$vaNumber = null;
-		$vendorName = null;
-		if (!empty($paymentNotification->va_numbers[0])) {
-			$vaNumber = $paymentNotification->va_numbers[0]->va_number;
-			$vendorName = $paymentNotification->va_numbers[0]->bank;
-		}
+		
 
 		$paymentStatus = null;
 		if ($transaction == 'capture') {
 			// For credit card transaction, we need to check whether transaction is challenge by FDS or not
-			if ($type == 'credit_card') {
-				if ($fraud == 'challenge') {
-					// TODO set payment status in merchant's database to 'Challenge by FDS'
-					// TODO merchant should decide whether this transaction is authorized or not in MAP
-					$paymentStatus = Models\Payment::CHALLENGE;
-				} else {
-					// TODO set payment status in merchant's database to 'Success'
-					$paymentStatus = Models\Payment::SUCCESS;
-				}
-			}
+			// if ($type == 'credit_card') {
+			// 	if ($fraud == 'challenge') {
+			// 		// TODO set payment status in merchant's database to 'Challenge by FDS'
+			// 		// TODO merchant should decide whether this transaction is authorized or not in MAP
+			// 		$paymentStatus = Models\Payment::CHALLENGE;
+			// 	} else {
+			// 		// TODO set payment status in merchant's database to 'Success'
+			// 		$paymentStatus = Models\Payment::SUCCESS;
+			// 	}
+			// }
 		} else if ($transaction == 'settlement') {
 			// TODO set payment status in merchant's database to 'Settlement'
 			$paymentStatus = Models\Payment::SETTLEMENT;
@@ -579,14 +574,14 @@ class SubsController extends Controller
 
 		$paymentParams = [
 			'id_subs' => $subs->id,
-			'tgl_pembayaran' => $paymentNotification->transaction_time,
-			'transaction_id' => $paymentNotification->transaction_id,
+			'tgl_pembayaran' => $request->transaction_time,
+			'transaction_id' => $request->transaction_id,
 			'method' => 'midtrans',
 			'status' => $paymentStatus,
-			'amount' => $paymentNotification->gross_amount,
-			'token' => $paymentNotification->transaction_id,
+			'amount' => $request->gross_amount,
+			'token' => $request->transaction_id,
 			'payloads' => $payload,
-			'payment_type' => $paymentNotification->payment_type,
+			'payment_type' => $request->payment_type,
 			//'va_number' => $vaNumber,
 			//'vendor_name' => $vendorName,
 			//'biller_code' => $paymentNotification->biller_code,
@@ -615,14 +610,6 @@ class SubsController extends Controller
 			'message' => 'Success',
 			'info' => 'Status Pembayaran ['.$paymentStatus.']',
 			//'data' => $result
-		]);
-
-
-
-		return response()->json([
-			'message' => 'Success',
-			'info' => 'Proses Langganan Telah Tersimpan. Segera Lakukan Pembayaran dalam waktu yang disediakan',
-			'data' => $result
 		]);
 	}
 
