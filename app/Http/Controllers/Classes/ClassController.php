@@ -408,7 +408,7 @@ class ClassController extends Controller
 
             $arr = [
                 'nama' => $student[$i]->user->nama,
-                'progress' => $progress*100,
+                'progress' => $progress,
                 'uuid' => $student[$i]->uuid,
             ];
             $result[$i] = $arr;
