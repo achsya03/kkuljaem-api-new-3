@@ -9,12 +9,16 @@ class WebController extends Controller
 {
     public function updateDeviceID(Request $request)
     {
-        if(!$uuid=$request->device_id){
-            return response()->json(['message'=>'Failed','info'=>"Device ID Tidak Sesuai"]);
+        if(!$uuid=$request->email){
+            return response()->json(['message'=>'Failed','info'=>"Email Tidak Sesuai"]);
+        }
+
+        if(count($user_upd = Models\User::where('email',$request->email)->get())==0){
+            return response()->json(['message'=>'Failed','info'=>"Email Tidak Sesuai"]);
         }
 
        
-        $user_upd = Models\User::where('uuid',$request->user()->uuid)
+        $user_upd = Models\User::where('email',$request->email)
                 ->update([
                     'device_id' => $request->device_id,
                 ]);
