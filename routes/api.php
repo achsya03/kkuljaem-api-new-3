@@ -149,6 +149,8 @@ Route::group(['prefix' => 'api/user/packet'], function () {
     //Route::get('/detail',         [Packet\PacketController::class,'detailSelect']);
 });
 Route::group(['prefix' => 'api/user/subs'], function () {
+    Route::get('/ios', [Payment\SubsController::class,'checkIosData']);
+    Route::post('/ios', [Payment\SubsController::class,'addIosData']);
     Route::get('/', [Payment\SubsController::class,'detailByUser']);
     Route::get('/detail', [Payment\SubsController::class,'detailSubs']);
     Route::post('/', [Payment\SubsController::class,'doCheckout']);
