@@ -188,8 +188,8 @@ class SubsController extends Controller
 		];
 
 		if(isset($request->referal)){
-        	$ref=Models\Reference::where('kode',$request->referal)->first();
-			if($ref=='' || $ref==null){
+        	$ref=Models\Reference::where('kode',$request->referal)->get();
+			if(count($ref)==0){
 				return response()->json([
 					'message' => 'Failed',
 					'error' => 'Kode Referal Tidak Terdaftar'
@@ -401,8 +401,8 @@ class SubsController extends Controller
 		];
 
 		if(isset($request->referal)){
-        	$ref=Models\Reference::where('kode',$request->referal)->first();
-			if(!$ref){
+        	$ref=Models\Reference::where('kode',$request->referal)->get();
+			if(count($ref)==0){
 				return response()->json([
 					'message' => 'Failed',
 					'error' => 'Kode Referal Tidak Terdaftar'
