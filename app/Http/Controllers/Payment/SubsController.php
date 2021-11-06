@@ -494,21 +494,6 @@ class SubsController extends Controller
 		];
 
 
-        $packet = Models\Packet::select([
-            'lama_paket',
-            'harga',
-            'status_aktif',
-            'uuid',
-            ])->where('uuid',$uuid)->first();
-        //unset($class_cat['id']);
-		
-
-        $result['tgl_daftar'] = $orderDate;
-        $result['tgl_akhir'] = $paymentDue;
-        $result['kode_referal'] = $kode;
-        $result['nama_referal'] = $nama;
-        $result['packet'] = $packet;
-
         $input = new Helper\InputController('subs',$data);
 
 		$subs = Models\Subs::where('uuid',$order_id)->first();
@@ -520,14 +505,7 @@ class SubsController extends Controller
 		//$paymentNotification = $request->paymentNotification;
 		$subs = Models\Subs::where('uuid', $request->order_id)->firstOrFail();
 
-		if ($subs->subs_status == 'PAID') {
-			return response()->json([
-				'message' => 'Failed',
-				'info' => 'Langganan Telah Dibayar Sebelumnya',
-				//'data' => $result
-			]);
-		}
-
+		
 		$transaction = 'settlement';
 		$type = $request->payment_type;
 		$orderId = $request->order_id;
@@ -575,12 +553,12 @@ class SubsController extends Controller
 		$paymentParams = [
 			'id_subs' => $subs->id,
 			'tgl_pembayaran' => $request->transaction_time,
-			'transaction_id' => $request->transaction_id,
-			'method' => 'midtrans',
+			'transaction_id' => $order_id,
+			'method' => 'Apple Pay',
 			'status' => $paymentStatus,
 			'amount' => $request->gross_amount,
-			'token' => $request->transaction_id,
-			'payloads' => $payload,
+			'token' => $order_id,
+			'payloads' => $request->payload,
 			'payment_type' => $request->payment_type,
 			//'va_number' => $vaNumber,
 			//'vendor_name' => $vendorName,
