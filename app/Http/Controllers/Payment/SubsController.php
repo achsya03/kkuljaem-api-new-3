@@ -503,7 +503,7 @@ class SubsController extends Controller
 		];
 
 		//$paymentNotification = $request->paymentNotification;
-		$subs = Models\Subs::where('uuid', $request->order_id)->firstOrFail();
+		$subs = Models\Subs::where('uuid', $order_id)->firstOrFail();
 
 		
 		$transaction = 'settlement';
