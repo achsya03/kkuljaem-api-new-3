@@ -554,7 +554,7 @@ class SubsController extends Controller
 			'id_subs' => $subs->id,
 			'tgl_pembayaran' => $request->transaction_time,
 			'transaction_id' => $order_id,
-			'method' => 'Apple Pay',
+			'method' => 'applepay',
 			'status' => $paymentStatus,
 			'amount' => $request->gross_amount,
 			'token' => $order_id,
