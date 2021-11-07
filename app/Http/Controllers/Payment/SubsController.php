@@ -552,7 +552,7 @@ class SubsController extends Controller
 
 		$paymentParams = [
 			'id_subs' => $subs->id,
-			'tgl_pembayaran' => $request->transaction_time,
+			'tgl_pembayaran' => date_format(date_create($request->transaction_time),"Y/m/d H:i:s"),
 			'transaction_id' => $order_id,
 			'method' => 'applepay',
 			'status' => $paymentStatus,
