@@ -621,11 +621,11 @@ class SubsController extends Controller
 				$status = 'GAGAL';
 			}
 			$arr = [
-				'lama_paket'=>$subs[0]->packet->lama_paket,
-				'harga'=>$subs[0]->harga,
-				'tgl_subs'=>$subs[0]->tgl_subs,
+				'lama_paket'=>$subs[$i]->packet->lama_paket,
+				'harga'=>$subs[$i]->harga,
+				'tgl_subs'=>$subs[$i]->tgl_subs,
 				'subs_status'=>$status,
-				'subs_uuid'=>$subs[0]->uuid,
+				'subs_uuid'=>$subs[$i]->uuid,
 			];
 			$result[$i] = $arr;
 		}
