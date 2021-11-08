@@ -36,7 +36,7 @@ class AdminController extends Controller
             ]);
         }//$date = date_format(date_create($usr->tgl_langganan_akhir),"Y/m/d");
 
-        Auth::logoutOtherDevices(bcrypt($request->user()->password));
+        //Auth::logoutOtherDevices(bcrypt($request->user()->password));
 
         $result = [];
         $jmlSiswa = count(Models\DetailStudent::all());

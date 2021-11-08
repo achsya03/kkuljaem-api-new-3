@@ -46,7 +46,7 @@ class ShowController extends Controller
     public function home(Request $request){
         $result = [];
 
-        Auth::logoutOtherDevices(bcrypt($request->user()->password));
+        //Auth::logoutOtherDevices(bcrypt($request->user()->password));
 
         $tglSekarang = date('Y/m/d');
 
