@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Helper;
 use App\Models;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Auth;
+//use App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Banner;
 
@@ -13,6 +13,7 @@ use App\Http\Controllers\Classes;
 
 use App\Http\Controllers\Helper;
 use App\Http\Controllers\Payment;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -34,6 +35,8 @@ class AdminController extends Controller
                 'data'    => 'Jenis Pengguna Tidak Sesuai'
             ]);
         }//$date = date_format(date_create($usr->tgl_langganan_akhir),"Y/m/d");
+
+        Auth::logoutOtherDevices(bcrypt($request->user()->password));
 
         $result = [];
         $jmlSiswa = count(Models\DetailStudent::all());

@@ -70,8 +70,7 @@ class LoginController extends Controller
             ]);
         }
 
-        Auth::logoutOtherDevices(bcrypt(request('password')));
-        
+
         $data = [
             'email'           => $request->user()->email,
             'device_id'       => $request->device_id,

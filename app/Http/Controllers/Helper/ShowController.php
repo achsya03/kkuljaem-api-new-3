@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers;
 use App\Http\Controllers\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShowController extends Controller
 {
@@ -44,6 +45,8 @@ class ShowController extends Controller
 
     public function home(Request $request){
         $result = [];
+
+        Auth::logoutOtherDevices(bcrypt($request->user()->password));
 
         $tglSekarang = date('Y/m/d');
 
