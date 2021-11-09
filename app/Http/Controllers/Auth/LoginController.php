@@ -40,12 +40,7 @@ class LoginController extends Controller
             return response()->json(['message'=>'Failed','info'=>"Operasi Gagal"]);#,'input'=>$return_data
         }
 
-        if(!$token = auth()->attempt($request->only('email','password'))){
-            return response()->json([
-                'message'=>'Failed',
-                'info'=> 'Email Atau Password Salah'
-            ]);
-        }
+        
         $user=User::where('email',$request->user()->email)
             ->whereNotNull('email_verified_at')->first();
 
@@ -67,6 +62,13 @@ class LoginController extends Controller
             return response()->json([
                 'message'=>'Failed',
                 'info'=> 'Role Tidak Sesuai'
+            ]);
+        }
+        $session=Session::where('user_id',$user->id)->delete();
+        if(!$token = auth()->attempt($request->only('email','password'))){
+            return response()->json([
+                'message'=>'Failed',
+                'info'=> 'Email Atau Password Salah'
             ]);
         }
 
