@@ -83,7 +83,7 @@ class LoginController extends Controller
 
         $input = new Helper\UpdateController('login',$data);
         $result = [
-            'bearer_token'=>auth()->check(),
+            'bearer_token'=>$token,
             #'nama'=>$user[0]->nama,
             'jenis_pengguna'=>$jenis_pengguna[$request->user()->jenis_pengguna],
             'jenis_akun'=>$jenis_akun[$request->user()->jenis_akun]
