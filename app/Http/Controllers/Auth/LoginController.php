@@ -41,7 +41,7 @@ class LoginController extends Controller
         }
 
         
-        $user=User::where('email',$request->user()->email)
+        $user=User::where('email',$request->email)
             ->whereNotNull('email_verified_at')->first();
 
         if($user==null){
