@@ -65,7 +65,7 @@ class LoginController extends Controller
                 'info'=> 'Role Tidak Sesuai'
             ]);
         }
-        $session=Models\Session::where('user_id',$user->id)->delete();
+        //$session=Models\Session::where('user_id',$user->id)->delete();
         if(!$token = auth()->attempt($request->only('email','password'))){
             return response()->json([
                 'message'=>'Failed',
