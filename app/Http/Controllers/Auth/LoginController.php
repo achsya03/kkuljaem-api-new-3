@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -64,7 +65,7 @@ class LoginController extends Controller
                 'info'=> 'Role Tidak Sesuai'
             ]);
         }
-        $session=Session::where('user_id',$user->id)->delete();
+        $session=Models\Session::where('user_id',$user->id)->delete();
         if(!$token = auth()->attempt($request->only('email','password'))){
             return response()->json([
                 'message'=>'Failed',
