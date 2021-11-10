@@ -679,7 +679,7 @@ class SubsController extends Controller
 
 		
         $result['tgl_daftar'] = $subs[0]->tgl_subs;
-        $result['tgl_akhir'] = (new \DateTime($subs[0]->tgl_subs))->modify('+'.(30*$subs[0]->packet->lama_paket).' day')->format('Y-m-d');
+        $result['tgl_akhir'] = (new \DateTime($subs[0]->tgl_subs))->modify('+'.(30*$subs[0]->packet->lama_paket).' day')->format('Y-m-d H:i:s');
         $result['kode_referal'] = $kode;
         $result['nama_referal'] = $nama;
         $result['packet'] = $packet;
