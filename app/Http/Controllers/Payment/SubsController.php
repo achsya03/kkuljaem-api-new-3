@@ -59,7 +59,9 @@ class SubsController extends Controller
 				'status'=>$status,
 			];
 			$arr[$i] = $res;
-			$total += $subs[$i]->harga;
+			if($status == 'BERHASIL'){
+				$total += $subs[$i]->harga;
+			}
 		}
 
 		$result = [
