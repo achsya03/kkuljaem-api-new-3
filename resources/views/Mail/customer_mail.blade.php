@@ -1,14 +1,16 @@
 Dear {{ $info_pengguna['nama'] }}, <br/>
 @if($stat=="verify")
-    Thanks for register in Kkuljaem <br/><br/>
-    Please click link below to activate your account <br/>
-    {{ $info_pengguna['url'] }} <br/>
-    We waiting for you to join us in Kkuljaem Class.<br/><br/>
+    Terima kasih telah mendaftarkan diri di Kkuljaem Korean App.<br/><br/>
+    Silakan klik link di bawah untuk memverifikasi alamat email Anda.<br/>
+    {{ $info_pengguna['url'] }} <br/><br/>
+    Regards,<br/>
+    Kkuljaem Korean  <br/><br/>
 @elseif($stat=="forgot-pass")
-    We heard that you lost your Kkuljaem password. Sorry about that!<br/><br/>
-    But don’t worry! You can use the following link to reset your password: <br/>
-    {{ $info_pengguna['url'] }} <br/>
-    We waiting for you to join us in Kkuljaem Class.<br/><br/>
+    Kami telah menerima permintaan untuk mengubah kata sandi Anda. <br/><br/>
+    Silakan klik link di bawah untuk mengganti kata sandi Anda.<br/>
+    {{ $info_pengguna['url'] }} <br/><br/>
+    Regards,<br/>
+    Kkuljaem Korean  <br/><br/>
 @endif
 Thanks,<br/>
 Kkuljaem Operator<br/>

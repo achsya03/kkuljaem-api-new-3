@@ -19,7 +19,7 @@ class MailController extends Controller
             $path="";
             $info_pengguna=[];
             if($stat=="verify"){
-                $judul="Thank you for signing up with Kkuljaem - Please verify your email address";
+                $judul="Selamat bergabung dengan Kkuljaem Korean";
                 $path="verify-mail";
                 $info_pengguna=[
                     'nama' => "Kkuljaem-User",
@@ -27,7 +27,7 @@ class MailController extends Controller
                     'url' => env('APP_DOMAIN', "https://kkuljaem.xyz").env('APP_PORT', "").'api/auth/'.$path.'?token='.$info_penggunas['web_token'],
                 ];
             }elseif ($stat=="forgot-pass") {
-                $judul="Reset Password";
+                $judul="Ubah kata sandi untuk akun Kkuljaem Korean";
                 $path="change-password";
                 $info_pengguna=[
                     'nama' => "Kkuljaem-User",
