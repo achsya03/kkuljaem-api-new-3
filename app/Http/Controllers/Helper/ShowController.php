@@ -20,7 +20,9 @@ class ShowController extends Controller
         }
         //$data['email'] = $user->email;
         if($user->jenis_pengguna!='0'){
-            if($user->detailMentor[0]->url_foto!=null || $user->detailMentor[0]->url_foto!=''){$data['foto'] = $user->detailMentor[0]->url_foto;}
+            if(count($user->detailMentor)>0){
+                if($user->detailMentor[0]->url_foto!=null || $user->detailMentor[0]->url_foto!=''){$data['foto'] = $user->detailMentor[0]->url_foto;}
+            }
         }
         $data['tgl_akhir_langganan'] = $user->tgl_langganan_akhir;
         $data['nama'] = $user->nama;
@@ -410,8 +412,10 @@ class ShowController extends Controller
             $tcr = Models\Teacher::find($teacher->id);
             $usr = Models\User::find($teacher->id_user);
             $arr['mentor_nama'] = $tcr->user->nama;
-            if(isset($usr->detailMentor[0]->url_foto)){
-                $arr['mentor_foto'] = $usr->detailMentor[0]->url_foto;
+            if(count($usr->detailMentor)>0){
+                if(isset($usr->detailMentor[0]->url_foto)){
+                    $arr['mentor_foto'] = $usr->detailMentor[0]->url_foto;
+                }
             }
             $arr['mentor_uuid'] = $tcr->uuid;
         }
@@ -452,9 +456,11 @@ class ShowController extends Controller
         //return $usr->detailMentor;
         $arr['mentor_nama'] = $usr->nama;
         $arr['mentor_lama'] = date_format(date_create($usr->created_at),"Y");
-        if(count($usr->detailMentor)>0){$arr['mentor_bio'] = $usr->detailMentor[0]->bio;}
-        if($usr->detailMentor[0]->url_foto!=null){
-            $arr['mentor_foto'] = $usr->detailMentor[0]->url_foto;
+        if(count($usr->detailMentor)>0){
+            $arr['mentor_bio'] = $usr->detailMentor[0]->bio;
+            if($usr->detailMentor[0]->url_foto!=null){
+                $arr['mentor_foto'] = $usr->detailMentor[0]->url_foto;
+            }
         }
         $arr['mentor_uuid'] = $uuid;
         $cls = [];$co=0;

@@ -1083,11 +1083,15 @@ class PostController extends Controller
 
                 }
             }
-                if($post[$i]->user->url_foto != null && $post[$i]->user->jenis_pengguna!='0'){
-                    $pos[$i] += [
-                        'foto_pengirim' => $post[$i]->user->url_foto,
+            $usr_id = $post[$i]->user->id;
+            $detail_mentor = Models\DetailMentor::where('id_users',$usr_id)->get();
+            if(count($detail_mentor)>0){
+                if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
+                    $arr1 += [
+                        'foto_pengirim' => $detail_mentor[0]->url_foto,
                     ];
                 }
+            }
             $pos[$i] += [
                 'tgl_post' => $post[$i]->created_at,
                 'jml_like' => $post[$i]->jml_like,

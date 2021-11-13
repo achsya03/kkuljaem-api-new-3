@@ -16,11 +16,12 @@ class SubsController extends Controller
         if(date_format(date_create($user->tgl_langganan_akhir),"Y/m/d") >= date('Y/m/d')){
             $stUsr = "Member";
         }
-        if($user->url_foto!=null || $user->url_foto!=''){
-
+        
+        if($user->jenis_pengguna!='0'){
+            if(count($user->detailMentor)>0){
+                if($user->detailMentor[0]->url_foto!=null || $user->detailMentor[0]->url_foto!=''){$data['foto'] = $user->detailMentor[0]->url_foto;}
+            }
         }
-        //$data['email'] = $user->email;
-        if($user->url_foto!=null || $user->url_foto!=''){$data['foto'] = $user->url_foto;}
         $data['tgl_akhir_langganan'] = $user->tgl_langganan_akhir;
         $data['nama'] = $user->nama;
         $data['status_member'] = $stUsr;
