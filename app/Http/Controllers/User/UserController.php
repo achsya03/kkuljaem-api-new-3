@@ -310,6 +310,7 @@ class UserController extends Controller
                 $gambar1 = $request->url_foto;
                 $uploadedFileUrl1 = $this->UUidCheck($gambar1);
             }
+            return $uploadedFileUrl1;
             $uuid1 = DetailMentorController::getUuid();
             $awal_mengajar = date_format(date_create($request->awal_mengajar),"Y/m/d");
             $data_user=[
