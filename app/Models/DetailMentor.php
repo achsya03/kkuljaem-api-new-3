@@ -13,6 +13,8 @@ class DetailMentor extends Model
         'id_users',
         'detailMentor',
         'bio',
+        'url_foto',
+        'foto_id',
         'awal_mengajar',
         'uuid',
     ];

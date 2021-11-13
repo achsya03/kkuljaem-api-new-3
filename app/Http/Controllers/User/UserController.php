@@ -111,7 +111,7 @@ class UserController extends Controller
         }
 
         if(!$uploadedFileUrl = Cloudinary::uploadFile($gambar[0]->getRealPath(),[
-            'folder' => date("Y-m-d")."/Profile",
+            'folder' => "/Profile",
             'use_filename' => 'True',
             'filename_override' => date('mdYhis')
         ])){
