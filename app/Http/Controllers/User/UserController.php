@@ -634,6 +634,7 @@ class UserController extends Controller
                 'nama'=>$user->nama,
                 'foto'=>$user->url_foto,
                 'jenis_pengguna'=>$usr,
+                'awal_mengajar'=>$user->detailMentor[0]->awal_mengajar,
                 'bio'=>$bio,
                 'user_uuid'=>$user->uuid,
             ];
