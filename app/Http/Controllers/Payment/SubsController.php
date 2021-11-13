@@ -232,7 +232,7 @@ class SubsController extends Controller
 					}
 				}
 				$result['tgl_daftar'] = $act_subs[$i]->tgl_subs;
-				$result['tgl_akhir'] = (new \DateTime($act_subs[$i]->tgl_subs))->modify('+'.(30*$act_subs[$i]->packet->lama_paket).' day')->format('Y-m-d');
+				$result['tgl_akhir'] = (new \DateTime($act_subs[$i]->tgl_subs))->modify('+'.(30*$act_subs[$i]->packet->lama_paket).' day')->format('Y-m-d H:i:s');
 				$result['kode_referal'] = $kode;
 				$result['nama_referal'] = $nama;
 				$result['packet'] = $packet;
@@ -336,7 +336,7 @@ class SubsController extends Controller
 		
 
         $result['tgl_daftar'] = $orderDate;
-        $result['tgl_akhir'] = (new \DateTime(date('Y-m-d')))->modify('+'.(30*$packet->lama_paket).' day')->format('Y-m-d');
+        $result['tgl_akhir'] = (new \DateTime(date('Y-m-d')))->modify('+'.(30*$packet->lama_paket).' day')->format('Y-m-d H:i:s');
         $result['kode_referal'] = $kode;
         $result['nama_referal'] = $nama;
         $result['packet'] = $packet;
