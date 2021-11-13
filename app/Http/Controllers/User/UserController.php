@@ -310,15 +310,15 @@ class UserController extends Controller
                 $gambar1 = $request->url_foto;
                 $uploadedFileUrl1 = $this->UUidCheck($gambar1);
             }
-            return $uploadedFileUrl1;
+            //return $uploadedFileUrl1;
             $uuid1 = DetailMentorController::getUuid();
             $awal_mengajar = date_format(date_create($request->awal_mengajar),"Y/m/d");
             $data_user=[
                 'id_users'  => $id_user,
                 'bio'       => $request->bio,
                 'awal_mengajar' => $awal_mengajar,
-                'url_foto' => $uploadedFileUrl1->getSecurePath(),
-                'foto_id' => $uploadedFileUrl1->getPublicId(),
+                'url_foto' => $uploadedFileUrl1['getSecurePath'],
+                'foto_id' => $uploadedFileUrl1['getPublicId'],
                 'uuid' => $uuid1
             ];
             DetailMentorController::addData($data_user);
