@@ -970,10 +970,12 @@ class ShowController extends Controller
             }
             $usr_id = $post[$i]->user->id;
             $detail_mentor = Models\DetailMentor::where('id_users',$usr_id)->get();
-            if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
-                $arr1 += [
-                    'foto_pengirim' => $detail_mentor[0]->url_foto,
-                ];
+            if(count($detail_mentor)>0){
+                if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
+                    $arr1 += [
+                        'foto_pengirim' => $detail_mentor[0]->url_foto,
+                    ];
+                }
             }
             $arr1 += [
                 'tgl_post' => $post[$i]->created_at,
@@ -1139,10 +1141,12 @@ class ShowController extends Controller
             }
             $usr_id = $post[$i]->user->id;
             $detail_mentor = Models\DetailMentor::where('id_users',$usr_id)->get();
-            if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
-                $arr1 += [
-                    'foto_pengirim' => $detail_mentor[0]->url_foto,
-                ];
+            if(count($detail_mentor)>0){
+                if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
+                    $arr1 += [
+                        'foto_pengirim' => $detail_mentor[0]->url_foto,
+                    ];
+                }
             }
             $arr1 += [
                 'tgl_post' => $post[$i]->created_at,
@@ -1192,10 +1196,12 @@ class ShowController extends Controller
             }
             $usr_id = $forum1[$i]->user->id;
             $detail_mentor = Models\DetailMentor::where('id_users',$usr_id)->get();
-            if($detail_mentor[0]->url_foto != null && $forum1[$i]->user->jenis_pengguna != '0'){
-                $arr1 += [
-                    'foto_pengirim' => $detail_mentor[0]->url_foto,
-                ];
+            if(count($detail_mentor)>0){
+                if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
+                    $arr1 += [
+                        'foto_pengirim' => $detail_mentor[0]->url_foto,
+                    ];
+                }
             }
             $arr1 += [
                 'tgl_post' => $forum1[$i]->created_at,
@@ -1340,10 +1346,12 @@ class ShowController extends Controller
             }
             $usr_id = $post[$i]->user->id;
             $detail_mentor = Models\DetailMentor::where('id_users',$usr_id)->get();
-            if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
-                $arr1 += [
-                    'foto_pengirim' => $detail_mentor[0]->url_foto,
-                ];
+            if(count($detail_mentor)>0){
+                if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
+                    $arr1 += [
+                        'foto_pengirim' => $detail_mentor[0]->url_foto,
+                    ];
+                }
             }
             $arr1 += [
                 'tgl_post' => $post[$i]->created_at,
@@ -1486,10 +1494,12 @@ class ShowController extends Controller
             }
             $usr_id = $post[$i]->user->id;
             $detail_mentor = Models\DetailMentor::where('id_users',$usr_id)->get();
-            if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
-                $arr1 += [
-                    'foto_pengirim' => $detail_mentor[0]->url_foto,
-                ];
+            if(count($detail_mentor)>0){
+                if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
+                    $arr1 += [
+                        'foto_pengirim' => $detail_mentor[0]->url_foto,
+                    ];
+                }
             }
             $arr1 += [
                 'tgl_post' => $post[$i]->created_at,
@@ -1551,10 +1561,12 @@ class ShowController extends Controller
 
             $usr_id = $user->id;
             $detail_mentor = Models\DetailMentor::where('id_users',$usr_id)->get();
-            if($detail_mentor[0]->url_foto != null && $user->jenis_pengguna != '0'){
-                $arr1 += [
-                    'user_foto' => $detail_mentor[0]->url_foto,
-                ];
+            if(count($detail_mentor)>0){
+                if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
+                    $arr1 += [
+                        'user_foto' => $detail_mentor[0]->url_foto,
+                    ];
+                }
             }
             $bad_word = Models\BadWord::select('kata')->get();
 
@@ -1722,10 +1734,12 @@ class ShowController extends Controller
             
             $usr_id = $user->id;
             $detail_mentor = Models\DetailMentor::where('id_users',$usr_id)->get();
-            if($detail_mentor[0]->url_foto != null && $user->jenis_pengguna != '0'){
-                $arr1 += [
-                    'user_foto' => $detail_mentor[0]->url_foto,
-                ];
+            if(count($detail_mentor)>0){
+                if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
+                    $arr1 += [
+                        'user_foto' => $detail_mentor[0]->url_foto,
+                    ];
+                }
             }
             $bad_word = Models\BadWord::select('kata')->get();
 
