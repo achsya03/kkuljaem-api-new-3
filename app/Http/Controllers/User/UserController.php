@@ -163,7 +163,7 @@ class UserController extends Controller
     }
 
     private function jenisPenggunaCheck($jenis_pengguna){
-        $arr = ['siswa','mentor','admin'];
+        $arr = ['student','mentor','admin'];
         if(!$result = in_array($jenis_pengguna,$arr)){
             return response()->json(['message'=>"Jenis Pengguna Tidak Valid"]);
         }
