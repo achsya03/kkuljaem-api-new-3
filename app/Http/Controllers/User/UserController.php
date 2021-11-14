@@ -262,22 +262,30 @@ class UserController extends Controller
 
     public function addData(Request $request){
         $jenis_pengguna=$request->jenis_pengguna;
-        $this->jenisPenggunaCheck($jenis_pengguna);
+        //$this->jenisPenggunaCheck($jenis_pengguna);
         
         $validator = Validator::make($request->all(), $this->rules, $this->messages);
         #echo $web_token;
         if($validator->fails()){
             return response()->json(['message'=>$validator->errors(),'info'=>$validator->errors()]);
         }
+        if($jenis_pengguna != 'student' or $jenis_pengguna != 'mentor' or $jenis_pengguna != 'admin'){
+            return response()->json(['message'
+            => 'Jenis Pengguna Tidak Terdaftar'],401);
+        }
 
 
         $arr = ['student','mentor','admin'];
         $id_pengguna = array_search($jenis_pengguna, $arr);
-        //return $id_pengguna.'-'.$jenis_pengguna;
-        if($id_pengguna == '' or $id_pengguna == NULL){
-            return response()->json(['message'
-            => 'Jenis Pengguna Tidak Terdaftar'],401);
+        $id_pengguna = -1;
+        if($jenis_pengguna == 'student'){
+            $id_pengguna = 0;
+        }elseif($jenis_pengguna == 'mentor'){
+            $id_pengguna = 1;
+        }elseif($jenis_pengguna == 'admin'){
+            $id_pengguna = 2;
         }
+        //return $id_pengguna.'-'.$jenis_pengguna;
 
         $web_token = $this->randomToken(144);
 
