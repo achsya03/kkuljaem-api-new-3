@@ -147,25 +147,22 @@ class PostAdminController extends Controller
             
         
         $arr1 = [];
-        for($i=0;$i<count($classes);$i++){
-            $content = Models\Content::where('id_class',$classes[$i]->id)
+        $content = Models\Content::where('id_class',$classes[$i]->id)
                         ->where('type','video')->orderBy('number','ASC')->get();
 
-            $arr11 = [];
+        $arr11 = [];
+        $arr10 = [];
               
-            for($j = 0;$j<count($content);$j++){
-                $arr11['video_nama'] = $content[$j]->video[0]->judul;
-                $arr11['video_episode'] = $content[$j]->number;
-                $arr11['video_uuid'] = $content[$j]->video[0]->uuid;
-            }
-
-            $arr11['class_nama'] = $classes[$i]->nama;
-            $arr11['class_uuid'] = $classes[$i]->uuid;
-            
-            $arr1[$i] = $arr11;
+        for($j = 0;$j<count($content);$j++){
+            $arr10['video_nama'] = $content[$j]->video[0]->judul;
+            $arr10['video_episode'] = $content[$j]->number;
+            $arr10['video_uuid'] = $content[$j]->video[0]->uuid;
+            $arr10['class_nama'] = $classes[$i]->nama;
+            $arr10['class_uuid'] = $classes[$i]->uuid;
+            $arr11[$j] = $arr10;
         }
 
-        $result = $arr1;
+        $result = $arr11;
 
 
         return response()->json([
