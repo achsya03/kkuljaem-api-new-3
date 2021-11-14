@@ -260,99 +260,99 @@ class UserController extends Controller
         ]);
     }
 
-    public function addData(Request $request){
-        $jenis_pengguna=$request->jenis_pengguna;
-        //$this->jenisPenggunaCheck($jenis_pengguna);
+    // public function addData(Request $request){
+    //     $jenis_pengguna=$request->jenis_pengguna;
+    //     //$this->jenisPenggunaCheck($jenis_pengguna);
         
-        $validator = Validator::make($request->all(), $this->rules, $this->messages);
-        #echo $web_token;
-        if($validator->fails()){
-            return response()->json(['message'=>$validator->errors(),'info'=>$validator->errors()]);
-        }
-        if($request->jenis_pengguna != 'student' or $request->jenis_pengguna != 'mentor' or $request->jenis_pengguna != 'admin'){
-            return response()->json(['message'
-            => 'Jenis Pengguna Tidak Terdaftar'],401);
-        }
+    //     $validator = Validator::make($request->all(), $this->rules, $this->messages);
+    //     #echo $web_token;
+    //     if($validator->fails()){
+    //         return response()->json(['message'=>$validator->errors(),'info'=>$validator->errors()]);
+    //     }
+    //     if($request->jenis_pengguna != 'student' or $request->jenis_pengguna != 'mentor' or $request->jenis_pengguna != 'admin'){
+    //         return response()->json(['message'
+    //         => 'Jenis Pengguna Tidak Terdaftar'],401);
+    //     }
 
 
-        $arr = ['student','mentor','admin'];
-        $id_pengguna = array_search($jenis_pengguna, $arr);
-        $id_pengguna = -1;
-        if($jenis_pengguna == 'student'){
-            $id_pengguna = 0;
-        }elseif($jenis_pengguna == 'mentor'){
-            $id_pengguna = 1;
-        }elseif($jenis_pengguna == 'admin'){
-            $id_pengguna = 2;
-        }
-        //return $id_pengguna.'-'.$jenis_pengguna;
+    //     $arr = ['student','mentor','admin'];
+    //     $id_pengguna = array_search($jenis_pengguna, $arr);
+    //     $id_pengguna = -1;
+    //     if($jenis_pengguna == 'student'){
+    //         $id_pengguna = 0;
+    //     }elseif($jenis_pengguna == 'mentor'){
+    //         $id_pengguna = 1;
+    //     }elseif($jenis_pengguna == 'admin'){
+    //         $id_pengguna = 2;
+    //     }
+    //     //return $id_pengguna.'-'.$jenis_pengguna;
 
-        $web_token = $this->randomToken(144);
+    //     $web_token = $this->randomToken(144);
 
-        $info_pengguna=[
-            #'nama' => request('nama'),
-            'email' => request('email'),
-            'web_token' => $web_token,
-        ];
+    //     $info_pengguna=[
+    //         #'nama' => request('nama'),
+    //         'email' => request('email'),
+    //         'web_token' => $web_token,
+    //     ];
 
-        if(!$kirim_email=MailController::sendEmail($info_pengguna,"verify")){
-            return response()->json(['message'
-            => 'Email Not Send'],401);
-        }
-        $uuid=$this->getUuid();
+    //     if(!$kirim_email=MailController::sendEmail($info_pengguna,"verify")){
+    //         return response()->json(['message'
+    //         => 'Email Not Send'],401);
+    //     }
+    //     $uuid=$this->getUuid();
 
 
-        User::create([
-            'nama' => request('nama'),
-            'email' => request('email'),
-            'password' => bcrypt(request('password')),
-            'web_token' => $web_token,
-            'jenis_pengguna' => $id_pengguna,
-            'jenis_akun' => 2,
-            'uuid' => $uuid
-        ]);
+    //     User::create([
+    //         'nama' => request('nama'),
+    //         'email' => request('email'),
+    //         'password' => bcrypt(request('password')),
+    //         'web_token' => $web_token,
+    //         'jenis_pengguna' => $id_pengguna,
+    //         'jenis_akun' => 2,
+    //         'uuid' => $uuid
+    //     ]);
 
-        $id_user = User::where('uuid', $uuid)->first()->id;
+    //     $id_user = User::where('uuid', $uuid)->first()->id;
         
-        if($id_pengguna==1 or $id_pengguna==2){
-            $uploadedFileUrl1 = [
-                'getSecurePath'=>'',
-                'getPublicId'=>'',
-            ];
+    //     if($id_pengguna==1 or $id_pengguna==2){
+    //         $uploadedFileUrl1 = [
+    //             'getSecurePath'=>'',
+    //             'getPublicId'=>'',
+    //         ];
 
-            if(isset($request->url_foto)){
-                $gambar1 = $request->url_foto;
-                $uploadedFileUrl1 = $this->UUidCheck($gambar1);
-            }
+    //         if(isset($request->url_foto)){
+    //             $gambar1 = $request->url_foto;
+    //             $uploadedFileUrl1 = $this->UUidCheck($gambar1);
+    //         }
             
-            $uuid1 = DetailMentorController::getUuid();
-            $awal_mengajar = date_format(date_create($request->awal_mengajar),"Y/m/d");
-            $data_user=[
-                'id_users'  => $id_user,
-                'bio'       => $request->bio,
-                'awal_mengajar' => $awal_mengajar,
-                'url_foto' => $uploadedFileUrl1['getSecurePath'],
-                'foto_id' => $uploadedFileUrl1['getPublicId'],
-                'uuid' => $uuid1
-            ];
-            DetailMentorController::addData($data_user);
-        }elseif($id_pengguna==0){
-            $uuid1 = DetailStudentController::getUuid();
-            $tgl_lahir = date_format(date_create($request->tgl_lahir),"Y/m/d");
-            $data_user=[
-                'id_users'  => $id_user,
-                'alamat'       => $request->alamat,
-                'jenis_kel' => $request->jenis_kel,
-                'tgl_lahir' => $tgl_lahir,
-                'tempat_lahir' => $request->tempat_lahir,
-                'uuid' => $uuid1
-            ];
-            DetailStudentController::addData($data_user);
-        }
+    //         $uuid1 = DetailMentorController::getUuid();
+    //         $awal_mengajar = date_format(date_create($request->awal_mengajar),"Y/m/d");
+    //         $data_user=[
+    //             'id_users'  => $id_user,
+    //             'bio'       => $request->bio,
+    //             'awal_mengajar' => $awal_mengajar,
+    //             'url_foto' => $uploadedFileUrl1['getSecurePath'],
+    //             'foto_id' => $uploadedFileUrl1['getPublicId'],
+    //             'uuid' => $uuid1
+    //         ];
+    //         DetailMentorController::addData($data_user);
+    //     }elseif($id_pengguna==0){
+    //         $uuid1 = DetailStudentController::getUuid();
+    //         $tgl_lahir = date_format(date_create($request->tgl_lahir),"Y/m/d");
+    //         $data_user=[
+    //             'id_users'  => $id_user,
+    //             'alamat'       => $request->alamat,
+    //             'jenis_kel' => $request->jenis_kel,
+    //             'tgl_lahir' => $tgl_lahir,
+    //             'tempat_lahir' => $request->tempat_lahir,
+    //             'uuid' => $uuid1
+    //         ];
+    //         DetailStudentController::addData($data_user);
+    //     }
         
-        return response()->json(['message'
-        => 'Success','info'=>'Silahkan Aktivasi Akun melalui email'],200);
-    }
+    //     return response()->json(['message'
+    //     => 'Success','info'=>'Silahkan Aktivasi Akun melalui email'],200);
+    // }
 
     public function detailData(Request $request){
         if(!$uuid=$request->token){
