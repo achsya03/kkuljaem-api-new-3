@@ -269,7 +269,7 @@ class UserController extends Controller
         if($validator->fails()){
             return response()->json(['message'=>$validator->errors(),'info'=>$validator->errors()]);
         }
-        if($jenis_pengguna != 'student' or $jenis_pengguna != 'mentor' or $jenis_pengguna != 'admin'){
+        if($request->jenis_pengguna != 'student' or $request->jenis_pengguna != 'mentor' or $request->jenis_pengguna != 'admin'){
             return response()->json(['message'
             => 'Jenis Pengguna Tidak Terdaftar'],401);
         }
