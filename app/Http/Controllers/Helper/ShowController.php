@@ -1389,8 +1389,7 @@ class ShowController extends Controller
             ]);
         }
 
-        if(count($post = Models\Post::where('stat_post',0)
-        ->where('uuid',$uuid)
+        if(count($post = Models\Post::where('uuid',$uuid)
         ->where('jenis','qna')
         ->orderBy('jml_like','DESC')->get())==0){
             return response()->json([
