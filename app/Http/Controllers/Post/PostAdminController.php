@@ -147,6 +147,7 @@ class PostAdminController extends Controller
             
         
         $arr1 = [];
+        $count = 0;
         for($i = 0;$i<count($classes);$i++){
             $content = Models\Content::where('id_class',$classes[$i]->id)
                             ->where('type','video')->orderBy('number','ASC')->get();
@@ -160,7 +161,8 @@ class PostAdminController extends Controller
                 $arr10['video_uuid'] = $content[$j]->video[0]->uuid;
                 $arr10['class_nama'] = $classes[$i]->nama;
                 $arr10['class_uuid'] = $classes[$i]->uuid;
-                $arr1 += $arr10;
+                $arr1[$count]= $arr10;
+                $count += 1;
             }
 
         }
