@@ -119,6 +119,7 @@ class PostAdminController extends Controller
                 'judul' => $qna[$i]->judul,
                 'deskripsi' => $qna[$i]->deskripsi,
                 'video_judul' => $video->judul,
+                'video_uuid' => $video->uuid,
                 'class_nama' => $classes->nama,
                 'class_uuid' => $classes->uuid,
                 'user_post' => $qna[$i]->user->nama,
@@ -142,16 +143,25 @@ class PostAdminController extends Controller
     public function listClasses(Request $request)
     {
         
-        $classes = Models\Classes::select(['nama','uuid'])->orderBy('nama','ASC')->get();
+        $classes = Models\Classes::orderBy('nama','ASC')->get();
             
         
         $arr1 = [];
         for($i=0;$i<count($classes);$i++){
-                        
-            $arr11 = [
-                'class_nama' => $classes[$i]->nama,
-                'class_uuid' => $classes[$i]->uuid,
-            ];
+            $content = Models\Content::where('id_class',$classes[$i]->id)
+                        ->where('type','video')->orderBy('number','ASC')->get();
+
+            $arr11 = [];
+              
+            for($j = 0;$j<count($content);$j++){
+                $arr11['video_nama'] = $content[$j]->video[0]->judul;
+                $arr11['video_episode'] = $content[$j]->number;
+                $arr11['video_uuid'] = $content[$j]->video[0]->uuid;
+            }
+
+            $arr11['class_nama'] = $classes[$i]->nama;
+            $arr11['class_uuid'] = $classes[$i]->uuid;
+            
             $arr1[$i] = $arr11;
         }
 
