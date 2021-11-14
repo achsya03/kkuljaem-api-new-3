@@ -273,6 +273,7 @@ class UserController extends Controller
 
         $arr = ['student','mentor','admin'];
         $id_pengguna = array_search($jenis_pengguna, $arr);
+        return $id_pengguna.'-'.$jenis_pengguna;
         if($id_pengguna == NULL){
             return response()->json(['message'
             => 'Jenis Pengguna Tidak Terdaftar'],401);
