@@ -162,9 +162,10 @@ class PostAdminController extends Controller
                 $arr10['class_uuid'] = $classes[$i]->uuid;
                 $arr11[$j] = $arr10;
             }
+            $arr1[$i] = $arr11;
 
         }
-        $result = $arr11;
+        $result = $arr1;
 
 
         return response()->json([
