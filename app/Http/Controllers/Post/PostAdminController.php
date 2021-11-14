@@ -160,9 +160,8 @@ class PostAdminController extends Controller
                 $arr10['video_uuid'] = $content[$j]->video[0]->uuid;
                 $arr10['class_nama'] = $classes[$i]->nama;
                 $arr10['class_uuid'] = $classes[$i]->uuid;
-                $arr11[$j] = $arr10;
+                $arr1 += $arr10;
             }
-            $arr1[$i] = $arr11;
 
         }
         $result = $arr1;
