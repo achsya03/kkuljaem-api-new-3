@@ -36,16 +36,43 @@ class MailController extends Controller
                 ];
             }
 
-            try{
-                $kirim_email=Mail::to($info_pengguna['email'])
-                ->send(new SendMail($judul,$info_pengguna,$stat));
-            }catch(\Exception $e) {
-                return 'Send Again';
+            $res = 'Send Again';
+
+            #$MAIL_MAILER = explode(",",env('MAIL_MAILER'));
+            $MAIL_HOST_ARR = explode(",-",env('MAIL_HOST_ARR'));
+            $MAIL_PORT_ARR = explode(",-",env('MAIL_PORT_ARR'));
+            $MAIL_USERNAME_ARR = explode(",-",env('MAIL_USERNAME_ARR'));
+            $MAIL_PASSWORD_ARR = explode(",-",env('MAIL_PASSWORD_ARR'));
+            #$MAIL_ENCRYPTION = explode(",",env('MAIL_ENCRYPTION'));
+            $MAIL_FROM_ADDRESS_ARR = explode(",-",env('MAIL_FROM_ADDRESS_ARR'));
+            #$MAIL_FROM_NAME = explode(",",env('MAIL_FROM_NAME'));
+
+            $counter = 0;
+
+            while($res = 'Send Again'){
+                #putenv("MAIL_MAILER=".$MAIL_MAILER[$counter]);
+                Config::set('host', $MAIL_HOST_ARR[$counter]);
+                Config::set('port', $MAIL_PORT_ARR[$counter]);
+                Config::set('username', $MAIL_USERNAME_ARR[$counter]);
+                Config::set('password', $MAIL_PASSWORD_ARR[$counter]);
+                #putenv("MAIL_ENCRYPTION=".$MAIL_ENCRYPTION[$counter]);
+                Config::set('address', $MAIL_FROM_ADDRESS_ARR[$counter]);
+                #putenv("MAIL_FROM_NAME=".$MAIL_FROM_NAME[$counter]);
+                try{
+
+                    $kirim_email=Mail::to($info_pengguna['email'])
+                    ->send(new SendMail($judul,$info_pengguna,$stat));
+                }catch(\Exception $e) {
+                    $res = 'Send Again';
+                    $counter += 1;
+                }
+                if(empty($kirim_email)){
+                    $res = 'Mail Sended';
+                }else{
+                    $res = 'Send Again';
+                    $counter += 1;
+                }
             }
-            if(empty($kirim_email)){
-                return 'Mail Sended';
-            }else{
-                return 'Send Again';
-            }
+            return $res;
     }
 }
