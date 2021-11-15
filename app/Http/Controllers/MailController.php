@@ -53,12 +53,12 @@ class MailController extends Controller
             for($i=0;$i<count($MAIL_HOST_ARR);$i++){
                 $counter = $i;
                 #putenv("MAIL_MAILER=".$MAIL_MAILER[$counter]);
-                Config::set('host', $MAIL_HOST_ARR[$counter]);
-                Config::set('port', $MAIL_PORT_ARR[$counter]);
-                Config::set('username', $MAIL_USERNAME_ARR[$counter]);
-                Config::set('password', $MAIL_PASSWORD_ARR[$counter]);
+                Config::set('mail.host', $MAIL_HOST_ARR[$counter]);
+                Config::set('mail.port', $MAIL_PORT_ARR[$counter]);
+                Config::set('mail.username', $MAIL_USERNAME_ARR[$counter]);
+                Config::set('mail.password', $MAIL_PASSWORD_ARR[$counter]);
                 #putenv("MAIL_ENCRYPTION=".$MAIL_ENCRYPTION[$counter]);
-                Config::set('address', $MAIL_FROM_ADDRESS_ARR[$counter]);
+                Config::set('mail.address', $MAIL_FROM_ADDRESS_ARR[$counter]);
                 #putenv("MAIL_FROM_NAME=".$MAIL_FROM_NAME[$counter]);
                 try{
 
