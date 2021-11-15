@@ -50,7 +50,8 @@ class MailController extends Controller
 
             $counter = 0;
 
-            while($res = 'Send Again'){
+            for($i=0;$i<count($MAIL_HOST_ARR);$i++){
+                $counter = $i;
                 #putenv("MAIL_MAILER=".$MAIL_MAILER[$counter]);
                 Config::set('host', $MAIL_HOST_ARR[$counter]);
                 Config::set('port', $MAIL_PORT_ARR[$counter]);
@@ -65,13 +66,12 @@ class MailController extends Controller
                     ->send(new SendMail($judul,$info_pengguna,$stat));
                 }catch(\Exception $e) {
                     $res = 'Send Again';
-                    $counter += 1;
                 }
                 if(empty($kirim_email)){
                     $res = 'Mail Sended';
+                    break;
                 }else{
                     $res = 'Send Again';
-                    $counter += 1;
                 }
             }
             return $res;
