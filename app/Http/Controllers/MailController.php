@@ -8,6 +8,7 @@ use App\Mail\SendMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Config;
 
 class MailController extends Controller
 {
