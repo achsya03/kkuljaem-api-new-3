@@ -39,7 +39,7 @@ class ForceController extends Controller
                 'message' => 'Failed',
                 'error' => 'Email tidak sesuai'
             ]);
-        }
+        }  
         if(count($user = Models\User::where('email',$email)->get())==0){
             return response()->json([
                 'message' => 'Failed',
