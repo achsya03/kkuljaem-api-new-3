@@ -36,10 +36,11 @@ class ForceController extends Controller
                 'error' => 'Email tidak sesuai'
             ]);
         }
+        $tgl_akhir = date_format(date_create($request->tgl_akhir),"Y/m/d");
         $tgl_akh = (new \DateTime(date('Y-m-d')))->modify('+'.(30*1).' day')->format('Y-m-d');
             
         $user = Models\User::where('email',$email)->update([
-            'tgl_langganan_akhir' => $tgl_akh
+            'tgl_langganan_akhir' => $tgl_akhir
         ]);
 
         $result = [
