@@ -10,8 +10,18 @@ use General;
 
 class ForceController extends Controller
 {
+    public function __construct(Request $request){
+        $this->middleware('auth');
+    }
+
     public function forceSubs(Request $request){
         $result = [];
+        if($request->user()->jenis_pengguna != 2){
+            return response()->json([
+                'message' => 'Failed',
+                'error' => 'Anda bukan admin'
+            ]);
+        }
         if(!$token = $request->token){
             return response()->json([
                 'message' => 'Failed',
