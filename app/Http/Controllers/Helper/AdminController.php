@@ -190,8 +190,8 @@ class AdminController extends Controller
         #$result['theme'] = $arr;
 
         $result = [
-            'jml-siswa' => $jmlSubs,
-            'jml-subs' => $jmlSiswa,
+            'jml-siswa' => $jmlSiswa,
+            'jml-subs' => $jmlSubs,
             'jml-mentor' => $jmlMentor,
             'jml-class' => $jmlClass,
             'jml-qna' => $jmlQnA,
