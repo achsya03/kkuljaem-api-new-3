@@ -39,7 +39,7 @@ class AdminController extends Controller
         //Auth::logoutOtherDevices(bcrypt($request->user()->password));
 
         $result = [];
-        $jmlSiswa = count(Models\DetailStudent::all());
+        $jmlSiswa = count(Models\User::where('jenis_pengguna',0)->get());
         $jmlSubs = count(Models\User::where('jenis_pengguna',0)
                         ->where('tgl_langganan_akhir','>=',date('Y/m/d'))
                         ->get());
