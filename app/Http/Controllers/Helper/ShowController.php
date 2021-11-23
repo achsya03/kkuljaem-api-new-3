@@ -58,7 +58,7 @@ class ShowController extends Controller
         if(count($words)==0){
             $words = Models\Words::orderBy('jadwal','ASC')->limit(5)->get();
         }
-        $class = Models\Classes::orderBy('created_at','DESC')
+        $class = Models\Classes::orderBy('nama','ASC')
             ->where('status_tersedia',1)->limit(6)->get();
         $video_uuid = Models\Video::select('uuid')->get();
         $theme = Models\Theme::orderBy('jml_post','DESC')
@@ -227,7 +227,7 @@ class ShowController extends Controller
         for($i = 0;$i < count($category);$i++){
             $arr = [];
             $class = Models\Classes::where('id_class_category',$category[$i]->id)
-                ->where('status_tersedia',1)->limit(6)->get();
+                ->where('status_tersedia',1)->orderBy('nama','ASC')->limit(6)->get();
             $classes = [];
             for($j = 0;$j < count($class);$j++){
                 $arr1 = [];
@@ -281,7 +281,7 @@ class ShowController extends Controller
 
         $arr = [];
         $class = Models\Classes::where('id_class_category',$category[0]->id)
-            ->where('status_tersedia',1)->get();
+            ->where('status_tersedia',1)->orderBy('nama','ASC')->get();
             
         $classes = [];
         $arr0 = [];
@@ -467,7 +467,7 @@ class ShowController extends Controller
         //$tc = Models\Teacher::where('id_user',$teacher[0]->id_user)->get();
         for($i=0;$i<count($teacher);$i++){
             if(count($classes = Models\Classes::where('id',$teacher[$i]->id_class)
-                ->where('status_tersedia',1)->get())==0){
+                ->where('status_tersedia',1)->orderBy('nama','ASC')->get())==0){
                     continue;
                 }
             $arr0 = [];
