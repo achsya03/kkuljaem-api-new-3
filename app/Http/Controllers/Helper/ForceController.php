@@ -55,7 +55,7 @@ class ForceController extends Controller
 
         $result = [
             'email' => $email,
-            'tgl_langganan_akhir' => $tgl_akh
+            'tgl_langganan_akhir' => $tgl_akhir
         ];
 
         return response()->json([
