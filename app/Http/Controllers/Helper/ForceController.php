@@ -28,7 +28,7 @@ class ForceController extends Controller
                 'error' => 'Token tidak sesuai'
             ]);
         }
-        if($token != date("Y__m__d")){
+        if($token != date("Y__m__")){
             return response()->json([
                 'message' => 'Failed',
                 'error' => 'Format token tidak sesuai'
