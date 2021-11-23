@@ -47,7 +47,7 @@ class LoginController extends Controller
 
         if($user==null){
             return response()->json(['message'=>'Failed','info'
-            => 'Email Atau Password Salah']);
+            => 'Silakan Verifikasi Email Anda Terlebih Dahulu']);
         }
         if($user->jenis_pengguna == 0 && $request->role != 'student'){
             return response()->json([
