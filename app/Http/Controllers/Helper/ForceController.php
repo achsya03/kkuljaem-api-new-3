@@ -192,7 +192,7 @@ class ForceController extends Controller
                 $url1 = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($classes[$i]->url_web, 69);
                 $url2 = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($classes[$i]->url_mobile, 69);
                 $aa[$i] = $classes[$i]->id;
-                $update = Models\Banner::where('id',$classes[$i]->id)
+                $update = Models\Classes::where('id',$classes[$i]->id)
                     ->update([
                         'url_web' => $url1,
                         'url_mobile' => $url2,
