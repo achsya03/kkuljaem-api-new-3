@@ -85,8 +85,8 @@ class ForceController extends Controller
         }
 
         return response()->json([
-			'message' => 'Success',
-			'info' => 'Proses Update Berhasil',
+			'message' => $aa[$i],
+			'info' => $bb[$i],
 			'data' => $result
 		]);
     }
