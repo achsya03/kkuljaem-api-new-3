@@ -54,7 +54,7 @@ class SubsController extends Controller
 				'tipe_transaksi'=> $pay_type,
 				'jenis'=>'Masuk',
 				'tgl_subs'=>$subs[$i]->tgl_subs,
-				'tgl_akhir_bayar'=>(new \DateTime($subs[$i]->tgl_subs))->modify('+'.(30*$subs[$i]->packet->lama_paket).' day')->format('Y-m-d H:i:s'),
+				'tgl_akhir_bayar'=>$subs[$i]->tgl_akhir_bayar,
 				'id_permintaan'=>$subs[$i]->uuid,
 				'email'=>$subs[$i]->user->email,
 				'status'=>$status,
