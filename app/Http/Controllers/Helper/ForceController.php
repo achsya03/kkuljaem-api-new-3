@@ -91,9 +91,8 @@ class ForceController extends Controller
         }
 
         return response()->json([
-			'message' => $aa,
-			'info' => $bb,
-			'data' => $result
+			'message' => 'Success',
+			'info' => 'Proses Update Berhasil',
 		]);
     }
 }
