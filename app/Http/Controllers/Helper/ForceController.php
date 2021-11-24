@@ -163,7 +163,7 @@ class ForceController extends Controller
             if(substr($detail_mentor[$i]->url_foto, 0, 11) == 'https://res'){
                 // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
                 // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
-                $url = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($detail_mentor[$i]->url_foto, 69);
+                $url = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com/Profile'.substr($detail_mentor[$i]->url_foto, 69);
                 $aa[$i] = $detail_mentor[$i]->id;
                 $update = Models\DetailMentor::where('id',$detail_mentor[$i]->id)
                     ->update([
