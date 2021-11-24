@@ -149,6 +149,7 @@ Route::group(['prefix' => 'api/force'], function () {
     Route::get('question/url',      [Helper\ForceController::class,'forceQuestionUrl']);
     Route::get('option/url',      [Helper\ForceController::class,'forceOptionUrl']);
     Route::get('mentor-detail/url',      [Helper\ForceController::class,'forceMentorDetailUrl']);
+    Route::get('classes/url',      [Helper\ForceController::class,'forceClassesUrl']);
 });    
 Route::group(['prefix' => 'api/user/packet'], function () {
     Route::get('/',         [Packet\PacketController::class,'allData']);

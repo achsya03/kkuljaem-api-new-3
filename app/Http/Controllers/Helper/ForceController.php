@@ -178,6 +178,34 @@ class ForceController extends Controller
 		]);
     }
 
+    public function forceClassesUrl(Request $request){
+        $result = [];
+        $classes = Models\Classes::orderBy('id','ASC')->get();
+
+        $aa = [];
+        $bb = [];
+
+        for($i=0;$i<count($classes);$i++){
+            if(substr($classes[$i]->url_web, 0, 11) == 'https://res'){
+                // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $url1 = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($classes[$i]->url_web, 69);
+                $url2 = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($classes[$i]->url_mobile, 69);
+                $aa[$i] = $classes[$i]->id;
+                $update = Models\Banner::where('id',$classes[$i]->id)
+                    ->update([
+                        'url_web' => $url1,
+                        'url_mobile' => $url2,
+                    ]);
+            }
+        }
+
+        return response()->json([
+			'message' => 'Success',
+			'info' => 'Proses Update Berhasil',
+		]);
+    }
+
     public function forceQuestionUrl(Request $request){
         $result = [];
         $question = Models\Question::orderBy('id','ASC')->get();
