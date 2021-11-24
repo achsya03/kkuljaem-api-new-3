@@ -157,6 +157,7 @@ class UpdateController extends Controller
             'mobile_id',
             'deskripsi',
             'label',
+            'link',
             'uuid',
         ];
         for($i=0;$i<count($field)-1;$i++){
