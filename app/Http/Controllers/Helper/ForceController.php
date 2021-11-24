@@ -78,7 +78,7 @@ class ForceController extends Controller
         $aa = [];
         $bb = [];
 
-        for($i=0;$i<1;$i++){
+        for($i=0;$i<count($word);$i++){
             if(substr($word[$i]->url_pengucapan, 0, 11) == 'https://res'){
                 // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
                 // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
