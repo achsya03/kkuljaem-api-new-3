@@ -46,7 +46,7 @@ class ForceController extends Controller
                 'error' => 'Email tidak sesuai'
             ]);
         }
-        if(date_format(date_create($request->tgl_akhir),"Y/m/d")<date_format(date_create(date()),"Y/m/d")){
+        if(date_format(date_create($request->tgl_akhir),"Y/m/d")<date("Y/m/d")){
             return response()->json([
                 'message' => 'Failed',
                 'error' => 'Tanggal Akhir Harus Lebih Dari Hari ini'
