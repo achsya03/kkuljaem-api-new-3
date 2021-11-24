@@ -146,9 +146,9 @@ Route::group(['prefix' => 'api/force'], function () {
     // Route::get('words/url',      [Helper\ForceController::class,'forceWordUrl']);
     // Route::get('post/url',      [Helper\ForceController::class,'forcePostUrl']);
     // Route::get('banner/url',      [Helper\ForceController::class,'forceBannerUrl']);
-    Route::get('question/url',      [Helper\ForceController::class,'forceMentorDetailUrl']);
+    Route::get('question/url',      [Helper\ForceController::class,'forceOptionUrl']);
     Route::get('option/url',      [Helper\ForceController::class,'forceQuestionUrl']);
-    Route::get('mentor-detail/url',      [Helper\ForceController::class,'forceOptionUrl']);
+    Route::get('mentor-detail/url',      [Helper\ForceController::class,'forceMentorDetailUrl']);
 });    
 Route::group(['prefix' => 'api/user/packet'], function () {
     Route::get('/',         [Packet\PacketController::class,'allData']);
