@@ -72,7 +72,7 @@ class ForceController extends Controller
         $aa = [];
         $bb = [];
 
-        for($i=0;$i<1;$i++){
+        for($i=0;$i<count($word);$i++){
             if(substr($word[$i]->url_pengucapan, 0, 11) == 'https://res'){
                 $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
                 $bb[$i] = substr($word[$i]->url_pengucapan, 69);
@@ -85,8 +85,8 @@ class ForceController extends Controller
         }
 
         return response()->json([
-			'message' => $aa[$i],
-			'info' => $bb[$i],
+			'message' => $aa,
+			'info' => $bb,
 			'data' => $result
 		]);
     }
