@@ -109,7 +109,7 @@ class ForceController extends Controller
                 // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
                 // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
                 $url = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($post_image[$i]->url_gambar, 69);
-                $aa[$i] = $word[$i]->id;
+                $aa[$i] = $post_image[$i]->id;
                 $update = Models\PostImage::where('id',$post_image[$i]->id)
                     ->update([
                         'url_gambar' => $url
