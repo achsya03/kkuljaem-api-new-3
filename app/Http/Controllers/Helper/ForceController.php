@@ -150,4 +150,103 @@ class ForceController extends Controller
 			'info' => 'Proses Update Berhasil',
 		]);
     }
+
+
+    public function forceMentorDetailUrl(Request $request){
+        $result = [];
+        $detail_mentor = Models\DetailMentor::orderBy('id','ASC')->get();
+
+        $aa = [];
+        $bb = [];
+
+        for($i=0;$i<count($detail_mentor);$i++){
+            if(substr($detail_mentor[$i]->url_foto, 0, 11) == 'https://res'){
+                // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $url = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($detail_mentor[$i]->url_foto, 69);
+                $aa[$i] = $detail_mentor[$i]->id;
+                $update = Models\DetailMentor::where('id',$detail_mentor[$i]->id)
+                    ->update([
+                        'url_foto' => $url
+                    ]);
+            }
+        }
+
+        return response()->json([
+			'message' => 'Success',
+			'info' => 'Proses Update Berhasil',
+		]);
+    }
+
+    public function forceQuestionUrl(Request $request){
+        $result = [];
+        $question = Models\Question::orderBy('id','ASC')->get();
+
+        $aa = [];
+        $bb = [];
+
+        for($i=0;$i<count($question);$i++){
+            if(substr($question[$i]->url_gambar, 0, 11) == 'https://res'){
+                // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $url1 = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($question[$i]->url_gambar, 69);
+                $aa[$i] = $question[$i]->id;
+                $update = Models\Question::where('id',$question[$i]->id)
+                    ->update([
+                        'url_gambar' => $url1,
+                    ]);
+            }
+            if(substr($question[$i]->url_file, 0, 11) == 'https://res'){
+                // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $url1 = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($question[$i]->url_file, 69);
+                $aa[$i] = $question[$i]->id;
+                $update = Models\Question::where('id',$question[$i]->id)
+                    ->update([
+                        'url_file' => $url1,
+                    ]);
+            }
+        }
+
+        return response()->json([
+			'message' => 'Success',
+			'info' => 'Proses Update Berhasil',
+		]);
+    }
+
+    public function forceOptionUrl(Request $request){
+        $result = [];
+        $option = Models\Option::orderBy('id','ASC')->get();
+
+        $aa = [];
+        $bb = [];
+
+        for($i=0;$i<count($option);$i++){
+            if(substr($option[$i]->url_gambar, 0, 11) == 'https://res'){
+                // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $url1 = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($option[$i]->url_gambar, 69);
+                $aa[$i] = $option[$i]->id;
+                $update = Models\Option::where('id',$option[$i]->id)
+                    ->update([
+                        'url_gambar' => $url1,
+                    ]);
+            }
+            if(substr($option[$i]->url_file, 0, 11) == 'https://res'){
+                // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $url1 = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($option[$i]->url_file, 69);
+                $aa[$i] = $option[$i]->id;
+                $update = Models\Option::where('id',$option[$i]->id)
+                    ->update([
+                        'url_file' => $url1,
+                    ]);
+            }
+        }
+
+        return response()->json([
+			'message' => 'Success',
+			'info' => 'Proses Update Berhasil',
+		]);
+    }
 }
