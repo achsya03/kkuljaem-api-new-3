@@ -148,7 +148,7 @@ class PostController extends Controller
             $arr1['category_uuid'] = $class_category[$i]->uuid;
 
             $classes = Models\Classes::where('id_class_category',$class_category[$i]->id)
-                        ->where('status_tersedia',1)->get();
+                        ->where('status_tersedia',1)->orderBy('nama','ASC')->get();
 
             for($j=0;$j<count($classes);$j++){
                 $arr2 = [];
