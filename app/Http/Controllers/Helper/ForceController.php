@@ -82,10 +82,11 @@ class ForceController extends Controller
             if(substr($word[$i]->url_pengucapan, 0, 11) == 'https://res'){
                 // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
                 // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
-
+                $url = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $aa[$i] = $word[$i]->id;
                 $update = Models\Words::where('id',$word[$i]->id)
                     ->update([
-                        'url_pengucapan' => 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69)
+                        'url_pengucapan' => $url
                     ]);
             }
         }
