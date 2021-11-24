@@ -85,7 +85,7 @@ class ForceController extends Controller
 
                 Models\Words::where('id',$word[$i]->id)
                     ->update([
-                        'url_pengucapan' => substr($word[$i]->url_pengucapan, 69)
+                        'url_pengucapan' => 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69)
                     ]);
             }
         }
