@@ -96,4 +96,58 @@ class ForceController extends Controller
 			'info' => 'Proses Update Berhasil',
 		]);
     }
+
+    public function forcePostUrl(Request $request){
+        $result = [];
+        $post_image = Models\PostImage::orderBy('id','ASC')->get();
+
+        $aa = [];
+        $bb = [];
+
+        for($i=0;$i<count($post_image);$i++){
+            if(substr($post_image[$i]->url_gambar, 0, 11) == 'https://res'){
+                // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $url = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($post_image[$i]->url_gambar, 69);
+                $aa[$i] = $word[$i]->id;
+                $update = Models\PostImage::where('id',$post_image[$i]->id)
+                    ->update([
+                        'url_gambar' => $url
+                    ]);
+            }
+        }
+
+        return response()->json([
+			'message' => 'Success',
+			'info' => 'Proses Update Berhasil',
+		]);
+    }
+
+    public function forceBannerUrl(Request $request){
+        $result = [];
+        $banner = Models\Banner::orderBy('id','ASC')->get();
+
+        $aa = [];
+        $bb = [];
+
+        for($i=0;$i<count($banner);$i++){
+            if(substr($banner[$i]->url_web, 0, 11) == 'https://res'){
+                // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $url1 = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($banner[$i]->url_web, 69);
+                $url2 = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($banner[$i]->url_mobile, 69);
+                $aa[$i] = $banner[$i]->id;
+                $update = Models\Banner::where('id',$banner[$i]->id)
+                    ->update([
+                        'url_web' => $url1,
+                        'url_mobile' => $url2,
+                    ]);
+            }
+        }
+
+        return response()->json([
+			'message' => 'Success',
+			'info' => 'Proses Update Berhasil',
+		]);
+    }
 }
