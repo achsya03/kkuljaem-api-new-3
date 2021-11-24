@@ -489,7 +489,7 @@ class SubsController extends Controller
 			'harga' => $packet[0]->harga,
 			'diskon' => 0,
 			'tgl_subs' => $orderDate,
-			'tgl_akhir_bayar' => (new \DateTime($orderDate))->modify('+'.(30*$packet[0]->lama_paket).' day')->format('Y-m-d H:i:s'),
+			'tgl_akhir_bayar' => (new \DateTime($orderDate))->modify('+ 1 day')->format('Y-m-d H:i:s'),
 			'snap_token' => '-',
 			'snap_url' => '-',
 			'subs_status' => 'PAID',
