@@ -69,18 +69,18 @@ class ForceController extends Controller
         $result = [];
         $word = Models\Words::orderBy('id','ASC')->get();
 
-        return response()->json([
-			'message' => substr($word[0]->url_pengucapan, 0, 11),
-			'info' => substr($word[0]->url_pengucapan, 68),
-			'data' => $result
-		]);
+        $aa = [];
+        $bb = [];
 
         for($i=0;$i<1;$i++){
             if(substr($word[$i]->url_pengucapan, 0, 11) == 'https://res'){
-                Models\Words::where('id',$word[$i]->id)
-                    ->update([
-                        'url_pengucapan' => substr($word[$i]->url_pengucapan, 68)
-                    ]);
+                $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                $bb[$i] = substr($word[$i]->url_pengucapan, 69);
+
+                // Models\Words::where('id',$word[$i]->id)
+                //     ->update([
+                //         'url_pengucapan' => substr($word[$i]->url_pengucapan, 69)
+                //     ]);
             }
         }
 
