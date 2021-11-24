@@ -70,8 +70,8 @@ class ForceController extends Controller
         $word = Models\Words::orderBy('id','ASC')->get();
 
         return response()->json([
-			'message' => substr($word[$i]->url_pengucapan, 0, 11),
-			'info' => substr($word[$i]->url_pengucapan, 68),
+			'message' => substr($word[0]->url_pengucapan, 0, 11),
+			'info' => substr($word[0]->url_pengucapan, 68),
 			'data' => $result
 		]);
 
