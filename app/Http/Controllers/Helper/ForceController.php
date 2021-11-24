@@ -64,4 +64,30 @@ class ForceController extends Controller
 			'data' => $result
 		]);
     }
+
+    public function forceWordUrl(Request $request){
+        $result = [];
+        $word = Models\Words::orderBy('id','ASC')->get();
+
+        return response()->json([
+			'message' => substr($word[$i]->url_pengucapan, 0, 11),
+			'info' => substr($word[$i]->url_pengucapan, 68),
+			'data' => $result
+		]);
+
+        for($i=0;$i<1;$i++){
+            if(substr($word[$i]->url_pengucapan, 0, 11) == 'https://res'){
+                Models\Words::where('id',$word[$i]->id)
+                    ->update([
+                        'url_pengucapan' => substr($word[$i]->url_pengucapan, 68)
+                    ]);
+            }
+        }
+
+        return response()->json([
+			'message' => 'Success',
+			'info' => 'Proses Update Berhasil',
+			'data' => $result
+		]);
+    }
 }

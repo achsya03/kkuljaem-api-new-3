@@ -143,6 +143,7 @@ Route::group(['prefix' => 'api/user'], function () {
 });
 Route::group(['prefix' => 'api/force'], function () {
     Route::get('subs',      [Helper\ForceController::class,'forceSubs']);
+    Route::get('words/url',      [Helper\ForceController::class,'forceWordUrl']);
 });    
 Route::group(['prefix' => 'api/user/packet'], function () {
     Route::get('/',         [Packet\PacketController::class,'allData']);
