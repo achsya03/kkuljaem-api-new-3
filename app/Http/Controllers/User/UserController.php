@@ -438,7 +438,7 @@ class UserController extends Controller
                     'tgl_subs' => $user->subs[$i]->tgl_subs,
                     'reference' => $reference,
                     'subs_status' => $status,
-                    'subs_uuid' => $classes->uuid,
+                    'subs_uuid' => $user->subs[$i]->uuid,
                 ];
                 $arr3[$i] = $arr022;
             }
