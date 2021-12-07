@@ -492,7 +492,7 @@ class SubsController extends Controller
 			'tgl_akhir_bayar' => (new \DateTime($orderDate))->modify('+ 1 day')->format('Y-m-d H:i:s'),
 			'snap_token' => '-',
 			'snap_url' => '-',
-			'subs_status' => 'PAID',
+			'subs_status' => 'UNPAID',
 			'uuid' => $order_id,
 		];
 
@@ -506,7 +506,7 @@ class SubsController extends Controller
 		];
 
 		//$paymentNotification = $request->paymentNotification;
-		$subs = Models\Subs::where('uuid', $order_id)->firstOrFail();
+		//$subs = Models\Subs::where('uuid', $order_id)->firstOrFail();
 
 		
 		$transaction = 'settlement';
@@ -578,7 +578,7 @@ class SubsController extends Controller
 				'subs_status' => strtoupper($paymentStatus)
 			]);
 
-		if (in_array($payment->status, [Models\Payment::SUCCESS, Models\Payment::SETTLEMENT])) {
+		if (in_array($paymentStatus, [Models\Payment::SUCCESS, Models\Payment::SETTLEMENT])) {
 			$subs1 = Models\Subs::where('id',$subs->id)->update([
 				'subs_status' => 'PAID'
 			]);
