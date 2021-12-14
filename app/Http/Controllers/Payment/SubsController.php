@@ -296,7 +296,7 @@ class SubsController extends Controller
 
 		$orderDate = date('Y-m-d H:i:s');		
 		$paymentDue = (new \DateTime($orderDate))->modify('+1 day')->format('Y-m-d H:i:s');
-        $validation = new Helper\ValidationController('postLike');
+        $validation = new Helper\ValidationController('subs');
         $uuid1 = $validation->data['uuid'];
 
 		//return $midtrans;
@@ -466,7 +466,7 @@ class SubsController extends Controller
 
 		$orderDate = date('Y-m-d H:i:s');		
 		$paymentDue = (new \DateTime($orderDate))->modify('+1 day')->format('Y-m-d H:i:s');
-        $validation = new Helper\ValidationController('postLike');
+        $validation = new Helper\ValidationController('subs');
         $uuid1 = $validation->data['uuid'];
 
 		//return $midtrans;
