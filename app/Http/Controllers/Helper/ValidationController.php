@@ -822,7 +822,7 @@ class ValidationController extends Controller
     }
 
     public function saveFile(Request $request){
-        $gambar = $request->gambar;
+        $gambar = $request->file('gambar');
         $newPath = $request->newPath;
         if(!$gambar){
             return response()->json(['message'=>"Only One Image Every Data"],401);
