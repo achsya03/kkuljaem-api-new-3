@@ -58,8 +58,7 @@ return [
             'secret' => env('DO_SECRET_ACCESS_KEY'),
             'region' => env('DO_DEFAULT_REGION'),
             'bucket' => env('DO_BUCKET'),
-            'endpoint' => env('DO_ENDPOINT'),
-            'use_path_style_endpoint' => env('DO_USE_PATH_STYLE_ENDPOINT', false),
+            'endpoint' => env('DO_ENDPOINT')
         ],
     ],
 

@@ -18,7 +18,7 @@ class FileController extends Controller
         $extension = $gambar->extension();
         
 
-        if(!$path = Storage::disk('do_spaces')->putFile($newPath,$request->file('gambar'),time().'.'.$extension,'public')){
+        if(!$path = Storage::disk('do_spaces')->putFileAs('testing',$request->file('gambar'),time().'.'.$extension,'public')){
             return response()->json(['message'=>'Image Upload Failed']);
         }
 
