@@ -70,6 +70,7 @@ return array(
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Midtrans\\' => array($vendorDir . '/midtrans/midtrans-php/Midtrans'),
     'League\\MimeTypeDetection\\' => array($vendorDir . '/league/mime-type-detection/src'),
+    'League\\Flysystem\\AwsS3v3\\' => array($vendorDir . '/league/flysystem-aws-s3-v3/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'League\\Config\\' => array($vendorDir . '/league/config/src'),
     'League\\CommonMark\\' => array($vendorDir . '/league/commonmark/src'),
@@ -79,6 +80,7 @@ return array(
     'Laravel\\Sail\\' => array($vendorDir . '/laravel/sail/src'),
     'L5Swagger\\' => array($vendorDir . '/darkaonline/l5-swagger/src'),
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
+    'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),
     'Jenssegers\\Agent\\' => array($vendorDir . '/jenssegers/agent/src'),
     'Jaybizzle\\CrawlerDetect\\' => array($vendorDir . '/jaybizzle/crawler-detect/src'),
     'Illuminate\\Support\\' => array($vendorDir . '/laravel/framework/src/Illuminate/Macroable', $vendorDir . '/laravel/framework/src/Illuminate/Collections'),
@@ -119,6 +121,7 @@ return array(
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'Barryvdh\\LaravelIdeHelper\\' => array($vendorDir . '/barryvdh/laravel-ide-helper/src'),
+    'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
     'Asm89\\Stack\\' => array($vendorDir . '/asm89/stack-cors/src'),
     'App\\' => array($baseDir . '/app'),
 );

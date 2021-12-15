@@ -10,7 +10,7 @@ class FileController extends Controller
 {
     
     public function saveFile(Request $request){
-        $gambar = $request->file('gambar');
+        $gambar = $request->gambar;
         $newPath = $request->newPath;
         if(!$gambar){
             return response()->json(['message'=>"Only One Image Every Data"],401);

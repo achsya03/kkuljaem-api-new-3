@@ -34,6 +34,8 @@ final class Versions
      */
     const VERSIONS          = array (
   'asm89/stack-cors' => 'v2.0.3@9cb795bf30988e8c96dd3c40623c48a877bc6714',
+  'aws/aws-crt-php' => 'v1.0.2@3942776a8c99209908ee0b287746263725685732',
+  'aws/aws-sdk-php' => '3.208.5@58fa9d8b522b0afa260299179ff950c783ff0ee1',
   'brick/math' => '0.9.3@ca57d18f028f84f777b2168cd1911b0dee2343ae',
   'cloudinary-labs/cloudinary-laravel' => '1.0.4@7543449243848eb936e4c492b82ec64512e67da0',
   'cloudinary/cloudinary_php' => '2.4.1@d4dc8e2b1b6c5f30e291d0fc136b84d08f0a31b6',
@@ -48,8 +50,8 @@ final class Versions
   'fruitcake/laravel-cors' => 'v2.0.4@a8ccedc7ca95189ead0e407c43b530dc17791d6a',
   'graham-campbell/guzzle-factory' => 'v5.0.2@983999291ca63d8da45be573574416b3c21f751b',
   'graham-campbell/result-type' => 'v1.0.3@296c015dc30ec4322168c5ad3ee5cc11dae827ac',
-  'guzzlehttp/guzzle' => '7.4.0@868b3571a039f0ebc11ac8f344f4080babe2cb94',
-  'guzzlehttp/promises' => '1.5.0@136a635e2b4a49b9d79e9c8fee267ffb257fdba0',
+  'guzzlehttp/guzzle' => '7.4.1@ee0a041b1760e6a53d2a39c8c34115adc2af2c79',
+  'guzzlehttp/promises' => '1.5.1@fe752aedc9fd8fcca3fe7ad05d419d32998a06da',
   'guzzlehttp/psr7' => '2.1.0@089edd38f5b8abba6cb01567c2a8aaa47cec4c72',
   'jaybizzle/crawler-detect' => 'v1.2.107@62b9055b555be9e1479d7c37515d7c58975c2aa4',
   'jenssegers/agent' => 'v2.6.4@daa11c43729510b3700bc34d414664966b03bffe',
@@ -59,11 +61,13 @@ final class Versions
   'lcobucci/jwt' => '3.3.3@c1123697f6a2ec29162b82f170dd4a491f524773',
   'league/commonmark' => '2.0.2@2df87709f44b0dd733df86aef0830dce9b1f0f13',
   'league/config' => 'v1.1.1@a9d39eeeb6cc49d10a6e6c36f22c4c1f4a767f3e',
-  'league/flysystem' => '1.1.5@18634df356bfd4119fe3d6156bdb990c414c14ea',
-  'league/mime-type-detection' => '1.8.0@b38b25d7b372e9fddb00335400467b223349fd7e',
+  'league/flysystem' => '1.1.9@094defdb4a7001845300334e7c1ee2335925ef99',
+  'league/flysystem-aws-s3-v3' => '1.0.29@4e25cc0582a36a786c31115e419c6e40498f6972',
+  'league/mime-type-detection' => '1.9.0@aa70e813a6ad3d1558fc927863d47309b4c23e69',
   'midtrans/midtrans-php' => '2.5.2@a1ad0c824449ca8c68c4cf11b3417ad518311d2b',
   'mobiledetect/mobiledetectlib' => '2.8.37@9841e3c46f5bd0739b53aed8ac677fa712943df7',
   'monolog/monolog' => '2.3.5@fd4380d6fc37626e2f799f29d91195040137eba9',
+  'mtdowling/jmespath.php' => '2.6.1@9b87907a81b87bc76d19a7fb2d61e61486ee9edb',
   'namshi/jose' => '7.2.3@89a24d7eb3040e285dd5925fcad992378b82bcff',
   'nesbot/carbon' => '2.53.1@f4655858a784988f880c1b8c7feabbf02dfdf045',
   'nette/schema' => 'v1.2.2@9a39cef03a5b34c7de64f551538cbba05c2be5df',
@@ -90,7 +94,7 @@ final class Versions
   'swiftmailer/swiftmailer' => 'v6.3.0@8a5d5072dca8f48460fce2f4131fcc495eec654c',
   'symfony/console' => 'v5.3.7@8b1008344647462ae6ec57559da166c2bfa5e16a',
   'symfony/css-selector' => 'v5.3.4@7fb120adc7f600a59027775b224c13a33530dd90',
-  'symfony/deprecation-contracts' => 'v2.4.0@5f38c8804a9e97d23e0c8d63341088cd8a22d627',
+  'symfony/deprecation-contracts' => 'v2.5.0@6f981ee24cf69ee7ce9736146d1c57c2780598a8',
   'symfony/error-handler' => 'v5.3.7@3bc60d0fba00ae8d1eaa9eb5ab11a2bbdd1fc321',
   'symfony/event-dispatcher' => 'v5.3.7@ce7b20d69c66a20939d8952b617506a44d102130',
   'symfony/event-dispatcher-contracts' => 'v2.4.0@69fee1ad2332a7cbab3aca13591953da9cdb7a11',
@@ -183,7 +187,7 @@ final class Versions
   'seld/phar-utils' => '1.1.2@749042a2315705d2dfbbc59234dd9ceb22bf3ff0',
   'symfony/filesystem' => 'v5.3.4@343f4fe324383ca46792cae728a3b6e2f708fb32',
   'theseer/tokenizer' => '1.2.1@34a41e998c2183e22995f158c581e7b5e755ab9e',
-  'laravel/laravel' => 'dev-main@a8c47aa86192381e7d3ac71b4d183e82550ac815',
+  'laravel/laravel' => 'dev-main@b9e3d09bd5f3d78253485492451a83c82f34bc5e',
 );
 
     private function __construct()
