@@ -72,7 +72,7 @@ Route::group(['prefix' => 'api/home'], function () {
     Route::get('/search',   [Helper\ShowController::class,'search']);
 });
 
-Route::get('/spaces-upload',                     [Helper\ValidationController::class,'saveFile']);
+Route::post('/spaces-upload',                     [Helper\FileController::class,'saveFile']);
 
 Route::group(['prefix' => 'api/classroom'], function () {
     Route::get('/',                     [Helper\ShowController::class,'classroom']);
