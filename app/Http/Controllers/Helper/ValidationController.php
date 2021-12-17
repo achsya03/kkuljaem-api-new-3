@@ -824,7 +824,7 @@ class ValidationController extends Controller
         $extension = $gambar->extension();
         
 
-        if(!$path1 = Storage::disk('do_spaces')->putFileAs('testing',$request->file('gambar'),time().'.'.$extension,'public')){
+        if(!$path1 = Storage::disk('do_spaces')->putFileAs('testing',$gambar,time().'.'.$extension,'public')){
             return response()->json(['message'=>'Image Upload Failed']);
         }
 
