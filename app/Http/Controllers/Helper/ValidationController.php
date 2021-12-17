@@ -6,6 +6,7 @@ use App\Models;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Cloudinary;
 
 class ValidationController extends Controller
@@ -799,22 +800,37 @@ class ValidationController extends Controller
     }
 
     public function UUidCheck($gambar,$path){
+        // if(!$gambar){
+        //     return response()->json(['message'=>"Only One Image Every Data"],401);
+        // }
+
+        // if(!$uploadedFileUrl = Cloudinary::uploadFile($gambar->getRealPath(),[
+        //     'resource_type' => 'auto',
+        //     'folder' => /*date("Y-m-d")."/".*/'Testing/'.$path,
+        //     'use_filename' => 'True',
+        //     'filename_override' => date('mdYhis')
+        // ])){
+        //     return response()->json(['message'=>'Image Upload Failed']);
+        // }
+
+        // $uploadResponse = [
+        //     'getSecurePath'   =>  $uploadedFileUrl->getSecurePath(),
+        //     'getPublicId'     =>  $uploadedFileUrl->getPublicId()
+        // ];
+
         if(!$gambar){
             return response()->json(['message'=>"Only One Image Every Data"],401);
         }
+        $extension = $gambar->extension();
+        
 
-        if(!$uploadedFileUrl = Cloudinary::uploadFile($gambar->getRealPath(),[
-            'resource_type' => 'auto',
-            'folder' => /*date("Y-m-d")."/".*/'Testing/'.$path,
-            'use_filename' => 'True',
-            'filename_override' => date('mdYhis')
-        ])){
+        if(!$path1 = Storage::disk('do_spaces')->putFileAs('testing',$request->file('gambar'),time().'.'.$extension,'public')){
             return response()->json(['message'=>'Image Upload Failed']);
         }
 
         $uploadResponse = [
-            'getSecurePath'   =>  $uploadedFileUrl->getSecurePath(),
-            'getPublicId'     =>  $uploadedFileUrl->getPublicId()
+            'getSecurePath'   =>  'https://kkuljaem-space.sfo3.digitaloceanspaces.com/'.$path.'/'.$path1,
+            'getPublicId'     =>  $path1
         ];
 
         return $uploadResponse;
@@ -822,11 +838,13 @@ class ValidationController extends Controller
 
 
     public function deleteImage($getPublicId){
-        Cloudinary::destroy($getPublicId);
+        // Cloudinary::destroy($getPublicId);
+        Storage::disk('do_spaces')->delete($getPublicId);
     }
 
     public function deleteFile($getPublicId){
-        Cloudinary::destroy($getPublicId, array("resource_type"=>"video"));
+        //Cloudinary::destroy($getPublicId, array("resource_type"=>"video"));
+        Storage::disk('do_spaces')->delete($getPublicId);
     }
 
 }
