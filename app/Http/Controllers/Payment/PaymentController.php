@@ -104,7 +104,7 @@ class PaymentController extends Controller
 
 		$paymentParams = [
 			'id_subs' => $subs->id,
-			'tgl_pembayaran' => $paymentNotification->transaction_time,
+			'tgl_pembayaran' => date("Y/m/d H:i:s"),
 			'transaction_id' => $paymentNotification->transaction_id,
 			'method' => 'midtrans',
 			'status' => $paymentStatus,

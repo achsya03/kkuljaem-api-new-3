@@ -553,9 +553,18 @@ class SubsController extends Controller
 		substr($subs->user->uuid, 0, 8).'_'.
 		date('His');
 
+		if (in_array($paymentStatus, [Models\Payment::SUCCESS, Models\Payment::SETTLEMENT])) {
+			$subs1 = Models\Subs::where('id',$subs->id)->update([
+				'subs_status' => 'PAID'
+			]);
+			$user = Models\User::where('id',$subs->id_user)->update([
+				'tgl_langganan_akhir' => (new \DateTime(date('Y-m-d')))->modify('+'.(30*$subs->packet->lama_paket).' day')->format('Y-m-d'),
+			]);
+		}	
+
 		$paymentParams = [
 			'id_subs' => $subs->id,
-			'tgl_pembayaran' => date_format(date_create($request->transaction_time),"Y/m/d H:i:s"),
+			'tgl_pembayaran' => date("Y/m/d H:i:s"),
 			'transaction_id' => $order_id,
 			'method' => 'applepay',
 			'status' => $paymentStatus,
@@ -578,14 +587,7 @@ class SubsController extends Controller
 				'subs_status' => strtoupper($paymentStatus)
 			]);
 
-		if (in_array($paymentStatus, [Models\Payment::SUCCESS, Models\Payment::SETTLEMENT])) {
-			$subs1 = Models\Subs::where('id',$subs->id)->update([
-				'subs_status' => 'PAID'
-			]);
-			$user = Models\User::where('id',$subs->id_user)->update([
-				'tgl_langganan_akhir' => (new \DateTime(date('Y-m-d')))->modify('+'.(30*$subs->packet->lama_paket).' day')->format('Y-m-d'),
-			]);
-		}	
+		
 			
 		return response()->json([
 			'message' => 'Success',
