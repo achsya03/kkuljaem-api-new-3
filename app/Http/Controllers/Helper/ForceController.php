@@ -105,10 +105,11 @@ class ForceController extends Controller
         $bb = [];
 
         for($i=0;$i<1;$i++){
+            return substr($word[$i]->pengucapan_id, 0, 7);
             if(substr($word[$i]->pengucapan_id, 0, 7) == 'Testing'){
                 // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
                 // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
-                $url = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->pengucapan_id, 8);
+                $url = substr($word[$i]->pengucapan_id, 8);
                 $aa[$i] = $word[$i]->id;
                 $update = Models\Words::where('id',$word[$i]->id)
                     ->update([
