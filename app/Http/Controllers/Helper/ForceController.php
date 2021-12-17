@@ -97,6 +97,32 @@ class ForceController extends Controller
 		]);
     }
 
+    public function forceWordPath(Request $request){
+        $result = [];
+        $word = Models\Words::orderBy('id','ASC')->get();
+
+        $aa = [];
+        $bb = [];
+
+        for($i=0;$i<1;$i++){
+            if(substr($word[$i]->pengucapan_id, 0, 7) == 'Testing'){
+                // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $url = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->pengucapan_id, 8);
+                $aa[$i] = $word[$i]->id;
+                $update = Models\Words::where('id',$word[$i]->id)
+                    ->update([
+                        'pengucapan_id' => $url
+                    ]);
+            }
+        }
+
+        return response()->json([
+			'message' => 'Success',
+			'info' => 'Proses Update Berhasil',
+		]);
+    }
+
     public function forcePostUrl(Request $request){
         $result = [];
         $post_image = Models\PostImage::orderBy('id','ASC')->get();
