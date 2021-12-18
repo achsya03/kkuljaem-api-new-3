@@ -511,7 +511,7 @@ class SubsController extends Controller
 		
 		$transaction = 'settlement';
 		$type = $request->payment_type;
-		$orderId = $request->order_id;
+		$orderId = $order_id;
 		//$fraud = $paymentNotification->fraud_status;
 
 		
