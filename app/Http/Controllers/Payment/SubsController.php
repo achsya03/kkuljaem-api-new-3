@@ -555,7 +555,7 @@ class SubsController extends Controller
 
 		if (in_array($paymentStatus, [Models\Payment::SUCCESS, Models\Payment::SETTLEMENT])) {
 			$subs1 = Models\Subs::where('id',$subs->id)->update([
-				'subs_status' => 'PAID'
+				'subs_status' => strtoupper('PAID')
 			]);
 			$user = Models\User::where('id',$subs->id_user)->update([
 				'tgl_langganan_akhir' => (new \DateTime(date('Y-m-d')))->modify('+'.(30*$subs->packet->lama_paket).' day')->format('Y-m-d'),
@@ -583,9 +583,7 @@ class SubsController extends Controller
 		// return $user = Models\User::where('id',$subs->id_user)->update([
 		// 	'tgl_langganan_akhir' => (new \DateTime(date('Y-m-d')))->modify('+'.(30*$subs->packet->lama_paket).' day')->format('Y-m-d'),
 		// ]);
-			$subs1 = Models\Subs::where('id',$subs->id)->update([
-				'subs_status' => strtoupper($paymentStatus)
-			]);
+			
 
 		
 			
