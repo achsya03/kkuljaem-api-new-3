@@ -123,6 +123,44 @@ class ForceController extends Controller
 		]);
     }
 
+    public function forceQuestionPath(Request $request){
+        $result = [];
+        $word = Models\Question::orderBy('id','ASC')->get();
+
+        $aa = [];
+        $bb = [];
+
+        for($i=0;$i<count($word);$i++){
+            if(substr($word[$i]->gambar_id, 0, 7) == 'Testing'){
+                // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $url = substr($word[$i]->gambar_id, 8);
+                $aa[$i] = $word[$i]->id;
+                $update = Models\Question::where('id',$word[$i]->id)
+                    ->update([
+                        'gambar_id' => $url
+                    ]);
+            }
+        }
+        for($i=0;$i<count($word);$i++){
+            if(substr($word[$i]->file_id, 0, 7) == 'Testing'){
+                // $aa[$i] = substr($word[$i]->url_pengucapan, 0, 11);
+                // $bb[$i] = 'https://kkuljaem-space.sfo3.digitaloceanspaces.com'.substr($word[$i]->url_pengucapan, 69);
+                $url = substr($word[$i]->file_id, 8);
+                $aa[$i] = $word[$i]->id;
+                $update = Models\Question::where('id',$word[$i]->id)
+                    ->update([
+                        'file_id' => $url
+                    ]);
+            }
+        }
+
+        return response()->json([
+			'message' => 'Success',
+			'info' => 'Proses Update Berhasil',
+		]);
+    }
+
     public function forcePostUrl(Request $request){
         $result = [];
         $post_image = Models\PostImage::orderBy('id','ASC')->get();
