@@ -313,7 +313,7 @@ class SorterController extends Controller
                             'error' => 'Detail Kategori tidak sesuai'
                         ]);
                     }
-                    $kelas = Models\Classes::select('nama','urutan')->where('detail_kategori',$detail_kategori)->orderBy('urutan','ASC')->get();
+                    $kelas = Models\Classes::select('nama','urutan')->where('id_class_category',$kategori_kelas[0]->id)->orderBy('urutan','ASC')->get();
 
                     $result['kategori_kelas'] = $kategori_kelas[0];
                     $result['kelas'] = $kelas;
@@ -333,7 +333,7 @@ class SorterController extends Controller
                         ]);
                     }
                     $cont = [];
-                    $content = Models\Content::orderBy('number','ASC')->get();
+                    $content = Models\Content::where('id_class',$kelas[0]->id)->orderBy('number','ASC')->get();
                     
                     for($i = 0;$i < count($content);$i++){
                         $arr1 = [];
