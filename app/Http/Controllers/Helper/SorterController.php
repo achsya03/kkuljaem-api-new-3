@@ -361,8 +361,8 @@ class SorterController extends Controller
 
                     $result = $banner;
                 }elseif($i == 4){
-                    $topik = Models\Theme::select('judul','urutan')->orderBy('urutan','ASC')->get();
-
+                    $video_uuid = Models\Video::select('uuid')->get();
+                    $topik = Models\Theme::select('judul','urutan')->orderBy('urutan','ASC')->whereNotIn('judul',$video_uuid)->get();
                     $result = $topik;
                 }
             }
