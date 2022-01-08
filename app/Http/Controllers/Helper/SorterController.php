@@ -282,7 +282,7 @@ class SorterController extends Controller
         }for($i=0;$i<count($tables);$i++){
             if($table == $tables[$i]){
                 if($i == 0){
-                    $kategori_kelas = Models\ClassesCategory::orderBy('nama','ASC')->get();
+                    $kategori_kelas = Models\ClassesCategory::select('nama','urutan')->orderBy('urutan','ASC')->get();
 
                     $result = $kategori_kelas;
                 }elseif($i == 1){
