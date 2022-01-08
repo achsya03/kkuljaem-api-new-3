@@ -59,7 +59,7 @@ class SorterController extends Controller
                             Models\Classes::where('id',$kelas[$j]->id)
                             ->where('id_class_category',$last_id_class_category)
                             ->update([
-                                'number'  => $num+1
+                                'urutan'  => $num+1
                             ]);
                         }
                     }
