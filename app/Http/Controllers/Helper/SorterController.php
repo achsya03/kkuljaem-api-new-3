@@ -73,11 +73,11 @@ class SorterController extends Controller
                         $last_id_class= $konten[0]->id_class;
                         for($j=0;$j<count($konten);$j++){
 
-                            $num += 1;
                             if($last_id_class != $konten[$j]->id_class){
                                 $num = 0;
                                 $last_id_class = $konten[$j]->id_class;
                             }
+                            $num += 1;
                             Models\Content::where('id',$konten[$j]->id)
                             ->where('id_class',$last_id_class)
                             ->update([
@@ -300,10 +300,38 @@ class SorterController extends Controller
 
                     $result = $kategori_kelas;
                 }elseif($i == 1){
-                    $kelas = Models\Classes::select('nama','urutan')->orderBy('urutan','ASC')->get();
+                    if(!$detail_kategori = $request->detail_kategori){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Detail Kategori tidak sesuai'
+                        ]);
+                    }
+                    $kategori_kelas = Models\ClassesCategory::select('nama','uuid')->where('uuid',$detail_kategori)->get();
+                    if(count($kategori_kelas)==0){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Detail Kategori tidak sesuai'
+                        ]);
+                    }
+                    $kelas = Models\Classes::select('nama','urutan')->where('detail_kategori',$detail_kategori)->orderBy('urutan','ASC')->get();
 
-                    $result = $kelas;
+                    $result['kategori_kelas'] = $kategori_kelas[0];
+                    $result['kelas'] = $kelas;
                 }elseif($i == 2){
+                    if(!$detail_kelas = $request->detail_kelas){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Detail Kelas tidak sesuai'
+                        ]);
+                    }
+
+                    $kelas = Models\Classes::select('nama','uuid')->where('uuid',$detail_kelas)->get();
+                    if(count($kelas)==0){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Detail Kategori tidak sesuai'
+                        ]);
+                    }
                     $cont = [];
                     $content = Models\Content::orderBy('number','ASC')->get();
                     
@@ -315,22 +343,7 @@ class SorterController extends Controller
                             $arr1['urutan'] = $content[$i]->number;
                             $arr1['judul'] = $content_video[0]->judul;
                             $arr1['type'] = $content[$i]->type;
-                            //$arr1['jml_latihan'] = $content_video[0]->jml_latihan;
-                            $arr1['jml_latihan'] = count(Models\Task::where('id_video',$content_video[0]->id)->get());
-                            //$arr1['jml_shadowing'] = $content_video[0]->jml_shadowing;
-                            $arr1['jml_shadowing'] = count(Models\Shadowing::where('id_video',$content_video[0]->id)->get());
-            
-                            $stat = 'Belum';
-                            if(count($studentVideo = Models\StudentVideo::where('id_video',$content_video[0]->id)->get())!=0){
-                                for($j = 0;$j<count($studentVideo);$j++){
-                                    if($studentVideo[$j]->student->id_user == $request->user()->id){
-                                        $stat = 'Selesai';
-                                        break;
-                                    }
-                                }
-                            }
-            
-                            $arr1['stat_pengerjaan'] = $stat;
+                           
                             $arr1['content_video_uuid'] = $content_video[0]->uuid;
                         }elseif($content[$i]->type == 'quiz'){
                             $count_quiz += 1;
@@ -338,24 +351,13 @@ class SorterController extends Controller
                             $arr1['urutan'] = $content[$i]->number;
                             $arr1['judul'] = $content_quiz[0]->judul;
                             $arr1['type'] = $content[$i]->type;
-                            $arr1['jml_soal'] = $content_quiz[0]->jml_pertanyaan;
-            
-                            $stat = 'Belum';
-                            if(count($studentQuiz = Models\StudentQuiz::where('id_quiz',$content_quiz[0]->id)->get())!=0){
-                                for($j = 0;$j<count($studentQuiz);$j++){
-                                    if($studentQuiz[$j]->student->id_user == $request->user()->id){
-                                        $stat = 'Selesai';
-                                        break;
-                                    }
-                                }
-                            }
-            
-                            $arr1['stat_pengerjaan'] = $stat;
+                            
                             $arr1['content_quiz_uuid'] = $content_quiz[0]->uuid;
                         }
                         $cont[$i] = $arr1;
                     }
-                    $result = $cont;
+                    $result['kelas'] = $kelas[0];
+                    $result['konten'] = $cont;
                 }elseif($i == 3){
                     $banner = Models\Banner::select('judul_banner','urutan')->orderBy('urutan','ASC')->get();
 
