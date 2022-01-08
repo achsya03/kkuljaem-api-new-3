@@ -53,11 +53,11 @@ class SorterController extends Controller
                         $num = 0;
                         $last_id_class_category = $kelas[0]->id_class_category;
                         for($j=0;$j<count($kelas);$j++){
-                            $num += 1;
                             if($last_id_class_category != $kelas[$j]->id_class_category){
                                 $num = 0;
                                 $last_id_class_category = $kelas[$j]->id_class_category;
                             }
+                            $num += 1;
                             Models\Classes::where('id',$kelas[$j]->id)
                             ->where('id_class_category',$last_id_class_category)
                             ->update([
