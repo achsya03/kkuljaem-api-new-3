@@ -282,23 +282,23 @@ class SorterController extends Controller
         }for($i=0;$i<count($tables);$i++){
             if($table == $tables[$i]){
                 if($i == 0){
-                    $kategori_kelas = Models\ClassesCategory::orderBy('id','ASC')->get();
+                    $kategori_kelas = Models\ClassesCategory::orderBy('urutan','ASC')->makeHidden(['id'])->get();
 
                     $result = $kategori_kelas;
                 }elseif($i == 1){
-                    $kelas = Models\Classes::orderBy('id_class_category','ASC')->orderBy('id','ASC')->get();
+                    $kelas = Models\Classes::orderBy('urutan','ASC')->makeHidden(['id'])->get();
 
                     $result = $kelas;
                 }elseif($i == 2){
-                    $konten = Models\Content::orderBy('id_class','ASC')->orderBy('id','ASC')->get();
+                    $konten = Models\Content::orderBy('urutan','ASC')->makeHidden(['id'])->get();
 
                     $result = $konten;
                 }elseif($i == 3){
-                    $banner = Models\Banner::orderBy('id','ASC')->get();
+                    $banner = Models\Banner::orderBy('urutan','ASC')->makeHidden(['id'])->get();
 
                     $result = $banner;
                 }elseif($i == 4){
-                    $topik = Models\Theme::orderBy('id','ASC')->get();
+                    $topik = Models\Theme::orderBy('urutan','ASC')->makeHidden(['id'])->get();
 
                     $result = $topik;
                 }
