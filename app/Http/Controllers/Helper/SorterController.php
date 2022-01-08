@@ -81,7 +81,7 @@ class SorterController extends Controller
                             Models\Content::where('id',$konten[$j]->id)
                             ->where('id_class',$last_id_class)
                             ->update([
-                                'urutan'  => $num
+                                'number'  => $num
                             ]);
                         }
                     }
