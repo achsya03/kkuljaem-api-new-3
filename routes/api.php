@@ -195,6 +195,12 @@ Route::group(['prefix' => 'api/admin/schedule'], function () {
     Route::get('/',         [Banner\BannerController::class,'GetContentSchedule']);
 });
 
+Route::group(['prefix' => 'api/admin/sorter'], function () {
+    Route::get('/',         [Helper\SorterController::class,'showData']);
+    Route::post('/',         [Helper\SorterController::class,'setNumbering']);
+    Route::post('/auto',         [Helper\SorterController::class,'setAutoNumbering']);
+});
+
 Route::group(['prefix' => 'api/admin/word'], function () {
     Route::get('/',         [Banner\WordController::class,'getContentSchedule']);
     Route::post('/',         [Banner\WordController::class,'addDataWord']);
