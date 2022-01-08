@@ -100,7 +100,8 @@ class SorterController extends Controller
                         }
                     }
                 }elseif($i == 4){
-                    $topik = Models\Theme::orderBy('id','ASC')->get();
+                    $video_uuid = Models\Video::select('uuid')->get();
+                    $topik = Models\Theme::orderBy('id','ASC')->whereNotIn('judul',$video_uuid)->get();
 
                     if(count($topik) > 0){
                         $num = 0;
