@@ -74,7 +74,7 @@ class SorterController extends Controller
                                 $num = 0;
                                 $last_id_class = $konten[$j]->id_class;
                             }
-                            Models\Classes::where('id',$konten[$j]->id)
+                            Models\Content::where('id',$konten[$j]->id)
                             ->where('id_class',$last_id_class)
                             ->update([
                                 'urutan'  => $num+1
@@ -88,7 +88,7 @@ class SorterController extends Controller
                         $num = 0;
                         
                         for($j=0;$j<count($banner);$j++){
-                            Models\Classes::where('id',$banner[$j]->id)
+                            Models\Banner::where('id',$banner[$j]->id)
                             ->update([
                                 'urutan'  => $num+1
                             ]);
@@ -101,7 +101,7 @@ class SorterController extends Controller
                         $num = 0;
                         
                         for($j=0;$j<count($topik);$j++){
-                            Models\Classes::where('id',$topik[$j]->id)
+                            Models\Theme::where('id',$topik[$j]->id)
                             ->update([
                                 'urutan'  => $num+1
                             ]);
@@ -201,7 +201,7 @@ class SorterController extends Controller
                         $num = 0;
                         
                         for($j=0;$j<count($arr_id);$j++){
-                            Models\Classes::where('id',$arr_id[$j])
+                            Models\Content::where('id',$arr_id[$j])
                             ->update([
                                 'number'  => $num+1
                             ]);
@@ -223,7 +223,7 @@ class SorterController extends Controller
                         $num = 0;
                         
                         for($j=0;$j<count($arr_id);$j++){
-                            Models\Classes::where('id',$arr_id[$j])
+                            Models\Banner::where('id',$arr_id[$j])
                             ->update([
                                 'urutan'  => $num+1
                             ]);
@@ -245,7 +245,7 @@ class SorterController extends Controller
                         $num = 0;
                         
                         for($j=0;$j<count($arr_id);$j++){
-                            Models\Classes::where('id',$arr_id[$j])
+                            Models\Theme::where('id',$arr_id[$j])
                             ->update([
                                 'urutan'  => $num+1
                             ]);
