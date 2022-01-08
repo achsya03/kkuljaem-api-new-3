@@ -36,12 +36,13 @@ class SorterController extends Controller
             if($table == $tables[$i]){
                 if($i == 0){
                     $kategori_kelas = Models\ClassesCategory::orderBy('id','ASC')->get();
-
+                    $num = 0;
                     if(count($kategori_kelas) > 0){
                         for($j=0;$j<count($kategori_kelas);$j++){
+                            $num += 1;
                             Models\ClassesCategory::where('id',$kategori_kelas[$j]->id)
                             ->update([
-                                'urutan'  => $j+1
+                                'urutan'  => $num
                             ]);
                         }
                     }
@@ -52,6 +53,7 @@ class SorterController extends Controller
                         $num = 0;
                         $last_id_class_category = $kelas[0]->id_class_category;
                         for($j=0;$j<count($kelas);$j++){
+                            $num += 1;
                             if($last_id_class_category != $kelas[$j]->id_class_category){
                                 $num = 0;
                                 $last_id_class_category = $kelas[$j]->id_class_category;
@@ -59,7 +61,7 @@ class SorterController extends Controller
                             Models\Classes::where('id',$kelas[$j]->id)
                             ->where('id_class_category',$last_id_class_category)
                             ->update([
-                                'urutan'  => $num+1
+                                'urutan'  => $num
                             ]);
                         }
                     }
@@ -70,6 +72,8 @@ class SorterController extends Controller
                         $num = 0;
                         $last_id_class= $konten[0]->id_class;
                         for($j=0;$j<count($konten);$j++){
+
+                            $num += 1;
                             if($last_id_class != $konten[$j]->id_class){
                                 $num = 0;
                                 $last_id_class = $konten[$j]->id_class;
@@ -77,7 +81,7 @@ class SorterController extends Controller
                             Models\Content::where('id',$konten[$j]->id)
                             ->where('id_class',$last_id_class)
                             ->update([
-                                'urutan'  => $num+1
+                                'urutan'  => $num
                             ]);
                         }
                     }
@@ -88,9 +92,10 @@ class SorterController extends Controller
                         $num = 0;
                         
                         for($j=0;$j<count($banner);$j++){
+                            $num += 1;
                             Models\Banner::where('id',$banner[$j]->id)
                             ->update([
-                                'urutan'  => $num+1
+                                'urutan'  => $num
                             ]);
                         }
                     }
@@ -101,9 +106,10 @@ class SorterController extends Controller
                         $num = 0;
                         
                         for($j=0;$j<count($topik);$j++){
+                            $num += 1;
                             Models\Theme::where('id',$topik[$j]->id)
                             ->update([
-                                'urutan'  => $num+1
+                                'urutan'  => $num
                             ]);
                         }
                     }
@@ -155,10 +161,12 @@ class SorterController extends Controller
                     }
 
                     if(count($arr_id) > 0){
+                        $num = 0;
                         for($j=0;$j<count($arr_id);$j++){
+                            $num += 1;
                             Models\ClassesCategory::where('id',$arr_id[$j])
                             ->update([
-                                'urutan'  => $j+1
+                                'urutan'  => $num
                             ]);
                         }
                     }
@@ -178,6 +186,7 @@ class SorterController extends Controller
                         $num = 0;
                         
                         for($j=0;$j<count($arr_id);$j++){
+                            $num += 1;
                                                         
                             Models\Classes::where('id',$arr_id[$j])
                             ->update([
@@ -201,9 +210,11 @@ class SorterController extends Controller
                         $num = 0;
                         
                         for($j=0;$j<count($arr_id);$j++){
+                            $num += 1;
+
                             Models\Content::where('id',$arr_id[$j])
                             ->update([
-                                'number'  => $num+1
+                                'number'  => $num
                             ]);
                         }
                     }
@@ -223,9 +234,10 @@ class SorterController extends Controller
                         $num = 0;
                         
                         for($j=0;$j<count($arr_id);$j++){
+                            $num += 1;
                             Models\Banner::where('id',$arr_id[$j])
                             ->update([
-                                'urutan'  => $num+1
+                                'urutan'  => $num
                             ]);
                         }
                     }
@@ -245,6 +257,7 @@ class SorterController extends Controller
                         $num = 0;
                         
                         for($j=0;$j<count($arr_id);$j++){
+                            $num += 1;
                             Models\Theme::where('id',$arr_id[$j])
                             ->update([
                                 'urutan'  => $num+1
