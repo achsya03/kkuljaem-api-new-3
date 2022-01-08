@@ -306,7 +306,7 @@ class SorterController extends Controller
                             'error' => 'Detail Kategori tidak sesuai'
                         ]);
                     }
-                    $kategori_kelas = Models\ClassesCategory::select('nama','uuid')->where('uuid',$detail_kategori)->get();
+                    $kategori_kelas = Models\ClassesCategory::select('id','nama','uuid')->where('uuid',$detail_kategori)->get();
                     if(count($kategori_kelas)==0){
                         return response()->json([
                             'message' => 'Failed',
@@ -314,7 +314,7 @@ class SorterController extends Controller
                         ]);
                     }
                     $kelas = Models\Classes::select('nama','urutan')->where('id_class_category',$kategori_kelas[0]->id)->orderBy('urutan','ASC')->get();
-
+                    unset($kategori_kelas[0]->id);
                     $result['kategori_kelas'] = $kategori_kelas[0];
                     $result['kelas'] = $kelas;
                 }elseif($i == 2){
@@ -325,7 +325,7 @@ class SorterController extends Controller
                         ]);
                     }
 
-                    $kelas = Models\Classes::select('nama','uuid')->where('uuid',$detail_kelas)->get();
+                    $kelas = Models\Classes::select('id','nama','uuid')->where('uuid',$detail_kelas)->get();
                     if(count($kelas)==0){
                         return response()->json([
                             'message' => 'Failed',
@@ -356,6 +356,7 @@ class SorterController extends Controller
                         }
                         $cont[$i] = $arr1;
                     }
+                    unset($kelas[0]->id);
                     $result['kelas'] = $kelas[0];
                     $result['konten'] = $cont;
                 }elseif($i == 3){
