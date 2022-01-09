@@ -152,8 +152,12 @@ class SorterController extends Controller
                 if($i == 0){
                     $kategori_kelas = Models\ClassesCategory::select('uuid')->orderBy('id','ASC')->get();
 
+                    $bann = [];
+                    for($k=0;$k<count($kategori_kelas);$k++){
+                        array_push($bann,$kategori_kelas[0]->uuid);
+                    }
                     for($k=0;$k<count($arr_id);$k++){
-                        if(!in_array($arr_id[$k],$kategori_kelas)){
+                        if(!in_array($arr_id[$k],$bann)){
                             return response()->json([
                                 'message' => 'Failed',
                                 'error' => 'ID tidak sesuai'
@@ -174,8 +178,12 @@ class SorterController extends Controller
                 }elseif($i == 1){
                     $kelas = Models\Classes::select('uuid')->orderBy('id','ASC')->get();
 
+                    $bann = [];
+                    for($k=0;$k<count($kelas);$k++){
+                        array_push($bann,$kelas[0]->uuid);
+                    }
                     for($k=0;$k<count($arr_id);$k++){
-                        if(!in_array($arr_id[$k],$kelas)){
+                        if(!in_array($arr_id[$k],$bann)){
                             return response()->json([
                                 'message' => 'Failed',
                                 'error' => 'ID tidak sesuai'
@@ -198,8 +206,12 @@ class SorterController extends Controller
                 }elseif($i == 2){
                     $konten = Models\Content::select('uuid')->orderBy('id','ASC')->get();
 
+                    $bann = [];
+                    for($k=0;$k<count($konten);$k++){
+                        array_push($bann,$konten[0]->uuid);
+                    }
                     for($k=0;$k<count($arr_id);$k++){
-                        if(!in_array($arr_id[$k],$konten)){
+                        if(!in_array($arr_id[$k],$bann)){
                             return response()->json([
                                 'message' => 'Failed',
                                 'error' => 'ID tidak sesuai'
@@ -221,9 +233,12 @@ class SorterController extends Controller
                     }
                 }elseif($i == 3){
                     $banner = Models\Banner::select('uuid')->orderBy('id','ASC')->get();
-                    return $banner->toArray();
+                    $bann = [];
+                    for($k=0;$k<count($banner);$k++){
+                        array_push($bann,$banner[0]->uuid);
+                    }
                     for($k=0;$k<count($arr_id);$k++){
-                        if(!in_array($arr_id[$k],$banner)){
+                        if(!in_array($arr_id[$k],$bann)){
                             return response()->json([
                                 'message' => 'Failed',
                                 'error' => 'ID tidak sesuai'
@@ -245,8 +260,12 @@ class SorterController extends Controller
                 }elseif($i == 4){
                     $topik = Models\Theme::select('uuid')->orderBy('id','ASC')->get();
 
+                    $bann = [];
+                    for($k=0;$k<count($topik);$k++){
+                        array_push($bann,$topik[0]->uuid);
+                    }
                     for($k=0;$k<count($arr_id);$k++){
-                        if(!in_array($arr_id[$k],$topik)){
+                        if(!in_array($arr_id[$k],$bann)){
                             return response()->json([
                                 'message' => 'Failed',
                                 'error' => 'ID tidak sesuai'
