@@ -315,7 +315,7 @@ class SorterController extends Controller
                     }
                 }elseif($i == 4){
                     $video_uuid = Models\Video::select('uuid')->get();
-                    $topik = Models\Theme::select('judul','urutan')->orderBy('id','ASC')->whereNotIn('judul',$video_uuid)->get();
+                    $topik = Models\Theme::select('uuid')->orderBy('id','ASC')->whereNotIn('judul',$video_uuid)->get();
 
                     $bann = [];
                     for($k=0;$k<count($topik);$k++){
