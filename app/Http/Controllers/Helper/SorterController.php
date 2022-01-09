@@ -212,7 +212,7 @@ class SorterController extends Controller
                     }
 
 
-                    if(count($arr_id) != count($kategori_kelas)){
+                    if(count($arr_id) != count($kelas)){
                         return response()->json([
                             'message' => 'Failed',
                             'error' => 'Jumlah ID tidak sesuai'
@@ -259,6 +259,13 @@ class SorterController extends Controller
                                 'error' => 'ID tidak sesuai'
                             ]);
                         }
+                    }
+
+                    if(count($arr_id) != count($konten)){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Jumlah ID tidak sesuai'
+                        ]);
                     }
 
                     if(count($arr_id) > 0){
