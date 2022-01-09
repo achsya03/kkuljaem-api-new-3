@@ -165,6 +165,13 @@ class SorterController extends Controller
                         }
                     }
 
+                    if(count($arr_id) != count($kategori_kelas)){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Jumlah ID tidak sesuai'
+                        ]);
+                    }
+
                     if(count($arr_id) > 0){
                         $num = 0;
                         for($j=0;$j<count($arr_id);$j++){
@@ -176,7 +183,20 @@ class SorterController extends Controller
                         }
                     }
                 }elseif($i == 1){
-                    $kelas = Models\Classes::select('uuid')->orderBy('id','ASC')->get();
+                    if(!$detail_kategori = $request->detail_kategori){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Detail Kategori tidak sesuai'
+                        ]);
+                    }
+                    $kategori_kelas = Models\ClassesCategory::select('id','nama','uuid')->where('uuid',$detail_kategori)->get();
+                    if(count($kategori_kelas)==0){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Detail Kategori tidak sesuai'
+                        ]);
+                    }
+                    $kelas = Models\Classes::select('uuid')->where('id_class_category',$kategori_kelas[0]->id)->orderBy('id','ASC')->get();
 
                     $bann = [];
                     for($k=0;$k<count($kelas);$k++){
@@ -189,6 +209,14 @@ class SorterController extends Controller
                                 'error' => 'ID tidak sesuai'
                             ]);
                         }
+                    }
+
+
+                    if(count($arr_id) != count($kategori_kelas)){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Jumlah ID tidak sesuai'
+                        ]);
                     }
 
                     if(count($arr_id) > 0){
@@ -204,7 +232,21 @@ class SorterController extends Controller
                         }
                     }
                 }elseif($i == 2){
-                    $konten = Models\Content::select('uuid')->orderBy('id','ASC')->get();
+                    if(!$detail_kelas = $request->detail_kelas){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Detail Kelas tidak sesuai'
+                        ]);
+                    }
+                    $kelas = Models\Classes::select('id','nama','uuid')->where('uuid',$detail_kelas)->get();
+                    if(count($kelas)==0){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Detail Kategori tidak sesuai'
+                        ]);
+                    }
+                    $cont = [];
+                    $konten = Models\Content::select('uuid')->where('id_class',$kelas[0]->id)->orderBy('id','ASC')->get();
 
                     $bann = [];
                     for($k=0;$k<count($konten);$k++){
@@ -245,6 +287,13 @@ class SorterController extends Controller
                             ]);
                         }
                     }
+                    
+                    if(count($arr_id) != count($banner)){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Jumlah ID tidak sesuai'
+                        ]);
+                    }
 
                     if(count($arr_id) > 0){
                         $num = 0;
@@ -271,6 +320,13 @@ class SorterController extends Controller
                                 'error' => 'ID tidak sesuai'
                             ]);
                         }
+                    }
+
+                    if(count($arr_id) != count($topik)){
+                        return response()->json([
+                            'message' => 'Failed',
+                            'error' => 'Jumlah ID tidak sesuai'
+                        ]);
                     }
 
                     if(count($arr_id) > 0){
