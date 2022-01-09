@@ -221,7 +221,7 @@ class SorterController extends Controller
                     }
                 }elseif($i == 3){
                     $banner = Models\Banner::select('uuid')->orderBy('id','ASC')->get();
-
+                    return $banner;
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$banner)){
                             return response()->json([
