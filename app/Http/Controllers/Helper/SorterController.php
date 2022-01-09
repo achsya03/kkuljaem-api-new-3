@@ -154,7 +154,7 @@ class SorterController extends Controller
 
                     $bann = [];
                     for($k=0;$k<count($kategori_kelas);$k++){
-                        array_push($bann,$kategori_kelas[0]->uuid);
+                        array_push($bann,$kategori_kelas[$k]->uuid);
                     }
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$bann)){
