@@ -334,6 +334,8 @@ class SorterController extends Controller
                     }
                     $cont = [];
                     $content = Models\Content::where('id_class',$kelas[0]->id)->orderBy('number','ASC')->get();
+                    $count_vid = 0;
+                    $count_quiz = 0;
                     
                     for($i = 0;$i < count($content);$i++){
                         $arr1 = [];
