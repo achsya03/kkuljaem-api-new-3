@@ -200,7 +200,7 @@ class SorterController extends Controller
 
                     $bann = [];
                     for($k=0;$k<count($kelas);$k++){
-                        array_push($bann,$kelas[0]->uuid);
+                        array_push($bann,$kelas[$k]->uuid);
                     }
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$bann)){
@@ -250,7 +250,7 @@ class SorterController extends Controller
 
                     $bann = [];
                     for($k=0;$k<count($konten);$k++){
-                        array_push($bann,$konten[0]->uuid);
+                        array_push($bann,$konten[$k]->uuid);
                     }
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$bann)){
@@ -284,7 +284,7 @@ class SorterController extends Controller
                     $banner = Models\Banner::select('uuid')->orderBy('id','ASC')->get();
                     $bann = [];
                     for($k=0;$k<count($banner);$k++){
-                        array_push($bann,$banner[0]->uuid);
+                        array_push($bann,$banner[$k]->uuid);
                     }
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$bann)){
@@ -318,7 +318,7 @@ class SorterController extends Controller
 
                     $bann = [];
                     for($k=0;$k<count($topik);$k++){
-                        array_push($bann,$topik[0]->uuid);
+                        array_push($bann,$topik[$k]->uuid);
                     }
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$bann)){
