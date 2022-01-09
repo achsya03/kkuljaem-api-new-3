@@ -150,7 +150,7 @@ class SorterController extends Controller
         for($i=0;$i<count($tables);$i++){
             if($table == $tables[$i]){
                 if($i == 0){
-                    $kategori_kelas = Models\ClassesCategory::select('id')->orderBy('id','ASC')->get();
+                    $kategori_kelas = Models\ClassesCategory::select('uuid')->orderBy('id','ASC')->get();
 
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$kategori_kelas)){
@@ -165,14 +165,14 @@ class SorterController extends Controller
                         $num = 0;
                         for($j=0;$j<count($arr_id);$j++){
                             $num += 1;
-                            Models\ClassesCategory::where('id',$arr_id[$j])
+                            Models\ClassesCategory::where('uuid',$arr_id[$j])
                             ->update([
                                 'urutan'  => $num
                             ]);
                         }
                     }
                 }elseif($i == 1){
-                    $kelas = Models\Classes::select('id')->orderBy('id_class_category','ASC')->orderBy('id','ASC')->get();
+                    $kelas = Models\Classes::select('uuid')->orderBy('id','ASC')->get();
 
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$kelas)){
@@ -189,14 +189,14 @@ class SorterController extends Controller
                         for($j=0;$j<count($arr_id);$j++){
                             $num += 1;
                                                         
-                            Models\Classes::where('id',$arr_id[$j])
+                            Models\Classes::where('uuid',$arr_id[$j])
                             ->update([
-                                'urutan'  => $num+1
+                                'urutan'  => $num
                             ]);
                         }
                     }
                 }elseif($i == 2){
-                    $konten = Models\Content::select('id')->orderBy('id_class','ASC')->orderBy('id','ASC')->get();
+                    $konten = Models\Content::select('uuid')->orderBy('id','ASC')->get();
 
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$konten)){
@@ -213,14 +213,14 @@ class SorterController extends Controller
                         for($j=0;$j<count($arr_id);$j++){
                             $num += 1;
 
-                            Models\Content::where('id',$arr_id[$j])
+                            Models\Content::where('uuid',$arr_id[$j])
                             ->update([
                                 'number'  => $num
                             ]);
                         }
                     }
                 }elseif($i == 3){
-                    $banner = Models\Banner::select('id')->orderBy('id','ASC')->get();
+                    $banner = Models\Banner::select('uuid')->orderBy('id','ASC')->get();
 
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$banner)){
@@ -236,14 +236,14 @@ class SorterController extends Controller
                         
                         for($j=0;$j<count($arr_id);$j++){
                             $num += 1;
-                            Models\Banner::where('id',$arr_id[$j])
+                            Models\Banner::where('uuid',$arr_id[$j])
                             ->update([
                                 'urutan'  => $num
                             ]);
                         }
                     }
                 }elseif($i == 4){
-                    $topik = Models\Theme::orderBy('id','ASC')->get();
+                    $topik = Models\Theme::orderBy('uuid','ASC')->get();
 
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$topik)){
@@ -259,9 +259,9 @@ class SorterController extends Controller
                         
                         for($j=0;$j<count($arr_id);$j++){
                             $num += 1;
-                            Models\Theme::where('id',$arr_id[$j])
+                            Models\Theme::where('uuid',$arr_id[$j])
                             ->update([
-                                'urutan'  => $num+1
+                                'urutan'  => $num
                             ]);
                         }
                     }
