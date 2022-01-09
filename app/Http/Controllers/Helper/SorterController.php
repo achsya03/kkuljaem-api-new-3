@@ -150,7 +150,7 @@ class SorterController extends Controller
         for($i=0;$i<count($tables);$i++){
             if($table == $tables[$i]){
                 if($i == 0){
-                    $kategori_kelas = Models\ClassesCategory::select('uuid')->orderBy('id','ASC')->get();
+                    $kategori_kelas = Models\ClassesCategory::orderBy('id','ASC')->get();
 
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$kategori_kelas)){
@@ -172,7 +172,7 @@ class SorterController extends Controller
                         }
                     }
                 }elseif($i == 1){
-                    $kelas = Models\Classes::select('uuid')->orderBy('id','ASC')->get();
+                    $kelas = Models\Classes::orderBy('id','ASC')->get();
 
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$kelas)){
@@ -196,7 +196,7 @@ class SorterController extends Controller
                         }
                     }
                 }elseif($i == 2){
-                    $konten = Models\Content::select('uuid')->orderBy('id','ASC')->get();
+                    $konten = Models\Content::orderBy('id','ASC')->get();
 
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$konten)){
@@ -220,7 +220,7 @@ class SorterController extends Controller
                         }
                     }
                 }elseif($i == 3){
-                    $banner = Models\Banner::select('uuid')->orderBy('id','ASC')->get();
+                    $banner = Models\Banner::orderBy('id','ASC')->get();
 
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$banner)){
@@ -243,7 +243,7 @@ class SorterController extends Controller
                         }
                     }
                 }elseif($i == 4){
-                    $topik = Models\Theme::orderBy('uuid','ASC')->get();
+                    $topik = Models\Theme::orderBy('id','ASC')->get();
 
                     for($k=0;$k<count($arr_id);$k++){
                         if(!in_array($arr_id[$k],$topik)){
