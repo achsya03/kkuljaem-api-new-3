@@ -379,7 +379,7 @@ class SorterController extends Controller
         }for($i=0;$i<count($tables);$i++){
             if($table == $tables[$i]){
                 if($i == 0){
-                    $kategori_kelas = Models\ClassesCategory::select('nama','urutan')->orderBy('urutan','ASC')->get();
+                    $kategori_kelas = Models\ClassesCategory::select('nama','urutan','uuid')->orderBy('urutan','ASC')->get();
 
                     $result = $kategori_kelas;
                 }elseif($i == 1){
@@ -396,7 +396,7 @@ class SorterController extends Controller
                             'error' => 'Detail Kategori tidak sesuai'
                         ]);
                     }
-                    $kelas = Models\Classes::select('nama','urutan')->where('id_class_category',$kategori_kelas[0]->id)->orderBy('urutan','ASC')->get();
+                    $kelas = Models\Classes::select('nama','urutan','uuid')->where('id_class_category',$kategori_kelas[0]->id)->orderBy('urutan','ASC')->get();
                     unset($kategori_kelas[0]->id);
                     $result['kategori_kelas'] = $kategori_kelas[0];
                     $result['kelas'] = $kelas;
@@ -445,12 +445,12 @@ class SorterController extends Controller
                     $result['kelas'] = $kelas[0];
                     $result['konten'] = $cont;
                 }elseif($i == 3){
-                    $banner = Models\Banner::select('judul_banner','urutan')->orderBy('urutan','ASC')->get();
+                    $banner = Models\Banner::select('judul_banner','urutan','uuid')->orderBy('urutan','ASC')->get();
 
                     $result = $banner;
                 }elseif($i == 4){
                     $video_uuid = Models\Video::select('uuid')->get();
-                    $topik = Models\Theme::select('judul','urutan')->orderBy('urutan','ASC')->whereNotIn('judul',$video_uuid)->get();
+                    $topik = Models\Theme::select('judul','urutan','uuid')->orderBy('urutan','ASC')->whereNotIn('judul',$video_uuid)->get();
                     $result = $topik;
                 }
             }
