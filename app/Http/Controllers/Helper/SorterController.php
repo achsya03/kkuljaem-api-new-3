@@ -389,7 +389,7 @@ class SorterController extends Controller
                             'error' => 'Detail Kategori tidak sesuai'
                         ]);
                     }
-                    $kategori_kelas = Models\ClassesCategory::select('nama','urutan','uuid')->where('uuid',$detail_kategori)->get();
+                    $kategori_kelas = Models\ClassesCategory::select('id','uuid')->where('uuid',$detail_kategori)->get();
                     if(count($kategori_kelas)==0){
                         return response()->json([
                             'message' => 'Failed',
