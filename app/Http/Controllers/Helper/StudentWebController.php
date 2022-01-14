@@ -14,7 +14,7 @@ class StudentWebController extends Controller
 
         $tglSekarang = date('Y/m/d');
 
-        $banner = Models\Banner::all();
+        $banner = Models\Banner::orderBy('urutan','ASC')->get();
         $videos = Models\Videos::where('jadwal',$tglSekarang)->limit(1)->get();
         if(count($videos)==0){
             $videos = Models\Videos::orderBy('jadwal','ASC')->limit(1)->get();
@@ -23,10 +23,10 @@ class StudentWebController extends Controller
         if(count($words)==0){
             $words = Models\Words::orderBy('jadwal','ASC')->limit(5)->get();
         }
-        $class = Models\Classes::orderBy('created_at','DESC')
+        $class = Models\Classes::orderBy('urutan','ASC')
             ->where('status_tersedia',1)->limit(6)->get();
             $video_uuid = Models\Video::select('uuid')->get();
-            $theme = Models\Theme::orderBy('jml_post','DESC')
+            $theme = Models\Theme::orderBy('urutan','ASC')
                     ->whereNotIn('judul',$video_uuid)->get();
         $post = Models\Post::where('stat_post',0)->where('jenis','forum')
         ->orderBy('jml_like','DESC')->limit(10)->get();

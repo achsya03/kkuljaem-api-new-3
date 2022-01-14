@@ -49,7 +49,7 @@ class ShowController extends Controller
 
         $tglSekarang = date('Y/m/d');
 
-        $banner = Models\Banner::all();
+        $banner = Models\Banner::orderBy('urutan','ASC')->get();
         $videos = Models\Videos::where('jadwal',$tglSekarang)->limit(1)->get();
         if(count($videos)==0){
             $videos = Models\Videos::orderBy('jadwal','ASC')->limit(1)->get();
