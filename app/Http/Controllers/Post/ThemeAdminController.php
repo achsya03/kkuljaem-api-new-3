@@ -81,7 +81,7 @@ class ThemeAdminController extends Controller
     public function allData(Request $request){
 
         $video_uuid = Models\Video::select('uuid')->get();
-        $theme = Models\Theme::orderBy('jml_post','DESC')
+        $theme = Models\Theme::orderBy('urutan','ASC')
                 ->whereNotIn('judul',$video_uuid)->get();
         foreach ($theme as $vid) {
             unset($vid['id']);  

@@ -569,6 +569,7 @@ class ClassController extends Controller
                 'group_uuid' => $classes[$i]->class_category->uuid,
                 'group' => $arr01,
                 'judul_class' => $classes[$i]->nama,
+                'urutan_class' => $classes[$i]->urutan,
                 'deskripsi_class' => $classes[$i]->deskripsi,
                 'mentor' => $mentor,
                 'mentor_all' => $arr0,

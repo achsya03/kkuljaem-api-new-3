@@ -112,7 +112,7 @@ class BannerController extends Controller
 
     public function allData(Request $request){
 
-        $banner = Banner::all();
+        $banner = Banner::orderBy('urutan','ASC')->get();
         foreach ($banner as $bann) {
             unset($bann['id']);
             unset($bann['gambar_web_id']);

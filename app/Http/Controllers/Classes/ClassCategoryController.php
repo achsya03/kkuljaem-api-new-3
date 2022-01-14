@@ -146,7 +146,7 @@ class ClassCategoryController extends Controller
 
     public function allData(Request $request){
 
-        $class_cat = ClassesCategory::orderBy('nama','ASC')->get();
+        $class_cat = ClassesCategory::orderBy('urutan','ASC')->get();
         for($i=0;$i<count($class_cat);$i++) {
             $classes = Models\Classes::where('id_class_category',$class_cat[$i]->id)->get();
             unset($class_cat[$i]['id']);

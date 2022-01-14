@@ -58,10 +58,10 @@ class ShowController extends Controller
         if(count($words)==0){
             $words = Models\Words::orderBy('jadwal','ASC')->limit(5)->get();
         }
-        $class = Models\Classes::orderBy('nama','ASC')
+        $class = Models\Classes::orderBy('urutan','ASC')
             ->where('status_tersedia',1)->limit(6)->get();
         $video_uuid = Models\Video::select('uuid')->get();
-        $theme = Models\Theme::orderBy('jml_post','DESC')
+        $theme = Models\Theme::orderBy('urutan','ASC')
                 ->whereNotIn('judul',$video_uuid)->get();
         $post = [];
         if(count($post = Models\Post::where('stat_post',0)->where('jenis','forum')
@@ -118,6 +118,7 @@ class ShowController extends Controller
             
             
             $cls[$i]['nama_kelas'] = $class[$i]->nama;
+            $cls[$i]['urutan_kelas'] = $class[$i]->urutan;
             if($cl != null){
                 $cls[$i]['nama_mentor'] = $cl->user->nama;
             }
@@ -222,16 +223,17 @@ class ShowController extends Controller
        
         //$result['stat_pengguna'] = $this->userCheck($request->user()->uuid,$date);
 
-        $category = Models\ClassesCategory::orderBy('nama','ASC')->get();
+        $category = Models\ClassesCategory::orderBy('urutan','ASC')->get();
         $arr0 = [];
         for($i = 0;$i < count($category);$i++){
             $arr = [];
             $class = Models\Classes::where('id_class_category',$category[$i]->id)
-                ->where('status_tersedia',1)->orderBy('nama','ASC')->limit(6)->get();
+                ->where('status_tersedia',1)->orderBy('urutan','ASC')->limit(6)->get();
             $classes = [];
             for($j = 0;$j < count($class);$j++){
                 $arr1 = [];
                 $arr1['class_nama'] = $class[$j]->nama;
+                $arr1['class_urutan'] = $class[$j]->urutan;
                 $arr1['url_web'] = $class[$j]->url_web;
                 $arr1['url_mobile'] = $class[$j]->url_mobile;
                 $arr1['jml_materi'] = $class[0]->jml_video+$class[0]->jml_kuis;
@@ -281,13 +283,14 @@ class ShowController extends Controller
 
         $arr = [];
         $class = Models\Classes::where('id_class_category',$category[0]->id)
-            ->where('status_tersedia',1)->orderBy('nama','ASC')->get();
+            ->where('status_tersedia',1)->orderBy('urutan','ASC')->get();
             
         $classes = [];
         $arr0 = [];
         for($j = 0;$j < count($class);$j++){
             $arr1 = [];
             $arr1['class_nama'] = $class[$j]->nama;
+            $arr1['class_urutan'] = $class[$j]->urutan;
             $arr1['url_web'] = $class[$j]->url_web;
             $arr1['url_mobile'] = $class[$j]->url_mobile;
             $arr1['jml_materi'] = $class[$j]->jml_video+$class[$j]->jml_kuis;
