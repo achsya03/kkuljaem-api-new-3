@@ -47,7 +47,7 @@ class ClassController extends Controller
         }
 
         $class_cat = ClassesCategory::where('uuid',$uuid)->first();
-        $classes = Classes::where('id_class_category',$class_cat->id)
+        $classes = Classes::where('id_class_category',$class_cat->id)->orderBy('urutan','ASC')
                 //->where('nama','LIKE','%'.$request->nama_kelas.'%')
                 // ->where('nama','ilike','%'.$request->nama_kelas.'%')
                 // ->limit($limit)->offset(($request->page - 1) * $limit)
@@ -64,6 +64,7 @@ class ClassController extends Controller
         // }
         $res= $this->classesValue($classes);
         $result['nama_group'] = $res[0]['nama_group'];
+        $result['group_urutan'] = $res[0]['group_urutan'];
         $result['group_deskripsi'] = $res[0]['group_deskripsi'];
         $result['group_uuid'] = $res[0]['group_uuid'];
 
@@ -314,7 +315,7 @@ class ClassController extends Controller
     #testing
     public function allData(Request $request){
 
-        $classes = Classes::where('nama','LIKE','%'.$request->nama_kelas.'%')
+        $classes = Classes::where('nama','LIKE','%'.$request->nama_kelas.'%')->orderBy('urutan','ASC')
         ->limit($request->limit)->get();
         // foreach ($classes as $cl) {
         //     unset($cl['id']);
@@ -566,6 +567,7 @@ class ClassController extends Controller
             $result[$i] = [
                 'nama_group' => $classes[$i]->class_category->nama,
                 'group_deskripsi' => $classes[$i]->class_category->deskripsi,
+                'group_urutan' => $classes[$i]->class_category->urutan,
                 'group_uuid' => $classes[$i]->class_category->uuid,
                 'group' => $arr01,
                 'judul_class' => $classes[$i]->nama,
