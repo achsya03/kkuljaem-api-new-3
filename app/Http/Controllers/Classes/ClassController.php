@@ -31,6 +31,9 @@ class ClassController extends Controller
         return response()->json(['message'=>'Success','data'
         => $result]);
     }
+    public function __construct(Request $request){
+        $this->middleware('auth');
+    }
 
     public function detailDataForClass(Request $request){
         if(!$uuid=$request->token){
