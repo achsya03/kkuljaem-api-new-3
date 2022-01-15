@@ -1740,7 +1740,7 @@ class ShowController extends Controller
             $usr_id = $user->id;
             $detail_mentor = Models\DetailMentor::where('id_users',$usr_id)->get();
             if(count($detail_mentor)>0){
-                if($detail_mentor[0]->url_foto != null && $pos[$i]->user->jenis_pengguna != '0'){
+                if($detail_mentor[0]->url_foto != null && $pos[$j]->user->jenis_pengguna != '0'){
                     $arr1 += [
                         'user_foto' => $detail_mentor[0]->url_foto,
                     ];
