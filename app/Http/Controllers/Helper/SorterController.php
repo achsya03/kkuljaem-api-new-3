@@ -428,6 +428,7 @@ class SorterController extends Controller
                             $arr1['urutan'] = $content[$i]->number;
                             $arr1['judul'] = $content_video[0]->judul;
                             $arr1['type'] = $content[$i]->type;
+                            $arr1['content_uuid'] = $content[$i]->uuid;
                            
                             $arr1['content_video_uuid'] = $content_video[0]->uuid;
                         }elseif($content[$i]->type == 'quiz'){
@@ -436,6 +437,7 @@ class SorterController extends Controller
                             $arr1['urutan'] = $content[$i]->number;
                             $arr1['judul'] = $content_quiz[0]->judul;
                             $arr1['type'] = $content[$i]->type;
+                            $arr1['content_uuid'] = $content[$i]->uuid;
                             
                             $arr1['content_quiz_uuid'] = $content_quiz[0]->uuid;
                         }
