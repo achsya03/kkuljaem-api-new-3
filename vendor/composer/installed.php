@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b9e3d09bd5f3d78253485492451a83c82f34bc5e',
+        'reference' => '0238cf929e655c1205642b477a8b6fb3e11c8aaf',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -616,7 +616,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b9e3d09bd5f3d78253485492451a83c82f34bc5e',
+            'reference' => '0238cf929e655c1205642b477a8b6fb3e11c8aaf',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -1674,6 +1674,15 @@
             'install_path' => __DIR__ . '/../webmozart/assert',
             'aliases' => array(),
             'reference' => '6964c76c7804814a842473e0c8fd15bab0f18e25',
+            'dev_requirement' => false,
+        ),
+        'yajra/laravel-datatables-oracle' => array(
+            'pretty_version' => 'v9.19.0',
+            'version' => '9.19.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../yajra/laravel-datatables-oracle',
+            'aliases' => array(),
+            'reference' => '553482df5f68969928acc0ee1a3af032cdaaf824',
             'dev_requirement' => false,
         ),
         'zircote/swagger-php' => array(

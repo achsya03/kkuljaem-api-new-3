@@ -144,7 +144,7 @@ Route::group(['prefix' => 'api/user'], function () {
     // Route::post('/',        [User\UserController::class, 'addData']);
 });
 Route::group(['prefix' => 'api/force'], function () {
-    Route::get('subs',      [Helper\ForceController::class,'forceSubs']);
+    Route::post('subs',      [Helper\ForceController::class,'forceSubs']);
     // Route::get('words/url',      [Helper\ForceController::class,'forceWordUrl']);
     // Route::get('words/path',      [Helper\ForceController::class,'forceWordPath']);
     // Route::get('question/path',      [Helper\ForceController::class,'forceQuestionPath']);
@@ -399,6 +399,55 @@ Route::group(['prefix' => 'api/admin/user'], function () {
     Route::delete('/student',     [User\UserController::class,'userDataDelete']);
     Route::delete('/mentor',      [User\UserController::class,'userDataDelete']);
     Route::get('/student/list',     [User\UserController::class,'studentList']);
+
+    Route::get('/student/lists', function (Request $request) {
+        if ($request->ajax()) {
+                $student = User::where('jenis_pengguna',0)->get();
+                $arr = [];
+
+                for($i=0;$i<count($student);$i++){
+                    $status = 'Belum Terverifikasi';
+                    if($student[$i]->email_verified_at != null || $student[$i]->email_verified_at != '' ){
+                        $status = 'Terverifikasi';
+                    }
+                    if(date_format(date_create($student[$i]->tgl_langganan_akhir),"Y/m/d") >= date('Y/m/d')){
+                        $status = 'Member';
+                    }
+                    $jenis_kel = '-';
+                    $tgl_lahir = '-';
+                    $alamat = '-';
+                    $tempat_lahir = '-';
+                    if(count($student[$i]->detailStudent)>0){
+                        if($student[$i]->detailStudent[0]->jenis_kel!=null){$jenis_kel = $student[$i]->detailStudent[0]->jenis_kel;}
+                        if($student[$i]->detailStudent[0]->tgl_lahir!=null){$tgl_lahir = $student[$i]->detailStudent[0]->tgl_lahir;}
+                        if($student[$i]->detailStudent[0]->alamat!=null){$alamat = $student[$i]->detailStudent[0]->alamat;}
+                        if($student[$i]->detailStudent[0]->tempat_lahir!=null){$tempat_lahir = $student[$i]->detailStudent[0]->tempat_lahir;}
+                    }
+        
+                    $arr1 = [
+                        'status'=>$status,
+                        'email'=>$student[$i]->email,
+                        'nama'=>$student[$i]->nama,
+                        'jenis_kel'=>$jenis_kel,
+                        'tgl_lahir'=>$tgl_lahir,
+                        'tempat_lahir'=>$tempat_lahir,
+                        'alamat'=>$alamat,
+                        'user_uuid'=>$student[$i]->uuid,
+                    ];
+                    $arr[$i] = $arr1;
+                }
+
+                return DataTables::of($arr)
+                    ->addIndexColumn()
+                    //->addColumn('action', function($row){
+                    //    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    //    return $actionBtn;
+                    //})
+                    //->rawColumns(['action'])
+                    ->make(true);
+            }
+    })->name('std.list'); 
+
     Route::get('/mentor/list',      [User\UserController::class,'mentorList']);
     Route::get('/student/detail',      [User\UserController::class,'detailData']);
     Route::get('/mentor/detail',      [User\UserController::class,'detailData']);

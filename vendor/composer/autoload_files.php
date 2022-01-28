@@ -41,4 +41,5 @@ return array(
     '746bb4ebbdf3585f3e2e85fffd4a5f43' => $vendorDir . '/cloudinary-labs/cloudinary-laravel/src/Support/helpers.php',
     'ac0aa5b57142c92aeadc397fa46b9d39' => $vendorDir . '/darkaonline/l5-swagger/src/helpers.php',
     'ed962a97bd972bc82007176b647d4e36' => $vendorDir . '/facade/ignition/src/helpers.php',
+    '0b47d6d4a00ca9112ba3953b49e7c9a4' => $vendorDir . '/yajra/laravel-datatables-oracle/src/helper.php',
 );

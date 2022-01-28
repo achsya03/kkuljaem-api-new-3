@@ -18,7 +18,8 @@
         "midtrans/midtrans-php": "^2.5",
         "spatie/dropbox-api": "^1.19",
         "spatie/flysystem-dropbox": "^1.0.0",
-        "tymon/jwt-auth": "^1.0"
+        "tymon/jwt-auth": "^1.0",
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",

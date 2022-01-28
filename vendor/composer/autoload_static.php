@@ -42,6 +42,7 @@ class ComposerStaticInit232245166118a1122f7cf27ad78aa96a
         '746bb4ebbdf3585f3e2e85fffd4a5f43' => __DIR__ . '/..' . '/cloudinary-labs/cloudinary-laravel/src/Support/helpers.php',
         'ac0aa5b57142c92aeadc397fa46b9d39' => __DIR__ . '/..' . '/darkaonline/l5-swagger/src/helpers.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
+        '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -52,6 +53,10 @@ class ComposerStaticInit232245166118a1122f7cf27ad78aa96a
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'Y' => 
+        array (
+            'Yajra\\DataTables\\' => 17,
         ),
         'W' => 
         array (
@@ -235,6 +240,10 @@ class ComposerStaticInit232245166118a1122f7cf27ad78aa96a
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'Yajra\\DataTables\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
         ),
         'Whoops\\' => 
         array (
@@ -785,6 +794,7 @@ class ComposerStaticInit232245166118a1122f7cf27ad78aa96a
         'App\\Http\\Controllers\\Helper\\FileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Helper/FileController.php',
         'App\\Http\\Controllers\\Helper\\ForceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Helper/ForceController.php',
         'App\\Http\\Controllers\\Helper\\HelperController' => __DIR__ . '/../..' . '/app/Http/Controllers/Helper/HelperController.php',
+        'App\\Http\\Controllers\\Helper\\ImageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Helper/ImageController.php',
         'App\\Http\\Controllers\\Helper\\ImageDeleteController' => __DIR__ . '/../..' . '/app/Http/Controllers/Helper/ImageDeleteController.php',
         'App\\Http\\Controllers\\Helper\\InputController' => __DIR__ . '/../..' . '/app/Http/Controllers/Helper/InputController.php',
         'App\\Http\\Controllers\\Helper\\MultiInputController' => __DIR__ . '/../..' . '/app/Http/Controllers/Helper/MultiInputController.php',
@@ -834,6 +844,7 @@ class ComposerStaticInit232245166118a1122f7cf27ad78aa96a
         'App\\Models\\DetailMentor' => __DIR__ . '/../..' . '/app/Models/DetailMentor.php',
         'App\\Models\\DetailStudent' => __DIR__ . '/../..' . '/app/Models/DetailStudent.php',
         'App\\Models\\Exam' => __DIR__ . '/../..' . '/app/Models/Exam.php',
+        'App\\Models\\ForceLog' => __DIR__ . '/../..' . '/app/Models/ForceLog.php',
         'App\\Models\\KkuljaemInfo' => __DIR__ . '/../..' . '/app/Models/KkuljaemInfo.php',
         'App\\Models\\Notification' => __DIR__ . '/../..' . '/app/Models/Notification.php',
         'App\\Models\\Option' => __DIR__ . '/../..' . '/app/Models/Option.php',
@@ -8171,6 +8182,22 @@ class ComposerStaticInit232245166118a1122f7cf27ad78aa96a
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'Yajra\\DataTables\\ApiResourceDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/ApiResourceDataTable.php',
+        'Yajra\\DataTables\\CollectionDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/CollectionDataTable.php',
+        'Yajra\\DataTables\\Contracts\\DataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Contracts/DataTable.php',
+        'Yajra\\DataTables\\Contracts\\Formatter' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Contracts/Formatter.php',
+        'Yajra\\DataTables\\DataTableAbstract' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/DataTableAbstract.php',
+        'Yajra\\DataTables\\DataTables' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/DataTables.php',
+        'Yajra\\DataTables\\DataTablesServiceProvider' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/DataTablesServiceProvider.php',
+        'Yajra\\DataTables\\EloquentDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/EloquentDataTable.php',
+        'Yajra\\DataTables\\Exceptions\\Exception' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Exceptions/Exception.php',
+        'Yajra\\DataTables\\Facades\\DataTables' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Facades/DataTables.php',
+        'Yajra\\DataTables\\Processors\\DataProcessor' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Processors/DataProcessor.php',
+        'Yajra\\DataTables\\Processors\\RowProcessor' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Processors/RowProcessor.php',
+        'Yajra\\DataTables\\QueryDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/QueryDataTable.php',
+        'Yajra\\DataTables\\Utilities\\Config' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Config.php',
+        'Yajra\\DataTables\\Utilities\\Helper' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Helper.php',
+        'Yajra\\DataTables\\Utilities\\Request' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Request.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',
         'phpDocumentor\\Reflection\\DocBlockFactoryInterface' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactoryInterface.php',
