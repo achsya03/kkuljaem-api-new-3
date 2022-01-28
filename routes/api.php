@@ -403,7 +403,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
         return view('Student.home');
     });
     Route::get('/student/lists', function (Request $request) {
-        if ($request->ajax()) {
+        //if ($request->ajax()) {
                 $student = User::where('jenis_pengguna',0)->get();
                 $arr = [];
 
@@ -447,7 +447,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                     //})
                     ->rawColumns(['action'])
                     ->make(true);
-            }
+            //}
     })->name('std.list'); 
 
     Route::get('/mentor/list',      [User\UserController::class,'mentorList']);
