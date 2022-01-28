@@ -228,6 +228,7 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'Success',
+            'max_page' => $max_page,
             //'account' => $this->statUser($request->user()),
             'data'    => $arr
         ]);
