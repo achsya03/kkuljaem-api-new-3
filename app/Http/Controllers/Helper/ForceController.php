@@ -65,10 +65,11 @@ class ForceController extends Controller
         $user = Models\User::where('email',$email)->update([
             'tgl_langganan_akhir' => $tgl_akhir
         ]);
+        $mntr = Models\DetailMentor::where('id_users', $request->user()->id)->get();
 
         $force_log = Models\ForceLog::create([
             "id_detail_student" => $users[0]->detailStudent[0]->id,
-            "id_detail_mentor" => $request->user()->detail_mentor[0]->id,
+            "id_detail_mentor" => $mntr[0]->id,
             "note" => $note,
             "tgl_awal" => $tgl_awal,
             "tgl_edit" => $tgl_akhir,
