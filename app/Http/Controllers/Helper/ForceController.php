@@ -52,7 +52,7 @@ class ForceController extends Controller
                 'error' => 'Email tidak sesuai'
             ]);
         }
-        $tgl_awal = $user->tgl_langganan_akhir;
+        $tgl_awal = $user[0]->tgl_langganan_akhir;
         if(date_format(date_create($request->tgl_akhir),"Y/m/d")<date("Y/m/d")){
             return response()->json([
                 'message' => 'Failed',
