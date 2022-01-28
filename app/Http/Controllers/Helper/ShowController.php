@@ -239,11 +239,10 @@ class ShowController extends Controller
                 $arr1['url_mobile'] = $class[$j]->url_mobile;
                 $arr1['jml_materi'] = $class[0]->jml_video+$class[0]->jml_kuis;
                 $arr1['class_uuid'] = $class[$j]->uuid;
-                $teacher = Models\Teacher::where('id_class',$class[$j]->id)->first();
-                if($teacher != null){
-                    $test = Models\Teacher::find($teacher->id);
-                    $arr1['mentor_nama'] = $test->user->nama;
-                    $arr1['mentor_uuid'] = $test->uuid;
+                $teacher = Models\Teacher::where('id_class',$class[$j]->id)->get();
+                for($k=0;$k<count($teacher);$k++){
+                    $arr1['mentor'][$k]['mentor_nama'] = $teacher->user->nama;
+                    $arr1['mentor'][$k]['mentor_uuid'] = $teacher->user->uuid;
                 }
                 $classes[$j] = $arr1;
             }
