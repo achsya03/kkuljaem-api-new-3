@@ -68,7 +68,7 @@ class ForceController extends Controller
 
         $force_log = Models\ForceLog::create([
             "id_detail_student" => $users[0]->detailStudent[0]->id,
-            "id_detail_mentor" => $request->user()->detail_mentor->id,
+            "id_detail_mentor" => $request->user()->detail_mentor[0]->id,
             "note" => $note,
             "tgl_awal" => $tgl_awal,
             "tgl_edit" => $tgl_akhir,
