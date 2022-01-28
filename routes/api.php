@@ -439,7 +439,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                     ];
                     $arr[$i] = $arr1;
                 }
-                dd($arr);die;
+                
 
                 return DataTables::eloquent(Models\User::where('jenis_pengguna',0)->limit(10)->get())
                     ->make(true);
