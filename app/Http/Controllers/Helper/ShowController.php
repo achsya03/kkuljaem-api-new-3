@@ -132,6 +132,7 @@ class ShowController extends Controller
         for($i = 0;$i < count($theme); $i++){
             $th[$i] = [
                 'topik' => $theme[$i]->judul,
+                'topik_image' => $theme[$i]->url_image,
                 'topik_uuid' => $theme[$i]->uuid
             ];
         }
@@ -1623,7 +1624,7 @@ class ShowController extends Controller
         $result = [];
         #$forum = Models\Post::where('jenis','forum')->where('stat_post','0')->get();
         $video_uuid = Models\Video::select('uuid')->get();
-        $theme = Models\Theme::orderBy('jml_post','DESC')
+        $theme = Models\Theme::orderBy('urutan','ASC')
                 ->whereNotIn('judul',$video_uuid)->get();
 
         $forum = Models\Post::where('stat_post',0)->where('jenis','forum')
@@ -1644,9 +1645,10 @@ class ShowController extends Controller
             // $forum = Models\Post::where('stat_post',0)->where('jenis','forum')
             //         ->orderBy('jml_like','DESC')->get();
             $arr1 = [
-                'urutan' => $i+1,
+                'urutan' => $theme[$i]->urutan,
                 'judul' => $theme[$i]->judul,
                 'jml_post' => $theme[$i]->jml_post,
+                'theme_image' => $theme[$i]->url_image,
                 'theme_uuid' => $theme[$i]->uuid
             ];
             $arr[$i] = $arr1;

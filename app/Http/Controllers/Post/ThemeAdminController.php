@@ -29,15 +29,27 @@ class ThemeAdminController extends Controller
 
         $uuid = $validation->data['uuid'];
 
-        $data = [
-            'judul'            => $request->judul,
-            'jml_post'         => 0,
-            'jml_like'         => 0,
-            'jml_comment'      => 0,
-            'uuid'              => $uuid
-        ];
+        if(!$request->theme_image){
+            return response()->json(['message'=>'Failed','info'=>"Image harus diisi"]);
 
-        $input = new Helper\InputController('theme',$data);
+        }
+
+        if($request->theme_image){
+            $gambar1 = $request->theme_image;
+            $uploadedFileUrl1 = $validation->UUidCheck($gambar1,'Theme');
+
+            $data = [
+                'judul'            => $request->judul,
+                'url_image'        => $uploadedFileUrl1['getSecurePath'],
+                'id_image'         => $uploadedFileUrl1['getPublicId'],
+                'jml_post'         => 0,
+                'jml_like'         => 0,
+                'jml_comment'      => 0,
+                'uuid'              => $uuid
+            ];
+
+            $input = new Helper\InputController('theme',$data);
+        }
 
         return response()->json(['message'=>'Success','info'
         => 'Proses Input Berhasil']);

@@ -9,6 +9,7 @@ use App\Http\Controllers\FCMController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Helper;
 use Validator;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -424,7 +425,8 @@ class PostController extends Controller
 
         $post_image = $post[0]->postImage;
         for($i=0;$i<count($post_image);$i++){
-            Cloudinary::destroy($post_image[$i]->gambar_id);
+            Storage::disk('do_spaces')->delete($post_image[$i]->gambar_id);
+            //Cloudinary::destroy($post_image[$i]->gambar_id);
         }
 
         #delete post
