@@ -35,7 +35,6 @@
               serverSide: true,
               ajax: "{{ route('std.list') }}",
               columns: [
-                  {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                   {data: 'nama', name: 'nama'},
                   {
                       data: 'action', 
