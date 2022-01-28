@@ -442,7 +442,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                 }
                 
 
-                return DataTables::eloquent(Models\User::where('jenis_pengguna',0)->limit(10)->get())
+                return DataTables::of(Models\User::where('jenis_pengguna',0)->limit(10)->get())
                     ->make(true);
             //}
     })->name('std.list'); 
