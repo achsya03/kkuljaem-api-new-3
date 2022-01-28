@@ -404,7 +404,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
         return view('Student.home');
     });
     Route::get('/student/lists', function (Request $request) {
-        //if ($request->ajax()) {
+        if ($request->ajax()) {
                 $student = Models\User::where('jenis_pengguna',0)->get();
                 $arr = [];
 
@@ -440,15 +440,15 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                     $arr[$i] = $arr1;
                 }
 
-                return DataTables::of($arr)
+                return DataTables::of($student)
                     ->addIndexColumn()
-                    //->addColumn('action', function($row){
-                    //    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    //    return $actionBtn;
-                    //})
+                    ->addColumn('action', function($row){
+                       $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                       return $actionBtn;
+                    })
                     ->rawColumns(['action'])
                     ->make(true);
-        //    }
+            }
     })->name('std.list'); 
 
     Route::get('/mentor/list',      [User\UserController::class,'mentorList']);
