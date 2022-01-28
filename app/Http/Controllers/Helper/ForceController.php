@@ -52,6 +52,7 @@ class ForceController extends Controller
                 'error' => 'Email tidak sesuai'
             ]);
         }
+        $tgl_awal = $user->tgl_langganan_akhir;
         if(date_format(date_create($request->tgl_akhir),"Y/m/d")<date("Y/m/d")){
             return response()->json([
                 'message' => 'Failed',
@@ -69,6 +70,8 @@ class ForceController extends Controller
             "id_detail_student" => $user->detail_student->id,
             "id_detail_mentor" => $request->user()->detail_mentor->id,
             "note" => $note,
+            "tgl_awal" => $tgl_awal,
+            "tgl_edit" => $tgl_akhir,
             "uuid" => Str::random(144)
         ]);
 

@@ -14,6 +14,8 @@ class ForceLog extends Model
         'id_detail_student',
         'id_detail_mentor',
         'note',
+        'tgl_awal',
+        'tgl_edit',
         'uuid',
     ];
     public function detail_student()

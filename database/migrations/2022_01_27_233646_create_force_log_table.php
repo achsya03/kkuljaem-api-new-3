@@ -19,6 +19,8 @@ class CreateForceLogTable extends Migration
             $table->BigInteger('id_detail_mentor')->unsigned()->nullable();
             //$table->string('jawaban_id')->nullable();
             $table->text('note')->nullable();
+            $table->date('tgl_awal')->nullable();
+            $table->date('tgl_edit')->nullable();
             //$table->string('file_id')->nullable();
             $table->string('uuid');
             $table->index(['uuid']);
