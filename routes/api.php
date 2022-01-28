@@ -399,7 +399,9 @@ Route::group(['prefix' => 'api/admin/user'], function () {
     Route::delete('/student',     [User\UserController::class,'userDataDelete']);
     Route::delete('/mentor',      [User\UserController::class,'userDataDelete']);
     Route::get('/student/list',     [User\UserController::class,'studentList']);
-
+    Route::get('/student/lists-test', function (Request $request) {
+        return view('Student.home');
+    });
     Route::get('/student/lists', function (Request $request) {
         if ($request->ajax()) {
                 $student = User::where('jenis_pengguna',0)->get();
