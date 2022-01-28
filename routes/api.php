@@ -5,6 +5,7 @@ use App\Http\Controllers\User\UserController;
 
 use App\Http\Controllers\Auth;
 
+use App\Models;
 use App\Http\Controllers\Banner;
 use App\Http\Controllers\Post;
 use App\Http\Controllers\User;
@@ -403,8 +404,8 @@ Route::group(['prefix' => 'api/admin/user'], function () {
         return view('Student.home');
     });
     Route::get('/student/lists', function (Request $request) {
-        //if ($request->ajax()) {
-                $student = User::where('jenis_pengguna',0)->get();
+        if ($request->ajax()) {
+                $student = Models\User::where('jenis_pengguna',0)->get();
                 $arr = [];
 
                 for($i=0;$i<count($student);$i++){
@@ -447,7 +448,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                     //})
                     ->rawColumns(['action'])
                     ->make(true);
-            //}
+            }
     })->name('std.list'); 
 
     Route::get('/mentor/list',      [User\UserController::class,'mentorList']);
