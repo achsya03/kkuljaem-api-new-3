@@ -443,6 +443,12 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                 
 
                 return DataTables::of(Models\User::where('jenis_pengguna',0)->limit(10)->get())
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                        return $actionBtn;
+                    })
+                    ->rawColumns(['action'])    
                     ->make(true);
             //}
     })->name('std.list'); 
