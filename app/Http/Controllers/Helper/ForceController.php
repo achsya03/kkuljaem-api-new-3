@@ -46,13 +46,13 @@ class ForceController extends Controller
                 'error' => 'Note tidak sesuai'
             ]);
         }  
-        if(count($user = Models\User::where('email',$email)->get())==0){
+        if(count($users = Models\User::where('email',$email)->get())==0){
             return response()->json([
                 'message' => 'Failed',
                 'error' => 'Email tidak sesuai'
             ]);
         }
-        $tgl_awal = $user[0]->tgl_langganan_akhir;
+        $tgl_awal = $users[0]->tgl_langganan_akhir;
         if(date_format(date_create($request->tgl_akhir),"Y/m/d")<date("Y/m/d")){
             return response()->json([
                 'message' => 'Failed',
@@ -67,7 +67,7 @@ class ForceController extends Controller
         ]);
 
         $force_log = Models\ForceLog::create([
-            "id_detail_student" => $user->detail_student->id,
+            "id_detail_student" => $users[0]->detail_student->id,
             "id_detail_mentor" => $request->user()->detail_mentor->id,
             "note" => $note,
             "tgl_awal" => $tgl_awal,
