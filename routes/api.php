@@ -404,7 +404,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
         return view('Student.home');
     });
     Route::get('/student/lists', function (Request $request) {
-        if ($request->ajax()) {
+        //if ($request->ajax()) {
                 $student = Models\User::where('jenis_pengguna',0)->limit(10)->get();
                 $arr = [];
 
@@ -443,7 +443,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
 
                 return DataTables::eloquent(Models\User::where('jenis_pengguna',0)->limit(10)->get())
                     ->make(true);
-            }
+            //}
     })->name('std.list'); 
 
     Route::get('/mentor/list',      [User\UserController::class,'mentorList']);
