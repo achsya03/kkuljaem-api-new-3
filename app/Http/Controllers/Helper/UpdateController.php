@@ -352,6 +352,8 @@ class UpdateController extends Controller
             //'id_question',
             'judul',
             'jml_post',
+            'url_image',
+            'id_image',
             'jml_like',
             'jml_comment',
             'uuid',

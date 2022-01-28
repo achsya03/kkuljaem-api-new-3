@@ -246,6 +246,8 @@ class InputController extends Controller
     private function theme($model,$data){
         $model::create([
             'judul'              => $data['judul'],
+            'url_image'           => $data['url_image'],
+            'id_image'           => $data['id_image'],
             'jml_post'           => $data['jml_post'],
             'jml_like'           => $data['jml_like'],
             'jml_comment'        => $data['jml_comment'],
