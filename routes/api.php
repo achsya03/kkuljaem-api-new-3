@@ -405,7 +405,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
     });
     Route::get('/student/lists', function (Request $request) {
         if ($request->ajax()) {
-                $student = Models\User::where('jenis_pengguna',0)->get();
+                $student = Models\User::where('jenis_pengguna',0)->limit(10)->get();
                 $arr = [];
 
                 for($i=0;$i<count($student);$i++){
@@ -439,8 +439,9 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                     ];
                     $arr[$i] = $arr1;
                 }
+                dd($arr);die;
 
-                return DataTables::of($student)
+                return DataTables::of($arr)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                        $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
