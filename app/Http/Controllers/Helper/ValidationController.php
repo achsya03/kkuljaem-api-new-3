@@ -789,7 +789,7 @@ class ValidationController extends Controller
         return $uuid;
     }
 
-    private function randomToken($number,$model){
+    public function randomToken($number,$model){
         $web_token = Str::random($number);
 
         while(count($model::where('web_token',$web_token)->get())>0){

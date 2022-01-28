@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Helper;
 use App\Models;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use General;
+use Illuminate\Support\Str;
 
 class ForceController extends Controller
 {
@@ -22,22 +22,28 @@ class ForceController extends Controller
                 'error' => 'Anda bukan admin'
             ]);
         }
-        if(!$token = $request->token){
-            return response()->json([
-                'message' => 'Failed',
-                'error' => 'Token tidak sesuai'
-            ]);
-        }
-        if($token != date("Y__m__")){
-            return response()->json([
-                'message' => 'Failed',
-                'error' => 'Format token tidak sesuai'
-            ]);
-        }
+        // if(!$token = $request->token){
+        //     return response()->json([
+        //         'message' => 'Failed',
+        //         'error' => 'Token tidak sesuai'
+        //     ]);
+        // }
+        // if($token != date("Y__m__")){
+        //     return response()->json([
+        //         'message' => 'Failed',
+        //         'error' => 'Format token tidak sesuai'
+        //     ]);
+        // }
         if(!$email = $request->email){
             return response()->json([
                 'message' => 'Failed',
                 'error' => 'Email tidak sesuai'
+            ]);
+        }  
+        if(!$note = $request->note){
+            return response()->json([
+                'message' => 'Failed',
+                'error' => 'Note tidak sesuai'
             ]);
         }  
         if(count($user = Models\User::where('email',$email)->get())==0){
@@ -57,6 +63,13 @@ class ForceController extends Controller
             
         $user = Models\User::where('email',$email)->update([
             'tgl_langganan_akhir' => $tgl_akhir
+        ]);
+
+        $force_log = Models\ForceLog::create([
+            "id_detail_student" => $user->detail_student->id,
+            "id_detail_mentor" => $request->user()->detail_mentor->id,
+            "note" => $note,
+            "uuid" => Str::random(144)
         ]);
 
         $result = [

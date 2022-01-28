@@ -67,6 +67,7 @@ return array(
     'App\\Http\\Controllers\\Helper\\MultiInputController' => $baseDir . '/app/Http/Controllers/Helper/MultiInputController.php',
     'App\\Http\\Controllers\\Helper\\RedirectVideoController' => $baseDir . '/app/Http/Controllers/Helper/RedirectVideoController.php',
     'App\\Http\\Controllers\\Helper\\ShowController' => $baseDir . '/app/Http/Controllers/Helper/ShowController.php',
+    'App\\Http\\Controllers\\Helper\\SorterController' => $baseDir . '/app/Http/Controllers/Helper/SorterController.php',
     'App\\Http\\Controllers\\Helper\\StudentWebController' => $baseDir . '/app/Http/Controllers/Helper/StudentWebController.php',
     'App\\Http\\Controllers\\Helper\\UpdateController' => $baseDir . '/app/Http/Controllers/Helper/UpdateController.php',
     'App\\Http\\Controllers\\Helper\\ValidationController' => $baseDir . '/app/Http/Controllers/Helper/ValidationController.php',
