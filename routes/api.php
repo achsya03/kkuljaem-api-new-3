@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\UserController;
 
 use App\Http\Controllers\Auth;
+use Yajra\DataTables\Facade\DataTables;
 
 use App\Models;
 use App\Http\Controllers\Banner;
