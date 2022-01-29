@@ -13,7 +13,20 @@ class ForceController extends Controller
     public function __construct(Request $request){
         $this->middleware('auth');
     }
+    public function getAllLog(Request $request){
+        $img = Models\ForceLog::all();
 
+        foreach ($img as $im) {
+            $ad = Models\DetailMentor::where('id',$im['id_detail_mentor'])->first();
+            $st = Models\DetailStudent::where('id',$im['id_detail_student'])->first();
+            $im['admin'] = $ad->user->nama;
+            $im['student'] = $st->user->nama;
+            unset($im['id']);  
+        }     
+
+        return response()->json(['message'=>'Success','data'
+        => $img]);
+    }
     public function forceSubs(Request $request){
         $result = [];
         if($request->user()->jenis_pengguna != 2){

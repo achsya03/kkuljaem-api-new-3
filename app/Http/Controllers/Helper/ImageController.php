@@ -46,7 +46,7 @@ class ImageController extends Controller
             return response()->json(['message' => 'Failed',
             'info'=>"Token Tidak Sesuai"]);
         }
-        if(count($img = KkuljaemInfo::where('key',$uuid)
+        if(count($img = Models\KkuljaemInfo::where('key',$uuid)
                 ->get())==0){
             return response()->json(['message' => 'Failed',
             'info'=>"Token Tidak Sesuai"]);

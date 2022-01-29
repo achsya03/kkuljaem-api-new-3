@@ -146,6 +146,7 @@ Route::group(['prefix' => 'api/user'], function () {
     // Route::post('/',        [User\UserController::class, 'addData']);
 });
 Route::group(['prefix' => 'api/force'], function () {
+    Route::get('subs',      [Helper\ForceController::class,'getAllLog']);
     Route::post('subs',      [Helper\ForceController::class,'forceSubs']);
     // Route::get('words/url',      [Helper\ForceController::class,'forceWordUrl']);
     // Route::get('words/path',      [Helper\ForceController::class,'forceWordPath']);
