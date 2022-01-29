@@ -21,6 +21,8 @@ class ForceController extends Controller
             $st = Models\DetailStudent::where('id',$im['id_detail_student'])->first();
             $im['admin'] = $ad->user->nama;
             $im['student'] = $st->user->nama;
+            unset($im['id_detail_mentor']);  
+            unset($im['id_detail_student']);  
             unset($im['id']);  
         }     
 
