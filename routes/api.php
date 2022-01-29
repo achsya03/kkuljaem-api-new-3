@@ -389,6 +389,12 @@ Route::group(['prefix' => 'api/admin/profile'], function () {
     Route::post('device-id',   [User\UserController::class, 'updateDeviceID']);
 });
 
+Route::group(['prefix' => 'api/admin/banner/non-mem'], function () {
+    Route::post('/',     [Helper\ImageController::class,'addNonMemberImage']);
+    Route::delete('/',     [Helper\ImageController::class,'deleteNonMemberImage']);
+    Route::get('/',     [Helper\ImageController::class,'getAllNonMemberImage']);
+    //Route::detail('/',     [Helper\ImageController::class,'getDetailNonMemberImage']);
+});
 
 Route::group(['prefix' => 'api/admin/user'], function () {
     Route::post('/student',     [User\UserController::class,'addData']);
