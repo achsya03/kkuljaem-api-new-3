@@ -81,8 +81,8 @@ class ThemeAdminController extends Controller
 
             $data = [
                 'judul'            => $request->judul,
-                'url_image'        => $uploadedFileUrl1['getSecurePath'],
-                'id_image'         => $uploadedFileUrl1['getPublicId'],
+                'url_gambar'        => $uploadedFileUrl1['getSecurePath'],
+                'gambar_id'         => $uploadedFileUrl1['getPublicId'],
                 'jml_post'         => $theme->jml_post,
                 'jml_like'         => $theme->jml_like,
                 'jml_comment'      => $theme->jml_comment,
