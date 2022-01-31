@@ -390,6 +390,10 @@ Route::group(['prefix' => 'api/admin/profile'], function () {
     Route::post('device-id',   [User\UserController::class, 'updateDeviceID']);
 });
 
+Route::group(['prefix' => 'api/banner/non-mem'], function () {
+    Route::post('/',     [Helper\ImageController::class,'addNonMemberImage']);
+});
+
 Route::group(['prefix' => 'api/admin/banner/non-mem'], function () {
     Route::post('/',     [Helper\ImageController::class,'addNonMemberImage']);
     Route::delete('/',     [Helper\ImageController::class,'deleteNonMemberImage']);
