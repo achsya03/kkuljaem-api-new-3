@@ -391,7 +391,7 @@ Route::group(['prefix' => 'api/admin/profile'], function () {
 });
 
 Route::group(['prefix' => 'api/banner/non-mem'], function () {
-    Route::post('/',     [Helper\ImageController::class,'addNonMemberImage']);
+    Route::get('/',     [Helper\ImageController::class,'getAllNonMemberImage']);
 });
 
 Route::group(['prefix' => 'api/admin/banner/non-mem'], function () {
