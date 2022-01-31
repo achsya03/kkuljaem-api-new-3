@@ -35,6 +35,11 @@ class ClassController extends Controller
         $this->middleware('auth');
     }
 
+
+    public function __construct(Request $request){
+        $this->middleware('auth');
+    }
+
     public function detailDataForClass(Request $request){
         if(!$uuid=$request->token){
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
