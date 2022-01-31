@@ -117,6 +117,7 @@ class ThemeAdminController extends Controller
                 ->whereNotIn('judul',$video_uuid)->get();
         foreach ($theme as $vid) {
             unset($vid['id']);  
+            unset($vid['gambar_id']);  
         }     
 
         return response()->json(['message'=>'Success','data'
