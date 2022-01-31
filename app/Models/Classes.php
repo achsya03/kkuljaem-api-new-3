@@ -22,6 +22,7 @@ class Classes extends Model
         'jml_kuis',
         'status_tersedia',
         'uuid',
+        'urutan',
     ];
 
     public function class_category()

@@ -14,6 +14,7 @@ class ClassesCategory extends Model
         'nama',
         'deskripsi',
         'uuid',
+        'urutan',
     ];
 
     public function classes()

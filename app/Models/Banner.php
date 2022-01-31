@@ -36,6 +36,7 @@ class Banner extends Model
         'label',
         'link',
         'uuid',
+        'urutan',
     ];
 
 

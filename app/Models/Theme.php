@@ -15,6 +15,9 @@ class Theme extends Model
         'jml_post',
         'jml_like',
         'jml_comment',
+        'url_gambar',
+        'gambar_id',
+        'urutan',
         'uuid',
     ];
 
