@@ -178,7 +178,7 @@ class UserController extends Controller
     public function studentList(Request $request){
         $student1 = User::where('jenis_pengguna',0)->get();
         $page = $request->has('page') ? $request->get('page') : 1;
-        $limit = $request->has('limit') ? $request->get('limit') : 10;
+        $limit = $request->has('limit') ? $request->get('limit') : 1000;
         $counter_student = count($student1);
         $max_page = ceil($counter_student / $limit);
 
