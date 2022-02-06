@@ -99,6 +99,7 @@ class ForceController extends Controller
 
         $result = [
             'email' => $email,
+            'tgl_langganan_awal' => $tgl_awal,
             'tgl_langganan_akhir' => $tgl_akhir
         ];
 
