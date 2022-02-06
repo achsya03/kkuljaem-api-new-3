@@ -77,11 +77,17 @@ class ForceController extends Controller
         $tgl_akhir = date_format(date_create($request->tgl_akhir),"Y/m/d");
         $tgl_akh = (new \DateTime(date('Y-m-d')))->modify('+'.(30*1).' day')->format('Y-m-d');
             
+        $mntr = Models\DetailMentor::where('id_users', $request->user()->id)->get();
+        if(count(Models\DetailStudent::where('id_users', $users[0]->id)->get())<1){
+            return response()->json([
+                'message' => 'Failed',
+                'error' => 'Data siswa belum lengkap'
+            ]);
+        }
+
         $user = Models\User::where('email',$email)->update([
             'tgl_langganan_akhir' => $tgl_akhir
         ]);
-        $mntr = Models\DetailMentor::where('id_users', $request->user()->id)->get();
-
         $force_log = Models\ForceLog::create([
             "id_detail_student" => $users[0]->detailStudent[0]->id,
             "id_detail_mentor" => $mntr[0]->id,
