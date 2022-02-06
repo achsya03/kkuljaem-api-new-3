@@ -191,7 +191,7 @@ class UserController extends Controller
 
         $student = User::where('jenis_pengguna',0)
                 ->orderBy('nama','ASC')
-                ->limit($limit)->offset(($page - 1) * $limit)->get();
+                ->limit($limit)->offset(($page - 1) * $limit)->get()->chunk(100);
 
         $arr = [];
         for($i=0;$i<count($student);$i++){
