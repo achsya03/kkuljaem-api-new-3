@@ -194,7 +194,7 @@ class UserController extends Controller
                 ->orderBy('nama','ASC')
                 ->limit($limit)->offset(($page - 1) * $limit)->get()->chunk(10, function ($users) {
                     foreach ($users as $user) {
-                        array_push($arrs,$user->email);
+                        array_push($arrs,$user);
                     }
                 });
         return response()->json([
