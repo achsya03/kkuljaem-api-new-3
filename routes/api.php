@@ -417,12 +417,17 @@ Route::group(['prefix' => 'api/admin/user'], function () {
     });
     Route::get('/student/lists', function (Request $request) {
         //if ($request->ajax()) {
-        $student = Models\User::where('jenis_pengguna', 0);
+        $student = Models\User::where('jenis_pengguna', 0)
+                ->join('detail_students', 'detail_students.id_users', '=', 'users.id');
 
         // $arr = [];
 
         return DataTables::of($student)
             // ->editColumn('status_aktif', 'Belum Tersedia')
+            ->editColumn('alamat', function ($student) {
+                $status = 'Alamat : ' . $student->alamat;
+                return $status;
+            })
             ->editColumn('status_aktif', function ($student) {
                 $status = 'Belum Terverifikasi';
                 if ($student->email_verified_at != null || $student->email_verified_at != '') {

@@ -16,6 +16,7 @@
             <thead>
                 <tr>
                     <th>Status</th>
+                    <th>Alamat</th>
                     <th>Nama</th>
                 </tr>
             </thead>
@@ -37,6 +38,9 @@
             serverSide: true,
             ajax: "{{ route('std.list') }}",
             columns: [{
+                    data: 'alamat',
+                    name: 'alamat'
+                },{
                     data: 'status_aktif',
                     name: 'status_aktif'
                 },
