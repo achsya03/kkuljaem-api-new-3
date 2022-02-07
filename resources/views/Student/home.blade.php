@@ -38,11 +38,11 @@
             serverSide: true,
             ajax: "{{ route('std.list') }}",
             columns: [{
-                    data: 'alamat',
-                    name: 'alamat'
-                },{
                     data: 'status_aktif',
                     name: 'status_aktif'
+                },{
+                    data: 'alamat',
+                    name: 'alamat'
                 },
                 {
                     data: 'action',
