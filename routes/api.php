@@ -419,9 +419,20 @@ Route::group(['prefix' => 'api/admin/user'], function () {
         //if ($request->ajax()) {
         $student = Models\User::where('jenis_pengguna', 0);
 
-        $arr = [];
+        // $arr = [];
 
-        return DataTables::of(Models\User::where('jenis_pengguna', 0))
+        return DataTables::of($student)
+            // ->editColumn('status_aktif', 'Belum Tersedia')
+            ->editColumn('status_aktif', function ($student) {
+                $status = 'Belum Terverifikasi';
+                if ($student->email_verified_at != null || $student->email_verified_at != '') {
+                    $status = 'Terverifikasi';
+                }
+                if (date_format(date_create($student->tgl_langganan_akhir), "Y/m/d") >= date('Y/m/d')) {
+                    $status = 'Member';
+                }
+                return $status;
+            })
             ->addColumn('action', function ($row) {
                 $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                 return $actionBtn;

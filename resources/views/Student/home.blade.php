@@ -37,8 +37,8 @@
             serverSide: true,
             ajax: "{{ route('std.list') }}",
             columns: [{
-                    data: 'status',
-                    name: 'status'
+                    data: 'status_aktif',
+                    name: 'status_aktif'
                 },
                 {
                     data: 'action',
