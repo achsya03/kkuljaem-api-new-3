@@ -416,7 +416,12 @@ Route::group(['prefix' => 'api/admin/user'], function () {
         return view('Student.home');
     });
     Route::get('/student/lists', function (Request $request) {
-        return DataTables::eloquent(Models\User::where('jenis_pengguna', 0))
+        //if ($request->ajax()) {
+        $student = Models\User::where('jenis_pengguna', 0);
+
+        $arr = [];
+
+        return DataTables::of(Models\User::where('jenis_pengguna', 0))
             ->addColumn('action', function ($row) {
                 $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                 return $actionBtn;
