@@ -418,7 +418,8 @@ Route::group(['prefix' => 'api/admin/user'], function () {
     Route::get('/student/lists', function (Request $request) {
         //if ($request->ajax()) {
         $student = Models\User::where('jenis_pengguna', 0)
-                ->join('detail_students', 'detail_students.id_users', '=', 'users.id');
+                ->join('detail_students', 'detail_students.id_users', '=', 'users.id')->limit(200)->get();
+        return $student;
 
         // $arr = [];
 
