@@ -418,7 +418,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
     Route::get('/student/lists', function (Request $request) {
         //if ($request->ajax()) {
         $student = Models\User::where('jenis_pengguna', 0)
-                ->join('detail_students', 'detail_students.id_users', '=', 'users.id');
+                ->rightJoin('detail_students', 'detail_students.id_users', '=', 'users.id');
 
         // $arr = [];
 
@@ -434,6 +434,15 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                     $status = 'Member';
                 }
                 return $status;
+            })
+            ->editColumn('alamat', function ($student) {
+                $alamat = '';
+                if($student->alamat==NULL || !$student->alamat){
+                    $alamat = '---';
+                }else{
+                    $alamat = '---';
+                }
+                return $alamat;
             })
             ->addColumn('action', function ($row) {
                 $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
