@@ -416,61 +416,13 @@ Route::group(['prefix' => 'api/admin/user'], function () {
         return view('Student.home');
     });
     Route::get('/student/lists', function (Request $request) {
-        //if ($request->ajax()) {
-        $student = Models\User::where('jenis_pengguna', 0);
-
-        $arr = [];
-
-        for ($i = 0; $i < count($student); $i++) {
-            $status = 'Belum Terverifikasi';
-            if ($student[$i]->email_verified_at != null || $student[$i]->email_verified_at != '') {
-                $status = 'Terverifikasi';
-            }
-            if (date_format(date_create($student[$i]->tgl_langganan_akhir), "Y/m/d") >= date('Y/m/d')) {
-                $status = 'Member';
-            }
-            $jenis_kel = '-';
-            $tgl_lahir = '-';
-            $alamat = '-';
-            $tempat_lahir = '-';
-            if (count($student[$i]->detailStudent) > 0) {
-                if ($student[$i]->detailStudent[0]->jenis_kel != null) {
-                    $jenis_kel = $student[$i]->detailStudent[0]->jenis_kel;
-                }
-                if ($student[$i]->detailStudent[0]->tgl_lahir != null) {
-                    $tgl_lahir = $student[$i]->detailStudent[0]->tgl_lahir;
-                }
-                if ($student[$i]->detailStudent[0]->alamat != null) {
-                    $alamat = $student[$i]->detailStudent[0]->alamat;
-                }
-                if ($student[$i]->detailStudent[0]->tempat_lahir != null) {
-                    $tempat_lahir = $student[$i]->detailStudent[0]->tempat_lahir;
-                }
-            }
-
-            $arr1 = [
-                'status' => $status,
-                'email' => $student[$i]->email,
-                'nama' => $student[$i]->nama,
-                'jenis_kel' => $jenis_kel,
-                'tgl_lahir' => $tgl_lahir,
-                'tempat_lahir' => $tempat_lahir,
-                'alamat' => $alamat,
-                'user_uuid' => $student[$i]->uuid,
-            ];
-            $arr[$i] = $arr1;
-        }
-
-
-        return DataTables::of($student)
-            ->addIndexColumn()
+        return DataTables::eloquent(Models\User::where('jenis_pengguna', 0))
             ->addColumn('action', function ($row) {
                 $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])
             ->make(true);
-        //}
     })->name('std.list');
 
     Route::get('/mentor/list',      [User\UserController::class, 'mentorList']);
