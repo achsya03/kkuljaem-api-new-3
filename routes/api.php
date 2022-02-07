@@ -440,7 +440,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                 if($student->alamat==NULL || !$student->alamat){
                     $alamat = '---';
                 }else{
-                    $alamat = '---';
+                    $alamat = $student->alamat;
                 }
                 return $alamat;
             })
