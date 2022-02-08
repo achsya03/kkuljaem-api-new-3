@@ -240,10 +240,12 @@ class ShowController extends Controller
                 $arr1['jml_materi'] = $class[0]->jml_video+$class[0]->jml_kuis;
                 $arr1['class_uuid'] = $class[$j]->uuid;
                 $teacher = Models\Teacher::where('id_class',$class[$j]->id)->get();
-                for($k=0;$k<count($teacher);$k++){
-                    $arr1['mentor'][$k]['mentor_nama'] = $teacher[$k]->user->nama;
-                    $arr1['mentor'][$k]['mentor_uuid'] = $teacher[$k]->user->uuid;
-                }
+                // for($k=0;$k<count($teacher);$k++){
+                    // $arr1['mentor'][$k]['mentor_nama'] = $teacher[$k]->user->nama;
+                    // $arr1['mentor'][$k]['mentor_uuid'] = $teacher[$k]->user->uuid;
+                // }
+                $arr1['mentor']['mentor_nama'] = $teacher[0]->user->nama;
+                $arr1['mentor']['mentor_uuid'] = $teacher[0]->user->uuid;
                 $classes[$j] = $arr1;
             }
 
