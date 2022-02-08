@@ -117,7 +117,7 @@ class ForceController extends Controller
         $user = Models\User::select('nama','device_id','uuid')
                     ->whereNotNull('device_id')
                     ->where('device_id','!=','web')
-                    ->where('email','ach.sya03@gmail.com')
+                    //->where('email','ach.sya03@gmail.com')
                     ->orderBy('id','ASC')
                     ->get();
         
@@ -146,7 +146,7 @@ class ForceController extends Controller
 
         return response()->json([
 			'message' => 'Success',
-			'info' => 'Proses Force Notif Berhasil Dengan '.$counter.' Data',
+			'info' => 'Proses Force Notif Berhasil Dengan '.($counter+1).' Data',
 		]);
     }
 
