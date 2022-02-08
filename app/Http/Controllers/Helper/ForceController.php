@@ -114,7 +114,7 @@ class ForceController extends Controller
     }
 
     public function forceNotif(Request $request){
-        $user = Models\User::select('nama','device_id')
+        $user = Models\User::select('nama','device_id','uuid')
                     ->whereNotNull('device_id')
                     ->where('device_id','!=','web')
                     ->where('email','ach.sya03@gmail.com')
