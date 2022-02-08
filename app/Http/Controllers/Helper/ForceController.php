@@ -127,8 +127,8 @@ class ForceController extends Controller
             
             $datas = [
                 'user_uuid'       => $request->user()->uuid,
-                'judul'           => 'Hari Terakhir Pendaftaran Live Session!',
-                'deskripsi'       => 'Cek banner pertama di beranda untuk mendaftar.',
+                'judul'           => $request->judul,
+                'deskripsi'       => $request->deskripsi,
                 'posisi'          => 'Notifikasi',
                 //'gambar'          => $datas['gambar'],
                 'uuid_target'     => $user[$i]->uuid,
