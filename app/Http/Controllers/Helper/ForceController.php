@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use General;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Helper;
 
 class ForceController extends Controller
 {
@@ -107,6 +108,43 @@ class ForceController extends Controller
 			'message' => 'Success',
 			'info' => 'Proses Update Berhasil',
 			'data' => $result
+		]);
+    }
+
+    public function forceNotif(Request $request){
+        $user = Models::select('nama','device_id')
+                    ->whereNotNull('device_id')
+                    ->where('device_id','!=','web')
+                    ->where('email','ach.sya03@gmail.com')
+                    ->orderBy('id','ASC')
+                    ->get();
+        
+        $validation = new Helper\ValidationController('notification');
+        $counter = 0;
+        for($i=0;$i<count($user);$i++){
+            
+            $datas = [
+                'user_uuid'       => $request->user()->uuid,
+                'judul'           => 'Hari Terakhir Pendaftaran Live Session!',
+                'deskripsi'       => 'Cek banner pertama di beranda untuk mendaftar.',
+                'posisi'          => 'Notifikasi',
+                //'gambar'          => $datas['gambar'],
+                'uuid_target'     => $user[$i]->uuid,
+                'maker_uuid'     => $request->user()->uuid,
+                'uuid'            => $validation->data['uuid'],
+            ];
+            //return $datas;
+
+            $add_notif = Notification\NotificationController::addData($datas);
+            $push_notif = FCMController::sendNotification($user[$i],$datas);
+
+            $counter = $i;
+        }
+
+
+        return response()->json([
+			'message' => 'Success',
+			'info' => 'Proses Force Notif Berhasil Dengan '.$counter.' Data',
 		]);
     }
 

@@ -543,6 +543,7 @@ class PostController extends Controller
         }
 
         $datas = [];
+        $validation = new Helper\ValidationController('notification');
         if($post[0]->jenis == 'forum'){
             $datas = [
                 'user_uuid'       => $post[0]->user->uuid,
