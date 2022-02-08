@@ -123,7 +123,7 @@ class ForceController extends Controller
                     //->where('email','ach.sya03@gmail.com')
                     ->orderBy('id','ASC')
                     ->get();
-        return $user;
+        //return $user;
         
         $validation = new Helper\ValidationController('notification');
         $counter = 0;
