@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use General;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Helper;
+use App\Http\Controllers\Notification;
+use App\Http\Controllers\FCMController;
 
 class ForceController extends Controller
 {
