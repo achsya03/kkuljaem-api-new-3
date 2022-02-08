@@ -140,10 +140,10 @@ class ForceController extends Controller
                 'maker_uuid'     => $request->user()->uuid,
                 'uuid'            => $validation->data['uuid'],
             ];
-            print_r($datas);
+            //print_r($datas);
 
-            // $add_notif = Notification\NotificationController::addData($datas);
-            // $push_notif = FCMController::sendNotification($user[$i],$datas);
+            $add_notif = Notification\NotificationController::addData($datas);
+            $push_notif = FCMController::sendNotification($user[$i],$datas);
 
             $counter = $i;
         }
