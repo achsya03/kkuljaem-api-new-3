@@ -123,13 +123,14 @@ class ForceController extends Controller
                     //->where('email','ach.sya03@gmail.com')
                     ->orderBy('id','ASC')
                     ->get();
-        return $user;
+        //return $user;
         
         $validation = new Helper\ValidationController('notification');
         $counter = 0;
         for($i=0;$i<count($user);$i++){
             
             $datas = [
+                'i' => $i,
                 'user_uuid'       => $user[$i]->uuid,
                 'judul'           => $request->judul,
                 'deskripsi'       => $request->deskripsi,
@@ -139,10 +140,10 @@ class ForceController extends Controller
                 'maker_uuid'     => $request->user()->uuid,
                 'uuid'            => $validation->data['uuid'],
             ];
-            //return $datas;
+            print_r($datas);
 
-            $add_notif = Notification\NotificationController::addData($datas);
-            $push_notif = FCMController::sendNotification($user[$i],$datas);
+            // $add_notif = Notification\NotificationController::addData($datas);
+            // $push_notif = FCMController::sendNotification($user[$i],$datas);
 
             $counter = $i;
         }
