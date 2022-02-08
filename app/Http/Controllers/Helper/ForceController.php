@@ -114,24 +114,28 @@ class ForceController extends Controller
     }
 
     public function forceNotif(Request $request){
+        $limit = $request->limit;
+        $page = $request->page;
         $user = Models\User::select('nama','device_id','uuid')
                     ->whereNotNull('device_id')
                     ->where('device_id','!=','web')
+                    ->limit($limit)->offset(($page - 1) * $limit)
                     //->where('email','ach.sya03@gmail.com')
                     ->orderBy('id','ASC')
                     ->get();
+        return $user;
         
         $validation = new Helper\ValidationController('notification');
         $counter = 0;
         for($i=0;$i<count($user);$i++){
             
             $datas = [
-                'user_uuid'       => $request->user()->uuid,
+                'user_uuid'       => $user[$i]->uuid,
                 'judul'           => $request->judul,
                 'deskripsi'       => $request->deskripsi,
                 'posisi'          => 'Notifikasi',
                 //'gambar'          => $datas['gambar'],
-                'uuid_target'     => $user[$i]->uuid,
+                'uuid_target'     => '#',
                 'maker_uuid'     => $request->user()->uuid,
                 'uuid'            => $validation->data['uuid'],
             ];
