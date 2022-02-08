@@ -244,8 +244,8 @@ class ShowController extends Controller
                     // $arr1['mentor'][$k]['mentor_nama'] = $teacher[$k]->user->nama;
                     // $arr1['mentor'][$k]['mentor_uuid'] = $teacher[$k]->user->uuid;
                 // }
-                $arr1['mentor']['mentor_nama'] = $teacher[0]->user->nama;
-                $arr1['mentor']['mentor_uuid'] = $teacher[0]->user->uuid;
+                $arr1['mentor_nama'] = $teacher[0]->user->nama;
+                $arr1['mentor_uuid'] = $teacher[0]->user->uuid;
                 $classes[$j] = $arr1;
             }
 
