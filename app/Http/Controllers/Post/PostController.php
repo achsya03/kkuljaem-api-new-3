@@ -69,6 +69,8 @@ class PostController extends Controller
 
             $data = [
                 'judul'         => $video[0]->uuid,
+                'url_image'      => '#',
+                'id_image'      => '#',
                 'jml_post'      => 0,
                 'jml_like'      => 0,
                 'jml_comment'   => 0,
