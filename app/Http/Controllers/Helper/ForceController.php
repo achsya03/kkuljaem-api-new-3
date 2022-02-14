@@ -152,7 +152,7 @@ class ForceController extends Controller
             $counter = $i;
         }
         
-        Models\Notification::create($datas);
+        Models\Notification::insert($datas);
         $push_notif = FCMController::sendLotNotification($arr,$request->judul,$request->deskripsi);
 
 
