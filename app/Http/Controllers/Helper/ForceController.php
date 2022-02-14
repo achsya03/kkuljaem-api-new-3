@@ -148,6 +148,9 @@ class ForceController extends Controller
             //print_r($datas);
 
             $add_notif = Notification\NotificationController::addData($datas);
+            return response()->json([
+                'stat' =>$add_notif
+            ]);
 
             $counter = $i;
         }
