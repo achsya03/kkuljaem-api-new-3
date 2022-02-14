@@ -47,6 +47,21 @@ class RegisterController extends Controller
                 'message'=>'Success',
                 'info'=> 'Silakan Konfirmasi Email Anda'
             ]);
+        }elseif(count($usr = User::where('email',request('email'))
+        ->where('email_verified_at',null)->get())>0){
+
+            return response()->json([
+                'message'=>'Failed',
+                'info'=> 'Email Telah Terdaftar'
+            ]);
+        }
+
+        if(request('password') != request('password_confirmation')){
+
+            return response()->json([
+                'message'=>'Failed',
+                'info'=> 'Password dan Konfirmasi Password Tidak Sesuai'
+            ]);
         }
 
 
