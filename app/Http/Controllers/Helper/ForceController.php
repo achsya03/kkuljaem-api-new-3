@@ -127,26 +127,33 @@ class ForceController extends Controller
         
         $validation = new Helper\ValidationController('notification');
         $counter = 0;
+        $datas = [];
+        $arr = [];
         for($i=0;$i<count($user);$i++){
             
-            $datas = [
-                'i' => $i,
+            $datas[$i] = [
+                // 'i' => $i,
                 'user_uuid'       => $user[$i]->uuid,
                 'judul'           => $request->judul,
-                'deskripsi'       => $request->deskripsi,
+                'keterangan'       => $request->deskripsi,
                 'posisi'          => 'Notifikasi',
                 //'gambar'          => $datas['gambar'],
                 'uuid_target'     => '#',
+                'tgl_notif'        => date('Y-m-d h:i:s'),
+                'status'          => 0,
                 'maker_uuid'     => $request->user()->uuid,
                 'uuid'            => $validation->data['uuid'],
             ];
+            $arr[$i] = $user[$i]->device_id;
             //print_r($datas);
 
-            $add_notif = Notification\NotificationController::addData($datas);
-            $push_notif = FCMController::sendNotification($user[$i],$datas);
+            //$add_notif = Notification\NotificationController::addData($datas);
 
             $counter = $i;
         }
+        
+        Models\Notification::create($datas);
+        $push_notif = FCMController::sendNotification($arr,$request->judul,$request->deskripsi);
 
 
         return response()->json([
