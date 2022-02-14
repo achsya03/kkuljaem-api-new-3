@@ -131,7 +131,7 @@ class ForceController extends Controller
         $arr = array();
         for($i=0;$i<count($user);$i++){
             
-            $datas[$i] = [
+            $datas = [
                 // 'i' => $i,
                 'user_uuid'       => $user[$i]->uuid,
                 'judul'           => $request->judul,
