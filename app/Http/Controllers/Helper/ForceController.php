@@ -149,6 +149,10 @@ class ForceController extends Controller
 
             $push_notif = FCMController::sendNotification($user[$i],$datas);
 
+            return response()->json([
+                'message' => $push_notif
+            ]);
+
             $counter = $i;
         }
         
