@@ -144,22 +144,22 @@ class ForceController extends Controller
                 'maker_uuid'     => $request->user()->uuid,
                 'uuid'            => $validation->data['uuid'],
             ];
-            array_push($arr,$user[$i]->device_id);
+            //array_push($arr,$user[$i]->device_id);
             //print_r($datas);
 
-            //$add_notif = Notification\NotificationController::addData($datas);
+            $add_notif = Notification\NotificationController::addData($datas);
 
             $counter = $i;
         }
         
         Models\Notification::insert($datas);
-        $push_notif = FCMController::sendLotNotification(json_encode($arr),$request->judul,$request->deskripsi);
+        //$push_notif = FCMController::sendLotNotification(json_encode($arr),$request->judul,$request->deskripsi);
 
 
         return response()->json([
 			'message' => 'Success',
 			'info' => 'Proses Force Notif Berhasil Dengan '.($counter+1).' Data',
-            'stat push' => $push_notif
+            //'stat push' => $push_notif
 		]);
     }
 
