@@ -13,9 +13,15 @@ class FCMController extends Controller
     public static function sendNotification($user,$datas){
         $token = $user->device_id;  
         $from = env('NOTIF_TOKEN', '#');
+        $ket = '';
+        if(isset($datas['deskripsi'])){
+            $ket = $datas['deskripsi'];
+        }elseif(isset($datas['keterangan'])){
+            $ket = $datas['keterangan'];
+        }
         $msg = array
               (
-                'body'  => $datas['deskripsi'],
+                'body'  => $ket,
                 'title' => $datas['judul'],
                 'receiver' => $user->nama,
                 'icon'  => env('APP_DOMAIN', "https://kkuljaem.xyz").'icon/kkIcon.png',/*Default Icon*/
