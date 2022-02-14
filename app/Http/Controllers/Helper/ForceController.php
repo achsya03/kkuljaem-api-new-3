@@ -128,7 +128,7 @@ class ForceController extends Controller
         $validation = new Helper\ValidationController('notification');
         $counter = 0;
         $datas = [];
-        $arr = [];
+        $arr = array();
         for($i=0;$i<count($user);$i++){
             
             $datas[$i] = [
@@ -144,7 +144,7 @@ class ForceController extends Controller
                 'maker_uuid'     => $request->user()->uuid,
                 'uuid'            => $validation->data['uuid'],
             ];
-            $arr[$i] = $user[$i]->device_id;
+            $array_push($arr,$user[$i]->device_id);
             //print_r($datas);
 
             //$add_notif = Notification\NotificationController::addData($datas);
