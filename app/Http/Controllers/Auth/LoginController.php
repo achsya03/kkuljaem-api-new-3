@@ -45,9 +45,14 @@ class LoginController extends Controller
         $user=User::where('email',$request->email)
             ->whereNotNull('email_verified_at')->first();
 
+        $user1=User::whereNotNull('email_verified_at')->first();
         if($user==null){
             return response()->json(['message'=>'Failed','info'
-            => 'Silakan Verifikasi Email Anda Terlebih Dahulu']);
+            => 'Email dan Password Tidak Sesuai']);
+        }
+        if($user1==null){
+            return response()->json(['message'=>'Failed','info'
+            => 'Silakan Verifikasi Email Terlebih Dahulu']);
         }
         if($user->jenis_pengguna == 0 && $request->role != 'student'){
             return response()->json([
