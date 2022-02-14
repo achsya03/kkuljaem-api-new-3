@@ -147,7 +147,7 @@ class ForceController extends Controller
             //array_push($arr,$user[$i]->device_id);
             //print_r($datas);
 
-            $push_notif = FCMController::sendNotification($user[$i]->user,$datas);
+            $push_notif = FCMController::sendNotification($user[$i],$datas);
 
             $counter = $i;
         }
