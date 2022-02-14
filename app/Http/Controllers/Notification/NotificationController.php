@@ -12,11 +12,17 @@ class NotificationController extends Controller
 {
     public static function addData($datas){
         $validation = new Helper\ValidationController('notification');
+        $ket = '';
+        if(isset($datas['deskripsi'])){
+            $ket = $datas['deskripsi'];
+        }elseif(isset($datas['keterangan'])){
+            $ket = $datas['keterangan'];
+        }
 
         $data = [
 			'user_uuid'       => $datas['user_uuid'],
 			'judul'           => $datas['judul'],
-			'keterangan'       => $datas['deskripsi'],
+			'keterangan'       => $ket,
 			'posisi'          => $datas['posisi'],
 			//'gambar'          => $datas['gambar'],
             'tgl_notif'        => date('Y-m-d h:i:s'),

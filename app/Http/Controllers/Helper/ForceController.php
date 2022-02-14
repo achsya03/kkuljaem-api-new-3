@@ -135,7 +135,7 @@ class ForceController extends Controller
                 // 'i' => $i,
                 'user_uuid'       => $user[$i]->uuid,
                 'judul'           => $request->judul,
-                'deskripsi'       => $request->deskripsi,
+                'keterangan'       => $request->deskripsi,
                 'posisi'          => 'Notifikasi',
                 //'gambar'          => $datas['gambar'],
                 'uuid_target'     => '#',
