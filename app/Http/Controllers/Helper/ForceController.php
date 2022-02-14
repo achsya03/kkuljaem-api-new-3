@@ -144,7 +144,7 @@ class ForceController extends Controller
                 'maker_uuid'     => $request->user()->uuid,
                 'uuid'            => $validation->data['uuid'],
             ];
-            $array_push($arr,$user[$i]->device_id);
+            array_push($arr,$user[$i]->device_id);
             //print_r($datas);
 
             //$add_notif = Notification\NotificationController::addData($datas);
