@@ -131,7 +131,7 @@ class ForceController extends Controller
         $arr = array();
         for($i=0;$i<count($user);$i++){
             
-            $datas = [
+            $datas[$i] = [
                 // 'i' => $i,
                 'user_uuid'       => $user[$i]->uuid,
                 'judul'           => $request->judul,
@@ -147,7 +147,7 @@ class ForceController extends Controller
             //array_push($arr,$user[$i]->device_id);
             //print_r($datas);
 
-            $push_notif = FCMController::sendNotification($user[$i],$datas);
+            $push_notif = FCMController::sendNotification($user[$i],$datas[$i]);
 
             // return response()->json([
             //     'message' => $push_notif

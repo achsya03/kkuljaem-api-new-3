@@ -436,6 +436,51 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                 }
                 return $status;
             })
+            ->editColumn('email', function ($student) {
+                $email = '';
+                if($student->email==NULL || !$student->email){
+                    $email = '---';
+                }else{
+                    $email = $student->email;
+                }
+                return $email;
+            })
+            ->editColumn('nama', function ($student) {
+                $nama = '';
+                if($student->nama==NULL || !$student->nama){
+                    $nama = '---';
+                }else{
+                    $nama = $student->nama;
+                }
+                return $nama;
+            })
+            ->editColumn('jenis_kel', function ($student) {
+                $jenis_kel = '';
+                if($student->jenis_kel==NULL || !$student->jenis_kel){
+                    $jenis_kel = '---';
+                }else{
+                    $jenis_kel = $student->jenis_kel;
+                }
+                return $jenis_kel;
+            })
+            ->editColumn('tgl_lahir', function ($student) {
+                $tgl_lahir = '';
+                if($student->tgl_lahir==NULL || !$student->tgl_lahir){
+                    $tgl_lahir = '---';
+                }else{
+                    $tgl_lahir = $student->tgl_lahir;
+                }
+                return $tgl_lahir;
+            })
+            ->editColumn('tempat_lahir', function ($student) {
+                $tempat_lahir = '';
+                if($student->tempat_lahir==NULL || !$student->tempat_lahir){
+                    $tempat_lahir = '---';
+                }else{
+                    $tempat_lahir = $student->tempat_lahir;
+                }
+                return $tempat_lahir;
+            })
             ->editColumn('alamat', function ($student) {
                 $alamat = '';
                 if($student->alamat==NULL || !$student->alamat){
@@ -444,6 +489,15 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                     $alamat = $student->alamat;
                 }
                 return $alamat;
+            })
+            ->editColumn('user_uuid', function ($student) {
+                $user_uuid = '';
+                if($student->user_uuid==NULL || !$student->user_uuid){
+                    $user_uuid = '---';
+                }else{
+                    $user_uuid = $student->user_uuid;
+                }
+                return $user_uuid;
             })
             ->addColumn('action', function ($row) {
                 $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';

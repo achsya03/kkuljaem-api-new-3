@@ -16,8 +16,13 @@
             <thead>
                 <tr>
                     <th>Status</th>
-                    <th>Alamat</th>
+                    <th>Email</th>
                     <th>Nama</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Tempat Lahir</th>
+                    <th>Alamat</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +45,21 @@
             columns: [{
                     data: 'status_aktif',
                     name: 'status_aktif'
+                },{
+                    data: 'email',
+                    name: 'email'
+                },{
+                    data: 'nama',
+                    name: 'nama'
+                },{
+                    data: 'jenis_kel',
+                    name: 'jenis_kel'
+                },{
+                    data: 'tgl_lahir',
+                    name: 'tgl_lahir'
+                },{
+                    data: 'tempat_lahir',
+                    name: 'tempat_lahir'
                 },{
                     data: 'alamat',
                     name: 'alamat'
