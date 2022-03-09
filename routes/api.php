@@ -418,7 +418,8 @@ Route::group(['prefix' => 'api/admin/user'], function () {
     });
     Route::get('/student/lists', function (Request $request) {
         if ($request->ajax()) {
-            $student = Models\User::where('jenis_pengguna', 0)
+            $student = Models\User::select('status_aktif','email','nama','jenis_kel','tgl_lahir','tempat_lahir','alamat','users.uuid AS user_uuid')
+                    ->where('jenis_pengguna', 0)
                     ->leftJoin('detail_students', 'detail_students.id_users', '=', 'users.id');
 
             // $arr = [];
@@ -495,9 +496,9 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                     return $alamat;
                 })
                 ->addColumn('action', function ($student) {
-                    $actionBtn = '<a href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/detail?id='.$student->uuid.'" class="info btn btn-info btn-sm">Rincian</a>
-                                <a href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/edit?id='.$student->uuid.'" class="edit btn btn-success btn-sm">Edit</a> 
-                                <a href="#" onclick="hapus(https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/user/student?token='.$student->uuid.'" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/detail?id='.$student->user_uuid.'" class="info btn btn-info btn-sm">Rincian</a>
+                                <a href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/edit?id='.$student->user_uuid.'" class="edit btn btn-success btn-sm">Edit</a> 
+                                <a href="#" onclick="hapus(https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/user/student?token='.$student->user_uuid.'" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
