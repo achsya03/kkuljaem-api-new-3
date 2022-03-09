@@ -63,6 +63,9 @@
                 },{
                     data: 'alamat',
                     name: 'alamat'
+                },{
+                    data: 'user_uuid',
+                    name: 'user_uuid'
                 },
                 {
                     data: 'action',

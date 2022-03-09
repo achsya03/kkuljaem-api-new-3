@@ -504,12 +504,12 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                     return $user_uuid;
                 })
                 ->addColumn('action', function ($student) {
-                    $actionBtn = '<a href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/detail?id='.$student->user_uuid.'" class="detail btn btn-success btn-sm">Rincian</a>
+                    $actionBtn = '<a href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/detail?id='.$student->user_uuid.'" class="info btn btn-info btn-sm">Rincian</a>
                                 <a href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/edit?id='.$student->user_uuid.'" class="edit btn btn-success btn-sm">Edit</a> 
                                 <a href="#" onclick="hapus(https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/user/student?token='.$student->user_uuid.'" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action'])
+                //->rawColumns(['action'])
                 ->make(true);
         }
     })->name('std.list');
