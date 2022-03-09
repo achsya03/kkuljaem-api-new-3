@@ -501,7 +501,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                     }else{
                         $user_uuid = $student->user_uuid;
                     }
-                    return $user_uuid;
+                    return '<a href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/detail?id='.$student->user_uuid.'" class="info btn btn-info btn-sm">Rincian</a>';
                 })
                 ->addColumn('action', function ($student) {
                     $actionBtn = '<a href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/detail?id='.$student->user_uuid.'" class="info btn btn-info btn-sm">Rincian</a>
@@ -509,7 +509,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                                 <a href="#" onclick="hapus(https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/user/student?token='.$student->user_uuid.'" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
-                //->rawColumns(['action'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
     })->name('std.list');
