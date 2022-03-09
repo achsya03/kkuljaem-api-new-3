@@ -417,94 +417,101 @@ Route::group(['prefix' => 'api/admin/user'], function () {
         return view('Student.home');
     });
     Route::get('/student/lists', function (Request $request) {
-        //if ($request->ajax()) {
-        $student = Models\User::where('jenis_pengguna', 0)
-                ->leftJoin('detail_students', 'detail_students.id_users', '=', 'users.id');
+        if ($request->ajax()) {
+            $student = Models\User::where('jenis_pengguna', 0)
+                    ->leftJoin('detail_students', 'detail_students.id_users', '=', 'users.id');
 
-        // $arr = [];
+            // $arr = [];
 
-        return DataTables::of($student)
-            // ->editColumn('status_aktif', 'Belum Tersedia')
-            
-            ->editColumn('status_aktif', function ($student) {
-                $status = 'Belum Terverifikasi';
-                if ($student->email_verified_at != null || $student->email_verified_at != '') {
-                    $status = 'Terverifikasi';
-                }
-                if (date_format(date_create($student->tgl_langganan_akhir), "Y/m/d") >= date('Y/m/d')) {
-                    $status = 'Member';
-                }
-                return $status;
-            })
-            ->editColumn('email', function ($student) {
-                $email = '';
-                if($student->email==NULL || !$student->email){
-                    $email = '---';
-                }else{
-                    $email = $student->email;
-                }
-                return $email;
-            })
-            ->editColumn('nama', function ($student) {
-                $nama = '';
-                if($student->nama==NULL || !$student->nama){
-                    $nama = '---';
-                }else{
-                    $nama = $student->nama;
-                }
-                return $nama;
-            })
-            ->editColumn('jenis_kel', function ($student) {
-                $jenis_kel = '';
-                if($student->jenis_kel==NULL || !$student->jenis_kel){
-                    $jenis_kel = '---';
-                }else{
-                    $jenis_kel = $student->jenis_kel;
-                }
-                return $jenis_kel;
-            })
-            ->editColumn('tgl_lahir', function ($student) {
-                $tgl_lahir = '';
-                if($student->tgl_lahir==NULL || !$student->tgl_lahir){
-                    $tgl_lahir = '---';
-                }else{
-                    $tgl_lahir = $student->tgl_lahir;
-                }
-                return $tgl_lahir;
-            })
-            ->editColumn('tempat_lahir', function ($student) {
-                $tempat_lahir = '';
-                if($student->tempat_lahir==NULL || !$student->tempat_lahir){
-                    $tempat_lahir = '---';
-                }else{
-                    $tempat_lahir = $student->tempat_lahir;
-                }
-                return $tempat_lahir;
-            })
-            ->editColumn('alamat', function ($student) {
-                $alamat = '';
-                if($student->alamat==NULL || !$student->alamat){
-                    $alamat = '---';
-                }else{
-                    $alamat = $student->alamat;
-                }
-                return $alamat;
-            })
-            ->editColumn('user_uuid', function ($student) {
-                $user_uuid = '';
-                if($student->user_uuid==NULL || !$student->user_uuid){
-                    $user_uuid = '---';
-                }else{
-                    $user_uuid = $student->user_uuid;
-                }
-                return $user_uuid;
-            })
-            ->addColumn('action', function ($row) {
-                $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                return $actionBtn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+            return DataTables::of($student)
+                // ->editColumn('status_aktif', 'Belum Tersedia')
+                
+                ->editColumn('status_aktif', function ($student) {
+                    $status = 'Belum Terverifikasi';
+                    if ($student->email_verified_at != null || $student->email_verified_at != '') {
+                        $status = 'Terverifikasi';
+                    }
+                    if (date_format(date_create($student->tgl_langganan_akhir), "Y/m/d") >= date('Y/m/d')) {
+                        $status = 'Member';
+                    }
+                    return $status;
+                })
+                ->editColumn('email', function ($student) {
+                    $email = '';
+                    if($student->email==NULL || !$student->email){
+                        $email = '---';
+                    }else{
+                        $email = $student->email;
+                    }
+                    return $email;
+                })
+                ->editColumn('nama', function ($student) {
+                    $nama = '';
+                    if($student->nama==NULL || !$student->nama){
+                        $nama = '---';
+                    }else{
+                        $nama = $student->nama;
+                    }
+                    return $nama;
+                })
+                ->editColumn('jenis_kel', function ($student) {
+                    $jenis_kel = '';
+                    if($student->jenis_kel==NULL || !$student->jenis_kel){
+                        $jenis_kel = '---';
+                    }else{
+                        if($student->jenis_kel == 'P'){
+                            $jenis_kel = 'Perempuan';
+                        }elseif($student->jenis_kel == 'L'){
+                            $jenis_kel = 'Laki-Laki';
+                        }
+                    }
+                    return $jenis_kel;
+                })
+                ->editColumn('tgl_lahir', function ($student) {
+                    $tgl_lahir = '';
+                    if($student->tgl_lahir==NULL || !$student->tgl_lahir){
+                        $tgl_lahir = '---';
+                    }else{
+                        $tgl_lahir = $student->tgl_lahir;
+                    }
+                    return $tgl_lahir;
+                })
+                ->editColumn('tempat_lahir', function ($student) {
+                    $tempat_lahir = '';
+                    if($student->tempat_lahir==NULL || !$student->tempat_lahir){
+                        $tempat_lahir = '---';
+                    }else{
+                        $tempat_lahir = $student->tempat_lahir;
+                    }
+                    return $tempat_lahir;
+                })
+                ->editColumn('alamat', function ($student) {
+                    $alamat = '';
+                    if($student->alamat==NULL || !$student->alamat){
+                        $alamat = '---';
+                    }else{
+                        $alamat = $student->alamat;
+                    }
+                    return $alamat;
+                })
+                ->editColumn('user_uuid', function ($student) {
+                    $user_uuid = '';
+                    if($student->user_uuid==NULL || !$student->user_uuid){
+                        $user_uuid = '---';
+                    }else{
+                        $user_uuid = $student->user_uuid;
+                    }
+                    return $user_uuid;
+                })
+                ->addColumn('action', function ($student) {
+                    $actionBtn = '<a href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/detail?id='.$student->user_uuid.'" class="detail btn btn-success btn-sm">Rincian</a>
+                                <a href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/edit?id='.$student->user_uuid.'" class="edit btn btn-success btn-sm">Edit</a> 
+                                <a href="#" onclick="hapus(https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/user/student?token='.$student->user_uuid.'" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     })->name('std.list');
 
     Route::get('/mentor/list',      [User\UserController::class, 'mentorList']);
