@@ -48,9 +48,7 @@ class UserController extends Controller
         return $data;
     }
 
-    public function __construct(Request $request){
-        $this->middleware('auth');
-    }
+    
     /**
      * Handle the incoming request.
      *
