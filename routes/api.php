@@ -418,7 +418,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
     });
     Route::get('/student/lists', function (Request $request) {
         // if ($request->ajax()) {
-            $student = DB::table('detail_students as d')->select('u.status_aktif','u.email','u.nama','d.tgl_lahir','d.tempat_lahir','d.alamat','u.uuid AS user_uuid')
+            $student = DB::table('detail_students as d')->select('u.tgl_langganan_akhir','u.email_verified_at','u.status_aktif','u.email','u.nama','d.tgl_lahir','d.tempat_lahir','d.alamat','u.uuid AS user_uuid')
                     ->leftJoin('users as u', 'd.id_users', '=', 'u.id')
                     ->where('u.jenis_pengguna', 0);
 
