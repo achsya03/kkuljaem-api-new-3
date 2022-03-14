@@ -417,7 +417,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
         return view('Student.home');
     });
     Route::get('/student/lists', function (Request $request) {
-        if ($request->ajax()) {
+        // if ($request->ajax()) {
             $student = Models\User::select('status_aktif','email','nama','detail_students.jenis_kel','tgl_lahir','tempat_lahir','alamat','users.uuid AS user_uuid')
                     ->leftJoin('detail_students', 'detail_students.id_users', '=', 'users.id')
                     ->where('jenis_pengguna', 0);
@@ -503,7 +503,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-        }
+        // }
     })->name('std.list');
 
     Route::get('/mentor/list',      [User\UserController::class, 'mentorList']);
