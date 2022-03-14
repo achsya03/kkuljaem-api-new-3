@@ -44,13 +44,13 @@
             ajax: "{{ route('std.list') }}",
             columns: [{
                     data: 'status_aktif',
-                    name: 'status_aktif'
+                    name: 'u.status_aktif'
                 },{
                     data: 'email',
-                    name: 'email'
+                    name: 'u.email'
                 },{
                     data: 'nama',
-                    name: 'nama'
+                    name: 'u.nama'
                 },{
                     data: 'jenis_kel',
                     name: 'jenis_kel'
