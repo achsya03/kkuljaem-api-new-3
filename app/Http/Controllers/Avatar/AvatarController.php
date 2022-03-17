@@ -119,7 +119,7 @@ class AvatarController extends Controller
         if($result){
             return response()->json([
                 'message' => 'Success',
-                'data' => $result
+                'data' => 'Proses berhasil dilakukan'
             ]);
         }else{
             return response()->json([
