@@ -20,7 +20,10 @@ class AvatarController extends Controller
     public function getAllAvatarGroup(Request $request){
         $avatarGroup = Models\AvatarGroup::select('nama','deskripsi','uuid')
                                             ->get();
-        return response($avatarGroup, 200);
+        return response()->json([
+            'message' => 'Success',
+            'data' => $avatarGroup
+        ]);
     }
 
     public function getDetailAvatarGroup(Request $request){
@@ -42,7 +45,26 @@ class AvatarController extends Controller
     }
 
     public function getAvatarByGroup(Request $request){
-
+        if(!$uuid=$request->token){
+            return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
+        }
+        if(!$idGroup=Models\AvatarGroup::where('uuid',$request->uuid)->first){
+            return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
+        }
+        $avatar = Models\Avatar::select('nama','deskripsi','avatar_url','avatar_id','uuid')
+                                ->where('id_avatar_group',$idGroup->id)
+                                ->get();
+        $result = [
+            'group_name'=>$idGroup->nama,
+            'group_desc'=>$idGroup->deskripsi,
+            'group_uuid'=>$idGroup->uuid,
+            'avatars'=>$avatar,
+        ];
+        
+        return response()->json([
+            'message' => 'Success',
+            'data' => $result
+        ]);
     }
 
     public function getDetailAvatar(Request $request){
