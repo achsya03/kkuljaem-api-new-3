@@ -166,7 +166,7 @@ class UserController extends Controller
                 ->addColumn('action', function ($student) {
                     $actionBtn = '<a style="margin:2px;"  type="button" href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/detail?id='.$student->user_uuid.'" class="btn btn-primary btn-sm">Rincian</a>
                                 <a style="margin:2px;"  type="button" href="http://admin.kkuljaemkoreanapp.com/akun_pengguna/siswa/edit?token='.$student->user_uuid.'" class="btn btn-info btn-sm">Edit</a> 
-                                <a style="margin:2px;"  type="button" href="#" onclick="hapus("https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/user/student?token='.$student->user_uuid.'")" class="btn btn-danger btn-sm">Delete</a>';
+                                <a style="margin:2px;"  type="button" href="#" onclick="'."hapus('https://kkuljaem-api-new-3-ft4mz.ondigitalocean.app/api/admin/user/student?token=".$student->user_uuid."'".')"'." class='btn btn-danger btn-sm'>Delete</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
