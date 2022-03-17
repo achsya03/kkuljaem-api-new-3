@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth;
 
 use App\Models;
 use App\Http\Controllers\Banner;
+use App\Http\Controllers\Avatar;
 use App\Http\Controllers\Post;
 use App\Http\Controllers\User;
 use App\Http\Controllers\Packet;
