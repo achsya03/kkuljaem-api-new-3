@@ -52,7 +52,7 @@ class AvatarController extends Controller
         if(!$idGroup=Models\AvatarGroup::where('uuid',$request->token)->first()){
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
-        $avatar = Models\Avatar::select('nama','deskripsi','avatar_url','avatar_id','uuid')
+        $avatar = Models\Avatar::select('nama','deskripsi','avatar_url','uuid')
                                 ->where('id_avatar_group',$idGroup->id)
                                 ->get();
         $result = [
