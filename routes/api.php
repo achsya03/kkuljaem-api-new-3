@@ -166,7 +166,7 @@ Route::group(['prefix' => 'api/user/packet'], function () {
 Route::group(['prefix' => 'api/user/avatar'], function () {
     Route::get('/group',         [Avatar\AvatarController::class, 'getAllAvatarGroup']);
     Route::get('/by-group',      [Avatar\AvatarController::class, 'getAvatarByGroup']);
-    Route::post('/update',       [Avatar\AvatarController::class, 'editUserAvatar']);
+    Route::post('/user-update',       [Avatar\AvatarController::class, 'editUserAvatar']);
 });
 
 Route::group(['prefix' => 'api/user/subs'], function () {
@@ -199,6 +199,22 @@ Route::group(['prefix' => 'api/admin/banner'], function () {
     Route::get('/detail',   [Banner\BannerController::class, 'detailDatas']);
     Route::post('/update',  [Banner\BannerController::class, 'updateData']);
     Route::delete('/',      [Banner\BannerController::class, 'deleteData']);
+});
+
+
+Route::group(['prefix' => 'api/admin/avatar'], function () {
+    Route::get('/group',            [Avatar\AvatarController::class, 'getAllAvatarGroup']);
+    Route::post('/group',           [Avatar\AvatarController::class, 'getAvatarByGroup']);
+    Route::get('/group/detail',     [Avatar\AvatarController::class, 'addAvatarGroup']);
+    Route::post('/group/update',    [Avatar\AvatarController::class, 'editAvatarGroup']);
+    Route::delete('/group',         [Avatar\AvatarController::class, 'deleteAvatarGroup']);
+
+    Route::get('/by-group',      [Avatar\AvatarController::class, 'getAvatarByGroup']);
+    Route::post('/',             [Avatar\AvatarController::class, 'addAvatar']);
+    Route::get('/detail',        [Avatar\AvatarController::class, 'getDetailAvatar']);
+    Route::post('/update',       [Avatar\AvatarController::class, 'editAvatar']);
+    Route::delete('/',           [Avatar\AvatarController::class, 'deleteAvatar']);
+    Route::post('/user-update',  [Avatar\AvatarController::class, 'editUserAvatar']);
 });
 
 Route::group(['prefix' => 'api/admin/schedule'], function () {
