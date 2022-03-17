@@ -77,6 +77,8 @@ class InputController extends Controller
             $this->userMentors(Models\DetailMentor::class,$data);
         }elseif($pos=='badWord'){
             $this->badWord(Models\BadWord::class,$data);
+        }elseif($pos=='avatarStudent'){
+            $this->avatarStudent(Models\AvatarStudent::class,$data);
         }
     }
 
@@ -423,8 +425,17 @@ class InputController extends Controller
 
     private function badWord($model,$data){
         $model::create([
-			'kata'       => $data['kata'],
-			'uuid'             => $data['uuid'],
+			'kata'              => $data['kata'],
+			'uuid'              => $data['uuid'],
+        ]);
+    }
+
+
+    private function avatarStudent($model,$data){
+        $model::create([
+			'id_avatar'             =>$data['id_avatar'],
+            'id_detail_student'     =>$data['id_detail_student'],
+            'uuid'                  =>$data['uuid']
         ]);
     }
 }

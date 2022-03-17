@@ -237,6 +237,11 @@ class ValidationController extends Controller
             // $this->data = [
             //     'uuid'      => $this->getUuid(Models\Subs::class)
             // ];
+        }elseif($pos=='subs'){
+            //$this->subs();
+            $this->data = [
+                'uuid'      => $this->getUuid(Models\AvatarStudent::class)
+            ];
         }
     }
 
