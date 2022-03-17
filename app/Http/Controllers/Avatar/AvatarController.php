@@ -49,7 +49,7 @@ class AvatarController extends Controller
         if(!$uuid=$request->token){
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
-        if(!$idGroup=Models\AvatarGroup::where('uuid',$request->uuid)->first()){
+        if(!$idGroup=Models\AvatarGroup::where('uuid',$request->token)->first()){
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
         $avatar = Models\Avatar::select('nama','deskripsi','avatar_url','avatar_id','uuid')
@@ -88,7 +88,7 @@ class AvatarController extends Controller
         if(!$uuid=$request->token){
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
-        if(!$idAvatar=Models\Avatar::where('uuid',$request->uuid)->first()){
+        if(!$idAvatar=Models\Avatar::where('uuid',$request->token)->first()){
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
 
