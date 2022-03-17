@@ -68,6 +68,10 @@ class UpdateController extends Controller
             $this->reference(Models\Reference::class,$data);
         }elseif($pos=='changePassUserLogin'){
             $this->changePassUserLogin(Models\User::class,$data);
+        }elseif($pos=='avatarGroup'){
+            $this->avatarGroup(Models\AvatarGroup::class,$data);
+        }elseif($pos=='avatar'){
+            $this->avatar(Models\Avatar::class,$data);
         }
     }
 
@@ -513,6 +517,23 @@ class UpdateController extends Controller
             'id_user'            => $data['id_user'],
             'tgl_testimoni'      => $data['tgl_testimoni'],
             'testimoni'          => $data['testimoni']
+        ]);
+    }
+
+    private function avatarGroup($model,$data){
+        $model::where('uuid',$data['uuid'])
+        ->update([
+            'nama'           => $data['nama'],
+            'deskripsi'      => $data['deskripsi']
+        ]);
+    }
+
+    private function avatar($model,$data){
+        $model::where('uuid',$data['uuid'])
+        ->update([
+            'nama'           => $data['nama'],
+            'deskripsi'      => $data['deskripsi'],
+            'id_avatar_group'=> $data['id_avatar_group']
         ]);
     }
 

@@ -242,6 +242,16 @@ class ValidationController extends Controller
             $this->data = [
                 'uuid'      => $this->getUuid(Models\AvatarStudent::class)
             ];
+        }elseif($pos=='avatarGroup'){
+            $this->avatarGroup();
+            $this->data = [
+                'uuid'      => $this->getUuid(Models\AvatarGroup::class)
+            ];
+        }elseif($pos=='avatar'){
+            $this->avatar();
+            $this->data = [
+                'uuid'      => $this->getUuid(Models\Avatar::class)
+            ];
         }
     }
 
@@ -776,6 +786,7 @@ class ValidationController extends Controller
             'status.required'                      => 'Status wajib diisi'
         ];
     }
+
     private function badWord(){
         $this->rules = [
             'kata'                               => 'required',
@@ -783,6 +794,32 @@ class ValidationController extends Controller
     
         $this->messages = [
             'kata.required'                      => 'Kata wajib diisi',
+        ];
+    }
+
+    private function avatarGroup(){
+        $this->rules = [
+            'nama'                               => 'required',
+            'deskripsi'                          => 'required',
+        ];
+    
+        $this->messages = [
+            'nama.required'                      => 'Nama wajib diisi',
+            'deskripsi.required'                 => 'Deskripsi wajib diisi',
+        ];
+    }
+
+    private function avatar(){
+        $this->rules = [
+            'nama'                               => 'required',
+            'deskripsi'                          => 'required',
+            'group_id'                          => 'required',
+        ];
+    
+        $this->messages = [
+            'nama.required'                      => 'Nama wajib diisi',
+            'deskripsi.required'                 => 'Deskripsi wajib diisi',
+            'group_id.required'                  => 'Group_id wajib diisi',
         ];
     }
     #============================================================

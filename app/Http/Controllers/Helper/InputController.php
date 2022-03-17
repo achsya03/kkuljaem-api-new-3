@@ -79,6 +79,10 @@ class InputController extends Controller
             $this->badWord(Models\BadWord::class,$data);
         }elseif($pos=='avatarStudent'){
             $this->avatarStudent(Models\AvatarStudent::class,$data);
+        }elseif($pos=='avatarGroup'){
+            $this->avatarGroup(Models\AvatarGroup::class,$data);
+        }elseif($pos=='avatar'){
+            $this->avatar(Models\Avatar::class,$data);
         }
     }
 
@@ -436,6 +440,23 @@ class InputController extends Controller
 			'id_avatar'             =>$data['id_avatar'],
             'id_detail_student'     =>$data['id_detail_student'],
             'uuid'                  =>$data['uuid']
+        ]);
+    }
+
+    private function avatarGroup($model,$data){
+        $model::create([
+			'nama'              =>$data['nama'],
+            'deskripsi'         =>$data['deskripsi'],
+            'uuid'              =>$data['uuid']
+        ]);
+    }
+
+    private function avatar($model,$data){
+        $model::create([
+			'nama'              =>$data['nama'],
+            'deskripsi'         =>$data['deskripsi'],
+            'id_avatar_group'   =>$data['id_avatar_group'],
+            'uuid'              =>$data['uuid']
         ]);
     }
 }
