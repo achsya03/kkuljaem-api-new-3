@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\DetailMentorController;
 use App\Http\Controllers\Auth\DetailStudentController;
 use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 use Validator;
 use Hash;
 use Session;
