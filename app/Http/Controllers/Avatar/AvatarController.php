@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Avatar;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models;
+use Validator;
+use Hash;
+use Session;
+use Cloudinary;
 
 class AvatarController extends Controller
 {
@@ -13,11 +18,15 @@ class AvatarController extends Controller
     }
 
     public function getAllAvatarGroup(Request $request){
-
+        $avatarGroup = Models\AvatarGroup::select('nama','deskripsi','uuid')
+                                            ->get();
+        return response($avatarGroup, 200);
     }
 
     public function getDetailAvatarGroup(Request $request){
-
+        if(!$uuid=$request->token){
+            return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
+        }
     }
 
     public function addAvatarGroup(Request $request){
@@ -49,6 +58,10 @@ class AvatarController extends Controller
     }
 
     public function deleteAvatar(Request $request){
+        
+    }
+
+    public function editUserAvatar(Request $request){
         
     }
 }

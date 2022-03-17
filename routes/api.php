@@ -39,13 +39,12 @@ use App\Http\Controllers\MailController;
 
 
 Route::group(['prefix' => 'api/auth'], function () {
-    Route::post('register',         Auth\RegisterController::class);
-    Route::post('login',            Auth\LoginController::class);
-    Route::post('logout',           Auth\LogoutController::class);
-    #Route::get('send-mail','MailController@sendEmail');
-    Route::post('forget-password',   Auth\ForgotPasswordController::class);
-    Route::post('change-password',   Auth\ChangePasswordController::class);
-    Route::get('verify-mail',       Auth\VerifyEmailController::class);
+    Route::post('register',             Auth\RegisterController::class);
+    Route::post('login',                Auth\LoginController::class);
+    Route::post('logout',               Auth\LogoutController::class);
+    Route::post('forget-password',      Auth\ForgotPasswordController::class);
+    Route::post('change-password',      Auth\ChangePasswordController::class);
+    Route::get('verify-mail',           Auth\VerifyEmailController::class);
 });
 
 #==========================Student================================
@@ -66,7 +65,7 @@ Route::group(['prefix' => 'api/auth'], function () {
 //test
 Route::group(['prefix' => 'api/home'], function () {
     Route::get('/',         [Helper\ShowController::class, 'home']);
-    Route::get('/web',         [Helper\StudentWebController::class, 'homeWeb']);
+    Route::get('/web',      [Helper\StudentWebController::class, 'homeWeb']);
     Route::get('/banner',   [Helper\ShowController::class, 'banner']);
     Route::get('/word',     [Helper\ShowController::class, 'word']);
     Route::get('/video',    [Helper\ShowController::class, 'video']);
@@ -104,9 +103,9 @@ Route::group(['prefix' => 'api/forum'], function () {
     Route::post('/comment',         [Post\PostController::class, 'addComment']); ##
     Route::delete('/comment',       [Post\PostController::class, 'deleteComment']);
     Route::post('/post/alert',      [Post\PostController::class, 'alertPost']); #
-    Route::delete('/post/alert',      [Post\PostController::class, 'alertPostDelete']);
+    Route::delete('/post/alert',    [Post\PostController::class, 'alertPostDelete']);
     Route::post('/comment/alert',   [Post\PostController::class, 'alertComment']); #
-    Route::delete('/comment/alert',   [Post\PostController::class, 'alertCommentDelete']); #
+    Route::delete('/comment/alert', [Post\PostController::class, 'alertCommentDelete']); #
     Route::post('/like',            [Post\PostController::class, 'addLike']);
     Route::delete('/like',          [Post\PostController::class, 'deleteLike']);
 
@@ -125,9 +124,9 @@ Route::group(['prefix' => 'api/qna'], function () {
     Route::post('/comment',         [Post\PostController::class, 'addComment']); ##
     Route::delete('/comment',       [Post\PostController::class, 'deleteComment']); #
     Route::post('/post/alert',      [Post\PostController::class, 'alertPost']); #
-    Route::delete('/post/alert',      [Post\PostController::class, 'alertPostDelete']);
+    Route::delete('/post/alert',    [Post\PostController::class, 'alertPostDelete']);
     Route::post('/comment/alert',   [Post\PostController::class, 'alertComment']); #
-    Route::delete('/comment/alert',   [Post\PostController::class, 'alertCommentDelete']);
+    Route::delete('/comment/alert', [Post\PostController::class, 'alertCommentDelete']);
     Route::post('/like',            [Post\PostController::class, 'addLike']);
     Route::delete('/like',          [Post\PostController::class, 'deleteLike']);
 
@@ -137,17 +136,17 @@ Route::group(['prefix' => 'api/qna'], function () {
 });
 
 Route::group(['prefix' => 'api/user'], function () {
-    Route::get('detail',      [User\UserController::class, 'detailUserData']);
-    Route::post('update',   [User\UserController::class, 'updateDataStudent']);
-    Route::post('device-id',   [User\UserController::class, 'updateDeviceID']);
+    Route::get('detail',            [User\UserController::class, 'detailUserData']);
+    Route::post('update',           [User\UserController::class, 'updateDataStudent']);
+    Route::post('device-id',        [User\UserController::class, 'updateDeviceID']);
     Route::post('change-password',      [Auth\ChangePasswordLoginController::class, 'changePassword']);
     // Route::get('/',         [User\UserController::class, 'allData']);
     // Route::post('/',        [User\UserController::class, 'addData']);
 });
 Route::group(['prefix' => 'api/force'], function () {
-    Route::post('notif',      [Helper\ForceController::class, 'forceNotif']);
+    Route::post('notif',    [Helper\ForceController::class, 'forceNotif']);
     Route::get('subs',      [Helper\ForceController::class, 'getAllLog']);
-    Route::post('subs',      [Helper\ForceController::class, 'forceSubs']);
+    Route::post('subs',     [Helper\ForceController::class, 'forceSubs']);
     // Route::get('words/url',      [Helper\ForceController::class,'forceWordUrl']);
     // Route::get('words/path',      [Helper\ForceController::class,'forceWordPath']);
     // Route::get('question/path',      [Helper\ForceController::class,'forceQuestionPath']);
@@ -162,12 +161,19 @@ Route::group(['prefix' => 'api/user/packet'], function () {
     Route::get('/',         [Packet\PacketController::class, 'allData']);
     //Route::get('/detail',         [Packet\PacketController::class,'detailSelect']);
 });
+
+Route::group(['prefix' => 'api/user/avatar'], function () {
+    Route::get('/group',         [Avatar\AvatarController::class, 'getAllAvatarGroup']);
+    Route::get('/by-group',      [Avatar\AvatarController::class, 'getAvatarByGroup']);
+    Route::post('/update',       [Avatar\AvatarController::class, 'editUserAvatar']);
+});
+
 Route::group(['prefix' => 'api/user/subs'], function () {
-    Route::get('/ios', [Payment\SubsController::class, 'checkIosData']);
-    Route::post('/ios', [Payment\SubsController::class, 'addIosData']);
-    Route::get('/', [Payment\SubsController::class, 'detailByUser']);
-    Route::get('/detail', [Payment\SubsController::class, 'detailSubs']);
-    Route::post('/', [Payment\SubsController::class, 'doCheckout']);
+    Route::get('/ios',      [Payment\SubsController::class, 'checkIosData']);
+    Route::post('/ios',     [Payment\SubsController::class, 'addIosData']);
+    Route::get('/',         [Payment\SubsController::class, 'detailByUser']);
+    Route::get('/detail',   [Payment\SubsController::class, 'detailSubs']);
+    Route::post('/',        [Payment\SubsController::class, 'doCheckout']);
 });
 // Route::group(['prefix' => 'videos/redirect'], function () {
 //     Route::get('/', [Helper\RedirectVideoController::class,'getVideos']);
@@ -188,10 +194,10 @@ Route::group(['prefix' => 'api/admin'], function () {
 
 Route::group(['prefix' => 'api/admin/banner'], function () {
     Route::get('/',         [Banner\BannerController::class, 'allData']);
-    Route::post('/',         [Banner\BannerController::class, 'addData']);
+    Route::post('/',        [Banner\BannerController::class, 'addData']);
     Route::get('/detail',   [Banner\BannerController::class, 'detailDatas']);
-    Route::post('/update',   [Banner\BannerController::class, 'updateData']);
-    Route::delete('/',   [Banner\BannerController::class, 'deleteData']);
+    Route::post('/update',  [Banner\BannerController::class, 'updateData']);
+    Route::delete('/',      [Banner\BannerController::class, 'deleteData']);
 });
 
 Route::group(['prefix' => 'api/admin/schedule'], function () {
@@ -200,49 +206,49 @@ Route::group(['prefix' => 'api/admin/schedule'], function () {
 
 Route::group(['prefix' => 'api/admin/sorter'], function () {
     Route::get('/',         [Helper\SorterController::class, 'showData']);
-    Route::post('/',         [Helper\SorterController::class, 'setNumbering']);
-    Route::post('/auto',         [Helper\SorterController::class, 'setAutoNumbering']);
+    Route::post('/',        [Helper\SorterController::class, 'setNumbering']);
+    Route::post('/auto',    [Helper\SorterController::class, 'setAutoNumbering']);
 });
 
 Route::group(['prefix' => 'api/admin/word'], function () {
     Route::get('/',         [Banner\WordController::class, 'getContentSchedule']);
-    Route::post('/',         [Banner\WordController::class, 'addDataWord']);
+    Route::post('/',        [Banner\WordController::class, 'addDataWord']);
     Route::get('/detail',   [Banner\WordController::class, 'detailDataWords']);
-    Route::post('/update',   [Banner\WordController::class, 'updateDataWord']);
-    Route::delete('/',   [Banner\WordController::class, 'deleteData']);
-    Route::get('/schedule',   [Banner\WordController::class, 'allDataWordByDate']);
+    Route::post('/update',  [Banner\WordController::class, 'updateDataWord']);
+    Route::delete('/',      [Banner\WordController::class, 'deleteData']);
+    Route::get('/schedule', [Banner\WordController::class, 'allDataWordByDate']);
 });
 
 Route::group(['prefix' => 'api/admin/videos'], function () {
     Route::get('/',         [Banner\VideoController::class, 'getContentSchedule']);
-    Route::post('/',         [Banner\VideoController::class, 'addDataVideo']);
+    Route::post('/',        [Banner\VideoController::class, 'addDataVideo']);
     Route::get('/detail',   [Banner\VideoController::class, 'detailDataVideos']);
-    Route::post('/update',   [Banner\VideoController::class, 'updateDataVideo']);
-    Route::delete('/',   [Banner\VideoController::class, 'deleteData']);
-    Route::get('/schedule',   [Banner\VideoController::class, 'allDataVideoByDate']);
+    Route::post('/update',  [Banner\VideoController::class, 'updateDataVideo']);
+    Route::delete('/',      [Banner\VideoController::class, 'deleteData']);
+    Route::get('/schedule', [Banner\VideoController::class, 'allDataVideoByDate']);
 });
 
 Route::group(['prefix' => 'api/admin/theme'], function () {
     Route::get('/',         [Post\ThemeAdminController::class, 'allData']);
-    Route::post('/',         [Post\ThemeAdminController::class, 'addData']);
+    Route::post('/',        [Post\ThemeAdminController::class, 'addData']);
     Route::get('/detail',   [Post\ThemeAdminController::class, 'detailData']);
-    Route::post('/update',   [Post\ThemeAdminController::class, 'updateData']);
+    Route::post('/update',  [Post\ThemeAdminController::class, 'updateData']);
     //Route::delete('/',   [Banner\VideoController::class,'deleteData']);
 });
 
 Route::group(['prefix' => 'api/admin/forum'], function () {
-    Route::get('/',         [Post\PostAdminController::class, 'listForum']);
-    Route::post('/select',         [Post\PostAdminController::class, 'selectForum']);
+    Route::get('/',                 [Post\PostAdminController::class, 'listForum']);
+    Route::post('/select',          [Post\PostAdminController::class, 'selectForum']);
 
     Route::post('/post',            [Post\PostController::class, 'addForumPost']); ##
-    Route::post('/update',            [Post\PostController::class, 'updateForumPost']); ##
+    Route::post('/update',          [Post\PostController::class, 'updateForumPost']); ##
     Route::delete('/post',          [Post\PostController::class, 'deletePost']); #
     Route::post('/comment',         [Post\PostController::class, 'addComment']); ##
     Route::delete('/comment',       [Post\PostController::class, 'deleteComment']);
     Route::post('/post/alert',      [Post\PostController::class, 'alertPost']); #
-    Route::delete('/post/alert',      [Post\PostController::class, 'alertPostDelete']);
+    Route::delete('/post/alert',    [Post\PostController::class, 'alertPostDelete']);
     Route::post('/comment/alert',   [Post\PostController::class, 'alertComment']); #
-    Route::delete('/comment/alert',   [Post\PostController::class, 'alertCommentDelete']); #
+    Route::delete('/comment/alert', [Post\PostController::class, 'alertCommentDelete']); #
     Route::post('/like',            [Post\PostController::class, 'addLike']);
     Route::delete('/like',          [Post\PostController::class, 'deleteLike']);
 
@@ -250,15 +256,15 @@ Route::group(['prefix' => 'api/admin/forum'], function () {
 });
 
 Route::group(['prefix' => 'api/admin/qna'], function () {
-    Route::get('/',         [Post\PostAdminController::class, 'listQnA']);
-    Route::get('/class-list',         [Post\PostAdminController::class, 'listClasses']);
+    Route::get('/',                 [Post\PostAdminController::class, 'listQnA']);
+    Route::get('/class-list',       [Post\PostAdminController::class, 'listClasses']);
     Route::delete('/post',          [Post\PostController::class, 'deletePost']); #
     Route::post('/comment',         [Post\PostController::class, 'addComment']); ##
     Route::delete('/comment',       [Post\PostController::class, 'deleteComment']); #
     Route::post('/post/alert',      [Post\PostController::class, 'alertPost']); #
-    Route::delete('/post/alert',      [Post\PostController::class, 'alertPostDelete']);
+    Route::delete('/post/alert',    [Post\PostController::class, 'alertPostDelete']);
     Route::post('/comment/alert',   [Post\PostController::class, 'alertComment']); #
-    Route::delete('/comment/alert',   [Post\PostController::class, 'alertCommentDelete']);
+    Route::delete('/comment/alert', [Post\PostController::class, 'alertCommentDelete']);
     Route::post('/like',            [Post\PostController::class, 'addLike']);
     Route::delete('/like',          [Post\PostController::class, 'deleteLike']);
 
@@ -268,10 +274,10 @@ Route::group(['prefix' => 'api/admin/qna'], function () {
 });
 
 Route::group(['prefix' => 'api/admin/classroom-group'], function () {
-    Route::post('/',        [Classes\ClassCategoryController::class, 'addData']);
-    Route::post('update',   [Classes\ClassCategoryController::class, 'updateData']);
-    Route::get('/',         [Classes\ClassCategoryController::class, 'allData']);
-    Route::get('/detail',   [Classes\ClassCategoryController::class, 'detailData']);
+    Route::post('/',           [Classes\ClassCategoryController::class, 'addData']);
+    Route::post('update',      [Classes\ClassCategoryController::class, 'updateData']);
+    Route::get('/',            [Classes\ClassCategoryController::class, 'allData']);
+    Route::get('/detail',      [Classes\ClassCategoryController::class, 'detailData']);
     Route::delete('/delete',   [Classes\ClassCategoryController::class, 'deleteData']);
 });
 
@@ -285,20 +291,20 @@ Route::group(['prefix' => 'api/user/notification'], function () {
     Route::post('/update',        [User\UserController::class, 'updateDeviceID']);
     //Route::post('/web/update',        [User\WebController::class,'updateDeviceID']);
     Route::get('/',               [Notification\NotificationController::class, 'getData']);
-    Route::delete('/',               [Notification\NotificationController::class, 'deleteData']);
-    Route::post('/read',               [Notification\NotificationController::class, 'updateRead']);
+    Route::delete('/',            [Notification\NotificationController::class, 'deleteData']);
+    Route::post('/read',          [Notification\NotificationController::class, 'updateRead']);
 });
 
 Route::group(['prefix' => 'api/admin/bad-word'], function () {
     Route::get('/',               [BadWord\BadWordController::class, 'allData']);
-    Route::delete('/',               [BadWord\BadWordController::class, 'deleteData']);
-    Route::post('/',               [BadWord\BadWordController::class, 'addData']);
+    Route::delete('/',            [BadWord\BadWordController::class, 'deleteData']);
+    Route::post('/',              [BadWord\BadWordController::class, 'addData']);
 });
 Route::group(['prefix' => 'api/admin/notification'], function () {
     Route::post('/update',        [User\UserController::class, 'updateDeviceID']);
     Route::get('/',               [Notification\NotificationController::class, 'getData']);
-    Route::delete('/',               [Notification\NotificationController::class, 'deleteData']);
-    Route::post('/read',               [Notification\NotificationController::class, 'updateRead']);
+    Route::delete('/',            [Notification\NotificationController::class, 'deleteData']);
+    Route::post('/read',          [Notification\NotificationController::class, 'updateRead']);
 });
 
 Route::group(['prefix' => 'api/setting'], function () {
@@ -309,7 +315,7 @@ Route::group(['prefix' => 'api/setting'], function () {
 Route::group(['prefix' => 'api/admin/testimoni'], function () {
     Route::delete('/',        [Testimoni\TestimoniController::class, 'deleteData']);
     Route::get('/',           [Testimoni\TestimoniController::class, 'getData']);
-    Route::post('/',           [Testimoni\TestimoniController::class, 'addData']);
+    Route::post('/',          [Testimoni\TestimoniController::class, 'addData']);
 });
 
 Route::group(['prefix' => 'api/testimoni'], function () {
@@ -358,23 +364,23 @@ Route::post('/test', [TestController::class, 'test']);
 Route::group(['prefix' => 'api/admin/classroom/content/video'], function () {
     Route::get('/shadowing',            [Classes\ShadowingController::class, 'checkData']);
     Route::post('/shadowing',           [Classes\ShadowingController::class, 'addData']);
-    Route::delete('/shadowing',        [Classes\ShadowingController::class, 'deleteData']); ##
+    Route::delete('/shadowing',         [Classes\ShadowingController::class, 'deleteData']); ##
     Route::get('/shadowing/detail',     [Classes\ShadowingController::class, 'detailData']);
     Route::post('/shadowing/update',    [Classes\ShadowingController::class, 'updateData']);
 });
 
 Route::group(['prefix' => 'api/admin/subs'], function () {
-    Route::get('/', [Payment\SubsController::class, 'subsReport']);
-    Route::get('/detail', [Payment\SubsController::class, 'subsReportDetail']);
+    Route::get('/',        [Payment\SubsController::class, 'subsReport']);
+    Route::get('/detail',  [Payment\SubsController::class, 'subsReportDetail']);
 });
 
 Route::group(['prefix' => 'api/admin/reference'], function () {
     Route::get('/',            [Reference\ReferenceController::class, 'allDatas']);
     Route::post('/',           [Reference\ReferenceController::class, 'addData']);
-    Route::delete('/',        [Reference\ReferenceController::class, 'deleteData']); ##
-    Route::get('/detail',     [Reference\ReferenceController::class, 'detailData']);
+    Route::delete('/',         [Reference\ReferenceController::class, 'deleteData']); ##
+    Route::get('/detail',      [Reference\ReferenceController::class, 'detailData']);
     Route::get('/student',     [Reference\ReferenceController::class, 'allDataStudent']);
-    Route::post('/update',    [Reference\ReferenceController::class, 'updateData']);
+    Route::post('/update',     [Reference\ReferenceController::class, 'updateData']);
 });
 
 Route::group(['prefix' => 'api/admin/report'], function () {
@@ -385,9 +391,9 @@ Route::group(['prefix' => 'api/admin/report'], function () {
 
 
 Route::group(['prefix' => 'api/admin/profile'], function () {
-    Route::get('/',     [User\UserController::class, 'detailUserDataUpdateMentor']);
-    Route::post('/',      [User\UserController::class, 'updateDataMentors']);
-    Route::post('device-id',   [User\UserController::class, 'updateDeviceID']);
+    Route::get('/',             [User\UserController::class, 'detailUserDataUpdateMentor']);
+    Route::post('/',            [User\UserController::class, 'updateDataMentors']);
+    Route::post('device-id',    [User\UserController::class, 'updateDeviceID']);
 });
 
 Route::group(['prefix' => 'api/banner/non-mem'], function () {
@@ -395,31 +401,31 @@ Route::group(['prefix' => 'api/banner/non-mem'], function () {
 });
 
 Route::group(['prefix' => 'api/admin/banner/non-mem'], function () {
-    Route::post('/',     [Helper\ImageController::class, 'addNonMemberImage']);
-    Route::delete('/',     [Helper\ImageController::class, 'deleteNonMemberImage']);
-    Route::get('/',     [Helper\ImageController::class, 'getAllNonMemberImage']);
+    Route::post('/',        [Helper\ImageController::class, 'addNonMemberImage']);
+    Route::delete('/',      [Helper\ImageController::class, 'deleteNonMemberImage']);
+    Route::get('/',         [Helper\ImageController::class, 'getAllNonMemberImage']);
     //Route::detail('/',     [Helper\ImageController::class,'getDetailNonMemberImage']);
 });
 
 Route::group(['prefix' => 'api/admin/user'], function () {
-    Route::post('/student',     [User\UserController::class, 'addData']);
-    Route::post('/mentor',      [User\UserController::class, 'addData']);
-    Route::post('/student/update',     [User\UserController::class, 'updateDataStudents']);
-    Route::post('/mentor/update',      [User\UserController::class, 'updateDataMentor']);
-    Route::post('/student/status',     [User\UserController::class, 'updateDataStudentsStatus']);
-    Route::get('/student',     [User\UserController::class, 'detailUserDataUpdate']);
-    Route::get('/mentor',      [User\UserController::class, 'detailUserDataUpdate']);
-    Route::delete('/student',     [User\UserController::class, 'userDataDelete']);
-    Route::delete('/mentor',      [User\UserController::class, 'userDataDelete']);
+    Route::post('/student',         [User\UserController::class, 'addData']);
+    Route::post('/mentor',          [User\UserController::class, 'addData']);
+    Route::post('/student/update',  [User\UserController::class, 'updateDataStudents']);
+    Route::post('/mentor/update',   [User\UserController::class, 'updateDataMentor']);
+    Route::post('/student/status',  [User\UserController::class, 'updateDataStudentsStatus']);
+    Route::get('/student',          [User\UserController::class, 'detailUserDataUpdate']);
+    Route::get('/mentor',           [User\UserController::class, 'detailUserDataUpdate']);
+    Route::delete('/student',       [User\UserController::class, 'userDataDelete']);
+    Route::delete('/mentor',        [User\UserController::class, 'userDataDelete']);
     Route::get('/student/list',     [User\UserController::class, 'studentList']);
     Route::get('/student/lists-test', function (Request $request) {
         return view('Student.home');
     });
     Route::get('/student/lists', [User\UserController::class, 'newStudentList'])->name('std.list');
 
-    Route::get('/mentor/list',      [User\UserController::class, 'mentorList']);
-    Route::get('/student/detail',      [User\UserController::class, 'detailData']);
-    Route::get('/mentor/detail',      [User\UserController::class, 'detailData']);
+    Route::get('/mentor/list',   [User\UserController::class, 'mentorList']);
+    Route::get('/student/detail',[User\UserController::class, 'detailData']);
+    Route::get('/mentor/detail', [User\UserController::class, 'detailData']);
 });
 // Route::get('/api/student/detail',      [User\UserController::class,'detailData']);
 // Route::get('/mentor/detail',      [User\UserController::class,'detailData']);
@@ -427,7 +433,7 @@ Route::group(['prefix' => 'api/admin/user'], function () {
 Route::group(['prefix' => 'api/admin/classroom/content/quiz'], function () {
     Route::get('/exam',         [Classes\ExamController::class, 'checkData']);
     Route::post('/exam',        [Classes\ExamController::class, 'addData']);
-    Route::delete('/exam',        [Classes\ExamController::class, 'deleteData']); ##
+    Route::delete('/exam',      [Classes\ExamController::class, 'deleteData']); ##
     Route::get('/exam/detail',  [Classes\ExamController::class, 'detailData']);
     Route::post('/exam/update', [Classes\ExamController::class, 'updateData']);
 });
@@ -435,9 +441,9 @@ Route::group(['prefix' => 'api/admin/classroom/content/quiz'], function () {
 Route::group(['prefix' => 'api/admin/packet'], function () {
     Route::get('/',         [Packet\PacketController::class, 'allDatas']);
     Route::post('/',        [Packet\PacketController::class, 'addData']);
-    Route::delete('/',        [Packet\PacketController::class, 'deleteData']); ##
-    Route::get('/detail',  [Packet\PacketController::class, 'detailData']);
-    Route::post('/update', [Packet\PacketController::class, 'updateData']);
+    Route::delete('/',      [Packet\PacketController::class, 'deleteData']); ##
+    Route::get('/detail',   [Packet\PacketController::class, 'detailData']);
+    Route::post('/update',  [Packet\PacketController::class, 'updateData']);
 });
 
 Route::group(['prefix' => 'api/admin/image-delete'], function () {
@@ -446,8 +452,8 @@ Route::group(['prefix' => 'api/admin/image-delete'], function () {
 
 Route::get('/test', [TestController::class, 'test']);
 Route::post('/notification', [Payment\PaymentController::class, 'notification']);
-Route::get('/completed', [Payment\PaymentController::class, 'completed']);
-Route::get('/unfinish', [Payment\PaymentController::class, 'unfinish']);
-Route::get('/failed', [Payment\PaymentController::class, 'failed']);
+Route::get('/completed',     [Payment\PaymentController::class, 'completed']);
+Route::get('/unfinish',      [Payment\PaymentController::class, 'unfinish']);
+Route::get('/failed',        [Payment\PaymentController::class, 'failed']);
 //Route::get('/payment', [Payment\PaymentController::class,'show']);
 #==========================Admin/Mentor================================
