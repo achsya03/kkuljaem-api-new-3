@@ -24,4 +24,8 @@ class DetailStudent extends Model
     {
         return $this->belongsTo(User::class,'id_users','id');
     }
+    public function avatarStudent()
+    {
+        return $this->hasMany(AvatarStudent::class,'id_detail_student','id');
+    }
 }

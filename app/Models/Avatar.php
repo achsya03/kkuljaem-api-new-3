@@ -19,4 +19,12 @@ class Avatar extends Model
         'avatar_id',
         'uuid',
     ];
+    public function avatarGroup()
+    {
+        return $this->belongsTo(AvatarGroup::class,'id_avatar_group','id');
+    }
+    public function avatarStudent()
+    {
+        return $this->hasMany(AvatarStudent::class,'id_avatar','id');
+    }
 }

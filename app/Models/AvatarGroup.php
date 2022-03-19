@@ -16,4 +16,8 @@ class AvatarGroup extends Model
         'deskripsi',
         'uuid',
     ];
+    public function avatar()
+    {
+        return $this->hasMany(Avatar::class,'id_avatar_group','id');
+    }
 }

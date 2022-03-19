@@ -15,5 +15,12 @@ class AvatarStudent extends Model
         'id_avatar',
         'id_detail_student',
         'uuid',
-    ];
+    ];public function avatar()
+    {
+        return $this->belongsTo(Avatar::class,'id_avatar','id');
+    }
+    public function detailStudent()
+    {
+        return $this->belongsTo(DetailStudent::class,'id_detail_student','id');
+    }
 }

@@ -229,6 +229,10 @@ class AvatarController extends Controller
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
 
+        if(!$idGroup=Models\AvatarGroup::select('id')->where('uuid',$request->group_uuid)->first()){
+            return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
+        }
+
         $validation = new Helper\ValidationController('avatarEdit');
         $this->rules = $validation->rules;
         $this->messages = $validation->messages;
@@ -251,7 +255,7 @@ class AvatarController extends Controller
         $data = [
             'nama'             => $request->nama,
             'deskripsi'        => $request->deskripsi,
-            'id_avatar_group'  => $request->group_uuid,
+            'id_avatar_group'  => $idGroup,
             'avatar_url'       => $uploadedFileUrl1['getSecurePath'],
             'avatar_id'        => $uploadedFileUrl1['getPublicId'],
             'uuid'             => $request->token
@@ -301,6 +305,17 @@ class AvatarController extends Controller
 
         $detailStudent = Models\DetailStudent::where('id_users',$request->user()->id)->first();
 
+        if(!$detailStudent){
+            $validation = new Helper\ValidationController('userStudentAvatar');
+            $uuid = $validation->data['uuid'];
+
+            Models\DetailStudent::create([
+                'id_users'           => $request->user()->id,
+                'uuid'               => $uuid
+            ]);
+
+            $detailStudent = Models\DetailStudent::select('id')->where('uuid',$uuid)->first();
+        }
         if(!($avatarStudent = Models\AvatarStudent::where('id_avatar',$idAvatar->id)
                                         ->where('id_detail_student',$detailStudent->id)
                                         ->first())){
