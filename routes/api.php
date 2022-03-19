@@ -204,8 +204,8 @@ Route::group(['prefix' => 'api/admin/banner'], function () {
 
 Route::group(['prefix' => 'api/admin/avatar'], function () {
     Route::get('/group',            [Avatar\AvatarController::class, 'getAllAvatarGroup']);
-    Route::post('/group',           [Avatar\AvatarController::class, 'getAvatarByGroup']);
-    Route::get('/group/detail',     [Avatar\AvatarController::class, 'addAvatarGroup']);
+    Route::post('/group',           [Avatar\AvatarController::class, 'addAvatarGroup']);
+    Route::get('/group/detail',     [Avatar\AvatarController::class, 'getDetailAvatarGroup']);
     Route::post('/group/update',    [Avatar\AvatarController::class, 'editAvatarGroup']);
     Route::delete('/group',         [Avatar\AvatarController::class, 'deleteAvatarGroup']);
 
