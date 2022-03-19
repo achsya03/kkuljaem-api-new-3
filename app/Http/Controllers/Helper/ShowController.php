@@ -132,7 +132,7 @@ class ShowController extends Controller
         for($i = 0;$i < count($theme); $i++){
             $th[$i] = [
                 'topik' => $theme[$i]->judul,
-                'topik_image' => $theme[$i]->url_image,
+                'topik_image' => $theme[$i]->url_gambar,
                 'topik_uuid' => $theme[$i]->uuid
             ];
         }
@@ -1812,6 +1812,7 @@ class ShowController extends Controller
         ->orderBy('jml_like','DESC')->get();
         $arr1 = [
             'judul' => $theme[0]->judul,
+            'theme_image' => $theme[0]->url_gambar,
             'theme_uuid' => $theme[0]->uuid
         ];
         $result['theme'] = $arr1;

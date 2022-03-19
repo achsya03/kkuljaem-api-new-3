@@ -529,12 +529,22 @@ class UpdateController extends Controller
     }
 
     private function avatar($model,$data){
-        $model::where('uuid',$data['uuid'])
-        ->update([
-            'nama'           => $data['nama'],
-            'deskripsi'      => $data['deskripsi'],
-            'id_avatar_group'=> $data['id_avatar_group']
-        ]);
+        $field = [
+            //'id_question',
+            'nama',
+            'deskripsi',
+            'avatar_url',
+            'avatar_id',
+            'uuid',
+        ];
+        for($i=0;$i<count($field)-1;$i++){
+            if(isset($data[$field[$i]]) && $data[$field[$i]] != ''){
+                $model::where('uuid',$data['uuid'])
+                ->update([
+                    $field[$i]            => $data[$field[$i]]
+                ]);
+            }
+        }
     }
 
     private function reference($model,$data){

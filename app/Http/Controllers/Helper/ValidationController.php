@@ -252,6 +252,11 @@ class ValidationController extends Controller
             $this->data = [
                 'uuid'      => $this->getUuid(Models\Avatar::class)
             ];
+        }elseif($pos=='avatarEdit'){
+            $this->avatarEdit();
+            $this->data = [
+                'uuid'      => $this->getUuid(Models\Avatar::class)
+            ];
         }
     }
 
@@ -813,8 +818,8 @@ class ValidationController extends Controller
         $this->rules = [
             'nama'                               => 'required',
             'deskripsi'                          => 'required',
-            'group_id'                           => 'required',
-            'avatar_url'                         => 'required',
+            'group_uuid'                         => 'required',
+            'avatar_image'                       => 'required',
         ];
     
         $this->messages = [
@@ -822,6 +827,20 @@ class ValidationController extends Controller
             'deskripsi.required'                 => 'Deskripsi wajib diisi',
             'group_id.required'                  => 'Group_id wajib diisi',
             'avatar_url.required'                => 'Avatar Image wajib diisi',
+        ];
+    }
+
+    private function avatarEdit(){
+        $this->rules = [
+            'nama'                               => 'required',
+            'deskripsi'                          => 'required',
+            'group_uuid'                         => 'required'
+        ];
+    
+        $this->messages = [
+            'nama.required'                      => 'Nama wajib diisi',
+            'deskripsi.required'                 => 'Deskripsi wajib diisi',
+            'group_id.required'                  => 'Group_id wajib diisi'
         ];
     }
     #============================================================

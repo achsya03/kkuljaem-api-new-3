@@ -456,6 +456,8 @@ class InputController extends Controller
 			'nama'              =>$data['nama'],
             'deskripsi'         =>$data['deskripsi'],
             'id_avatar_group'   =>$data['id_avatar_group'],
+            'avatar_url'        =>$data['avatar_url'],
+            'avatar_id'         =>$data['avatar_id'],
             'uuid'              =>$data['uuid']
         ]);
     }
