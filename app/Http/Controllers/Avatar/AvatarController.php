@@ -255,7 +255,7 @@ class AvatarController extends Controller
         $data = [
             'nama'             => $request->nama,
             'deskripsi'        => $request->deskripsi,
-            'id_avatar_group'  => $idGroup,
+            'id_avatar_group'  => $idGroup->id,
             'avatar_url'       => $uploadedFileUrl1['getSecurePath'],
             'avatar_id'        => $uploadedFileUrl1['getPublicId'],
             'uuid'             => $request->token
