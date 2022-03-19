@@ -193,13 +193,17 @@ class AvatarController extends Controller
             return response()->json(['message'=>'Failed','info'=>$validator->errors()]);
         }
 
+        if(!$idGroup=Models\AvatarGroup::select('id')->where('uuid',$request->group_uuid)->first()){
+            return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
+        }
+
         $uuid1 = $validation->data['uuid'];
         $uploadedFileUrl1 = $validation->UUidCheck($request->avatar_image,'Avatar');
 
         $data = [
             'nama'             => $request->nama,
             'deskripsi'        => $request->deskripsi,
-            'id_avatar_group'  => $request->group_uuid,
+            'id_avatar_group'  => $idGroup->id,
             'avatar_url'       => $uploadedFileUrl1['getSecurePath'],
             'avatar_id'        => $uploadedFileUrl1['getPublicId'],
             'uuid'             => $uuid1
