@@ -10,6 +10,7 @@ use Validator;
 use Hash;
 use Session;
 use Cloudinary;
+use Illuminate\Support\Facades\Storage;
 
 class AvatarController extends Controller
 {
@@ -286,7 +287,11 @@ class AvatarController extends Controller
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
 
-        if(!$result=Models\Avatar::where('uuid',$request->token)->delete()){
+        if(!$idAvatar=Models\Avatar::select('avatar_id')->where('uuid',$request->token)->first()){
+            return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
+        }
+
+        if(!$result=Models\Avatar::where('uuid',$request->token)->delete() and Storage::disk('do_spaces')->delete($idAvatar->avatar_id)){
             return response()->json([
                 'message' => 'Failed',
                 'data' => 'Data gagal dihapus'
