@@ -168,7 +168,7 @@ class AvatarController extends Controller
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
 
-        if(!$idAvatar=Models\Avatar::select('nama','deskripsi','avatar_url','avatar_group.uuid AS group_uuid','uuid')
+        if(!$idAvatar=Models\Avatar::select('avatar.nama as nama','deskripsi','avatar_url','avatar_group.uuid AS group_uuid','uuid')
                                     ->join('avatar_group','avatar.id_avatar_group','=','avatar_group.id')->first()
                                     ->where('uuid',$request->token)->first()){
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
