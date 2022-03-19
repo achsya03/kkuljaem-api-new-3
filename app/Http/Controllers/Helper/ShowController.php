@@ -1649,7 +1649,7 @@ class ShowController extends Controller
                 'urutan' => $theme[$i]->urutan,
                 'judul' => $theme[$i]->judul,
                 'jml_post' => $theme[$i]->jml_post,
-                'theme_image' => $theme[$i]->url_image,
+                'theme_image' => $theme[$i]->url_gambar,
                 'theme_uuid' => $theme[$i]->uuid
             ];
             $arr[$i] = $arr1;

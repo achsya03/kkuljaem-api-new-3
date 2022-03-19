@@ -166,7 +166,7 @@ class AvatarController extends Controller
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
 
-        if(!$idAvatar=Models\Avatar::select('nama','deskripsi','id_avatar_group AS group_id','uuid')->where('uuid',$request->token)->first()){
+        if(!$idAvatar=Models\Avatar::select('nama','deskripsi','avatar_url','id_avatar_group AS group_id','uuid')->where('uuid',$request->token)->first()){
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
 
@@ -190,11 +190,14 @@ class AvatarController extends Controller
         }
 
         $uuid1 = $validation->data['uuid'];
+        $uploadedFileUrl1 = $validation->UUidCheck($gambar1,'Avatar');
 
         $data = [
             'nama'             => $request->nama,
             'deskripsi'        => $request->deskripsi,
             'id_avatar_group'  => $request->group_id,
+            'avatar_url'       => $uploadedFileUrl1['getSecurePath'],
+            'avatar_id'        => $uploadedFileUrl1['getPublicId'],
             'uuid'             => $uuid1
         ];
 

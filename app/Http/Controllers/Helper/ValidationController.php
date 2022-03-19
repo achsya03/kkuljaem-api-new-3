@@ -813,13 +813,15 @@ class ValidationController extends Controller
         $this->rules = [
             'nama'                               => 'required',
             'deskripsi'                          => 'required',
-            'group_id'                          => 'required',
+            'group_id'                           => 'required',
+            'avatar_url'                         => 'required',
         ];
     
         $this->messages = [
             'nama.required'                      => 'Nama wajib diisi',
             'deskripsi.required'                 => 'Deskripsi wajib diisi',
             'group_id.required'                  => 'Group_id wajib diisi',
+            'avatar_url.required'                => 'Avatar Image wajib diisi',
         ];
     }
     #============================================================
