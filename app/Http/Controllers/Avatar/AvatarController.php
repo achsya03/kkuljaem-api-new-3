@@ -291,15 +291,15 @@ class AvatarController extends Controller
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
 
-        if(!$result=Models\Avatar::where('uuid',$request->token)->delete() and Storage::disk('do_spaces')->delete($idAvatar->avatar_id)){
-            return response()->json([
-                'message' => 'Failed',
-                'data' => 'Data gagal dihapus'
-            ]);
-        }else{
+        if($result=Models\Avatar::where('uuid',$request->token)->delete() and Storage::disk('do_spaces')->delete($idAvatar->avatar_id)){
             return response()->json([
                 'message' => 'Success',
                 'data' => 'Data berhasil dihapus'
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'Failed',
+                'data' => 'Data gagal dihapus'
             ]);
         }
     }
