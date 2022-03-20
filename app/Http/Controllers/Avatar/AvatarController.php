@@ -170,12 +170,14 @@ class AvatarController extends Controller
         }
 
         if(!$idAvatar=Models\Avatar::select('avatar.nama as nama','avatar.deskripsi','avatar_url','avatar_group.uuid AS group_uuid','avatar.uuid')
-                                    ->join('avatar_group','avatar.id_avatar_group','=','avatar_group.id')->first()
-                                    ->where('uuid',$request->token)->first()){
+                                    ->rightJoin('avatar_group','avatar.id_avatar_group','=','avatar_group.id')
+                                    ->where('avatar.uuid',$request->token)->first()){
             return response()->json(['message'=>'Failed','info'=>"Token Tidak Sesuai"]);
         }
-
+        
         unset($idAvatar['id']);
+        unset($idAvatar['id_avatar_group']);
+        unset($idAvatar['avatar_id']);
 
         return response()->json([
             'message' => 'Success',
