@@ -432,7 +432,7 @@ class UserController extends Controller
 
             if(isset($request->url_foto)){
                 $gambar1 = $request->url_foto;
-                $uploadedFileUrl1 = $this->UUidCheck($gambar1);
+                $uploadedFileUrl1 = $this->UUidCheck($gambar1,'Profile');
             }
             
             $uuid1 = DetailMentorController::getUuid();
