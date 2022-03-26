@@ -1098,13 +1098,15 @@ class PostController extends Controller
                     ];
                 }
             }
-            if(count($detail_student->avatarStudent)>0){
-                $avaID = $detail_student->avatarStudent[0]->id_avatar;
-                $avatar = Models\Avatar::where('id',$avaID)->first();
-                if(($avatar->avatar_url != null && $avatar->avatar_url != '') && $post[$i]->user->jenis_pengguna == '0'){
-                    $pos[$i] += [
-                        'avatar' => $avatar->avatar_url,
-                    ];
+            if(count($detail_student)>0){
+                if(count($detail_student[0]->avatarStudent)>0){
+                    $avaID = $detail_student[0]->avatarStudent->id_avatar;
+                    $avatar = Models\Avatar::where('id',$avaID)->first();
+                    if(($avatar->avatar_url != null && $avatar->avatar_url != '') && $post[$i]->user->jenis_pengguna == '0'){
+                        $pos[$i] += [
+                            'avatar' => $avatar->avatar_url,
+                        ];
+                    }
                 }
             }
             $pos[$i] += [
