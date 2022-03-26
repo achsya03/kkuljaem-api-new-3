@@ -23,6 +23,12 @@ class ShowController extends Controller
             if(count($user->detailMentor)>0){
                 if($user->detailMentor[0]->url_foto!=null || $user->detailMentor[0]->url_foto!=''){$data['foto'] = $user->detailMentor[0]->url_foto;}
             }
+        }elseif($user->jenis_pengguna=='0'){
+            if(count($user->detailStudent)>0){
+                $detStudentID = $user->detailStudent[0]->id;
+                $avaStudent = Models\AvatarStudent::where('id_detail_student',$detStudentID)->first();
+                if($avaStudent->avatar->avatar_url!=null || $avaStudent->avatar->avatar_url!=''){$data['avatar'] = $avaStudent->avatar[0]->avatar_url;}
+            }
         }
         $data['tgl_akhir_langganan'] = $user->tgl_langganan_akhir;
         $data['nama'] = $user->nama;

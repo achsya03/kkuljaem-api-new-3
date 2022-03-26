@@ -1090,10 +1090,20 @@ class PostController extends Controller
             }
             $usr_id = $post[$i]->user->id;
             $detail_mentor = Models\DetailMentor::where('id_users',$usr_id)->get();
+            $detail_student = Models\DetailStudent::where('id_users',$usr_id)->get();
             if(count($detail_mentor)>0){
                 if($detail_mentor[0]->url_foto != null && $post[$i]->user->jenis_pengguna != '0'){
                     $pos[$i] += [
                         'foto_pengirim' => $detail_mentor[0]->url_foto,
+                    ];
+                }
+            }
+            if(count($detail_student->avatarStudent)>0){
+                $avaID = $detail_student->avatarStudent[0]->id_avatar;
+                $avatar = Models\Avatar::where('id',$avaID)->first();
+                if(($avatar->avatar_url != null && $avatar->avatar_url != '') && $post[$i]->user->jenis_pengguna == '0'){
+                    $pos[$i] += [
+                        'avatar' => $avatar->avatar_url,
                     ];
                 }
             }

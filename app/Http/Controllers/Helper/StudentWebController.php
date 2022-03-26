@@ -9,6 +9,38 @@ use Session;
 
 class StudentWebController extends Controller
 {
+    private function statUser($user){
+        $stUsr = "Non-Member";
+        $jenis_akun=['No Sign','Helm','Crown Silver'];
+        if(date_format(date_create($user->tgl_langganan_akhir),"Y/m/d") >= date('Y/m/d')){
+            $stUsr = "Member";
+        }
+        //$data['email'] = $user->email;
+        if($user->jenis_pengguna!='0'){
+            if(count($user->detailMentor)>0){
+                if($user->detailMentor[0]->url_foto!=null || $user->detailMentor[0]->url_foto!=''){$data['foto'] = $user->detailMentor[0]->url_foto;}
+            }
+        }elseif($user->jenis_pengguna=='0'){
+            if(count($user->detailStudent)>0){
+                $detStudentID = $user->detailStudent[0]->id;
+                $avaStudent = Models\AvatarStudent::where('id_detail_student',$detStudentID)->first();
+                if($avaStudent->avatar[0]->avatar_url!=null || $avaStudent->avatar[0]->avatar_url!=''){$data['avatar'] = $avaStudent->avatar[0]->avatar_url;}
+            }
+        }
+        $data['tgl_akhir_langganan'] = $user->tgl_langganan_akhir;
+        $data['nama'] = $user->nama;
+        $data['status_member'] = $stUsr;
+        $det_student = Models\DetailStudent::where('id_users',$user->id)->get();
+
+        if(count($det_student)>0){
+            $data['jenis_kelamin'] = $det_student[0]->jenis_kel;
+
+        }
+        //$data['jenis_akun'] = $jenis_akun[$user->jenis_akun];
+
+        return $data;
+    }
+    
     public function homeWeb(Request $request){
         $result = [];
 
@@ -98,7 +130,7 @@ class StudentWebController extends Controller
 
         return response()->json([
             'message' => 'Success',
-            //'account' => $this->statUser($request->user()),
+            'account' => $this->statUser($request->user()),
             'data'    => $result
         ]);
     }
