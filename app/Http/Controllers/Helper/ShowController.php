@@ -26,8 +26,10 @@ class ShowController extends Controller
         }elseif($user->jenis_pengguna=='0'){
             if(count($user->detailStudent)>0){
                 $detStudentID = $user->detailStudent[0]->id;
-                $avaStudent = Models\AvatarStudent::where('id_detail_student',$detStudentID)->first();
-                if($avaStudent->avatar->avatar_url!=null || $avaStudent->avatar->avatar_url!=''){$data['avatar'] = $avaStudent->avatar[0]->avatar_url;}
+                $avaStudent = Models\AvatarStudent::where('id_detail_student',$detStudentID)->get();
+                if(count($avaStudent)>0){
+                    if($avaStudent[0]->avatar->avatar_url!=null || $avaStudent[0]->avatar->avatar_url!=''){$data['avatar'] = $avaStudent->avatar[0]->avatar_url;}
+                }
             }
         }
         $data['tgl_akhir_langganan'] = $user->tgl_langganan_akhir;
