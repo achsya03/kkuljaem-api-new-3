@@ -128,10 +128,17 @@ class StudentWebController extends Controller
         $result['word'] = $wor;
         $result['class'] = $cls;
 
-        return response()->json([
-            'message' => 'Success',
-            'account' => $this->statUser($request->user()),
-            'data'    => $result
-        ]);
+        if(!empty($request->user())){
+            return response()->json([
+                'message' => 'Success',
+                'account' => $this->statUser($request->user()),
+                'data'    => $result
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'Success',
+                'data'    => $result
+            ]);
+        }
     }
 }
