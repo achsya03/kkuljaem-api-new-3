@@ -86,9 +86,9 @@ class UserController extends Controller
     }
 
     public function newStudentList(Request $request){
-        $student = Models\DetailStudent::select('u.tgl_langganan_akhir','u.email_verified_at','u.status_aktif','u.email','u.nama', 'detail_students.jenis_kel','detail_students.tgl_lahir','detail_students.tempat_lahir','detail_students.alamat','u.uuid AS user_uuid')
-                    ->rightJoin('users as u', 'detail_students.id_users', '=', 'u.id')
-                    ->where('u.jenis_pengguna', 0);
+        $student = Models\User::select('users.tgl_langganan_akhir','users.email_verified_at','users.status_aktif','users.email','users.nama', 'd.jenis_kel','d.tgl_lahir','d.tempat_lahir','d.alamat','users.uuid AS user_uuid')
+                    ->join('detail_students as d', 'd.id_users', '=', 'users.id')
+                    ->where('users.jenis_pengguna', 0);
 
             // $arr = [];
 
