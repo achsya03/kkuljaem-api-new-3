@@ -38,6 +38,10 @@ class ClassCategoryController extends Controller
         return response()->json(['message'=>'Success','info'
         => 'Proses Input Berhasil']);
     }
+    
+    public function __construct(Request $request){
+        $this->middleware('auth');
+    }
 
     public function updateData(Request $request){
         if(!$uuid=$request->token){
