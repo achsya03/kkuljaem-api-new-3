@@ -332,6 +332,8 @@ class ShowController extends Controller
 
     //Masih Plain belum ada validasi member
     public function classroomDetail(Request $request){
+        set_time_limit(180);
+
         $result = [];
         if(!$uuid = $request->token){
             return response()->json([
@@ -340,8 +342,8 @@ class ShowController extends Controller
             ]);
         }
 
-        $usr = Models\User::where('uuid',$request->user()->uuid)->first();
-        $date = date_format(date_create($usr->tgl_langganan_akhir),"Y/m/d");
+        // $usr = Models\User::where('uuid',$request->user()->uuid)->first();
+        // $date = date_format(date_create($usr->tgl_langganan_akhir),"Y/m/d");
        
 
         $classes = Models\Classes::where('uuid',$uuid)->get();
@@ -356,7 +358,7 @@ class ShowController extends Controller
         $arr = [];
         $cont = [];
         $content = Models\Content::where('id_class',$classes[0]->id)->orderBy('type', 'DESC')->orderBy('number', 'ASC')->get();
-        $content_id = Models\Content::where('id_class',$classes[0]->id)->orderBy('type', 'DESC')->orderBy('number', 'ASC')->get();
+        // $content_id = Models\Content::where('id_class',$classes[0]->id)->orderBy('type', 'DESC')->orderBy('number', 'ASC')->get();
         $count_vid = 0;
         $count_quiz = 0;
         //$arr['stat_pengguna'] = $this->userCheck($uuidUser,$date);
@@ -374,13 +376,12 @@ class ShowController extends Controller
                 $arr1['jml_shadowing'] = $content_video[0]->jml_shadowing;
 
                 $stat = 'Belum';
-                if(count($studentVideo = Models\StudentVideo::where('id_video',$content_video[0]->id)->get())!=0){
-                    for($j = 0;$j<count($studentVideo);$j++){
-                        if($studentVideo[$j]->student->id_user == $request->user()->id){
-                            $stat = 'Selesai';
-                            break;
-                        }
-                    }
+                if(count($studentVideo = Models\StudentVideo::join('students','students.id','=','student_video.id_student')
+                                                            ->where('student_video.id_video',$content_video[0]->id)
+                                                            ->where('students.id',$request->user()->id)
+                                                            ->get()
+                )!=0){
+                    $stat = 'Selesai';
                 }
 
                 $arr1['stat_pengerjaan'] = $stat;
@@ -394,13 +395,12 @@ class ShowController extends Controller
                 $arr1['jml_soal'] = $content_quiz[0]->jml_pertanyaan;
 
                 $stat = 'Belum';
-                if(count($studentQuiz = Models\StudentQuiz::where('id_quiz',$content_quiz[0]->id)->get())!=0){
-                    for($j = 0;$j<count($studentQuiz);$j++){
-                        if($studentQuiz[$j]->student->id_user == $request->user()->id){
-                            $stat = 'Selesai';
-                            break;
-                        }
-                    }
+                if(count($studentQuiz = Models\StudentQuiz::join('students','students.id','=','student_quiz.id_student')
+                                                            ->where('student_quiz.id_quiz',$content_quiz[0]->id)
+                                                            ->where('students.id',$request->user()->id)
+                                                            ->get()
+                )!=0){
+                    $stat = 'Selesai';
                 }
 
                 $arr1['stat_pengerjaan'] = $stat;
