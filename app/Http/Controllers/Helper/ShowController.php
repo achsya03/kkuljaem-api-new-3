@@ -635,13 +635,12 @@ class ShowController extends Controller
                 $arr1['jml_shadowing'] = count(Models\Shadowing::where('id_video',$content_video[0]->id)->get());
 
                 $stat = 'Belum';
-                if(count($studentVideo = Models\StudentVideo::where('id_video',$content_video[0]->id)->get())!=0){
-                    for($j = 0;$j<count($studentVideo);$j++){
-                        if($studentVideo[$j]->student->id_user == $request->user()->id){
-                            $stat = 'Selesai';
-                            break;
-                        }
-                    }
+                if(count($studentVideo = Models\StudentVideo::join('students','students.id','=','student_video.id_student')
+                                                            ->where('student_video.id_video',$content_video[0]->id)
+                                                            ->where('students.id',$request->user()->id)
+                                                            ->get()
+                )!=0){
+                    $stat = 'Selesai';
                 }
 
                 $arr1['stat_pengerjaan'] = $stat;
@@ -655,13 +654,12 @@ class ShowController extends Controller
                 $arr1['jml_soal'] = $content_quiz[0]->jml_pertanyaan;
 
                 $stat = 'Belum';
-                if(count($studentQuiz = Models\StudentQuiz::where('id_quiz',$content_quiz[0]->id)->get())!=0){
-                    for($j = 0;$j<count($studentQuiz);$j++){
-                        if($studentQuiz[$j]->student->id_user == $request->user()->id){
-                            $stat = 'Selesai';
-                            break;
-                        }
-                    }
+                if(count($studentQuiz = Models\StudentQuiz::join('students','students.id','=','student_quiz.id_student')
+                                                            ->where('student_quiz.id_quiz',$content_quiz[0]->id)
+                                                            ->where('students.id',$request->user()->id)
+                                                            ->get()
+                )!=0){
+                    $stat = 'Selesai';
                 }
 
                 $arr1['stat_pengerjaan'] = $stat;
