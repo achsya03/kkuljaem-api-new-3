@@ -47,6 +47,51 @@ class ChangePasswordController extends Controller
         return response()->json(['message'=>'Success','info'
         => 'Password Berhasil Diperbarui']);
     }
+
+    public function force(Request $request)
+    {
+        $validation = new Helper\ValidationController('changePassUser');
+        $this->rules = $validation->rules;
+        $this->messages = $validation->messages;
+
+        $validator = Validator::make($request->all(), $this->rules, $this->messages);
+
+        if($validator->fails()){
+            $result = "Operasi Gagal";
+
+            return response()->json(['message'=>'Failed','info'=>$result]);#,'input'=>$return_data
+        }
+
+        $admin = User::where('email',$request->admin_email)->where('password',bcrypt($request->admin_password))->where('jenis_pengguna',2)->get();
+        if(count($admin)==0){
+            // return response()->json([
+			// 	'message' => 'Failed',
+			// 	'info' => 'Token Tidak Ssesuai',
+			// 	//'data' => $result
+			// ]);
+            return Redirect::to(env('APP_URL', "https://kkuljaem.xyz").'register-3')->with( ['status'=>'error'] );
+        }
+
+        $user = User::where('email',$request->email)->get();
+        if(count($user)==0){
+            return response()->json(['message'=>'Failed','info'
+            => 'Email Tidak Terdaftar']);
+        }
+
+        $old_web_token = $request->token;
+        $web_token = $validation->data['web_token'];
+
+        $data = [
+            'old_web_token'  => $old_web_token,
+            'password'       => bcrypt(request('password')),
+            'web_token'      => $web_token
+        ];
+
+        $input = new Helper\UpdateController('changePassUser',$data); 
+        
+        return response()->json(['message'=>'Success','info'
+        => 'Password Berhasil Diperbarui']);
+    }
     /*public function apiRequest(Request $request){
         
     }*/
