@@ -186,7 +186,9 @@ Route::group(['prefix' => 'api/user/subs'], function () {
 
 #==========================Admin/Mentor================================
 Route::group(['prefix' => 'api/admin'], function () {
-    Route::get('/', [Helper\AdminController::class, 'dashboard']);
+    Route::get('/',                     [Helper\AdminController::class, 'dashboard']);
+    Route::post('verify-mail',          [Helper\Auth\VerifyEmailController::class, 'force']);
+    Route::post('change-password',      [Helper\Auth\Auth\ChangePasswordController::class, 'force']);
 });
 
 // Route::group(['prefix' => 'api/admin/profile'], function () {
