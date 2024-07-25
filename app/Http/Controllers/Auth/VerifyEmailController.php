@@ -89,7 +89,10 @@ class VerifyEmailController extends Controller
 			]);
             // return Redirect::to(env('APP_URL', "https://kkuljaem.xyz").'register-3')->with( ['status'=>'error'] );
         }
-        
+        return response()->json([
+            'message' => $user
+            //'data' => $result
+        ]);
         $old_web_token = $user->web_token;
         $web_token = $user->web_token;
 
