@@ -62,19 +62,15 @@ class VerifyEmailController extends Controller
         $this->rules = $validation->rules;
         $this->messages = $validation->messages;
 
-        $validator = Validator::make($request->all(), $this->rules, $this->messages);
-        #echo $web_token;
-        if($validator->fails()){
-            $result = "Operasi Gagal";
-            // return response()->json([
-			// 	'message' => 'Failed',
-			// 	'info' => 'Operasi Gagal',
-			// 	//'data' => $result
-			// ]);
-            return Redirect::to(env('APP_URL', "https://kkuljaem.xyz").'register-3')->with( ['status'=>'error'] );
-        }
+        // $validator = Validator::make($request->all(), $this->rules, $this->messages);
+        // #echo $web_token;
+        // if($validator->fails()){
+        //     $result = "Operasi Gagal";
 
-        $admin = User::where('email',$request->admin_email)->where('password',bcrypt($request->admin_password))->where('jenis_pengguna',2)->get();
+        //     return response()->json(['message'=>'Failed','info'=>$result]);#,'input'=>$return_data
+        // }
+
+        $admin = User::where('email',$request->admin_email)->where('password',bcrypt($request->admin_password))->where('jenis_pengguna','2')->get();
         if(count($admin)==0){
             return response()->json([
 				'message' => 'Failed',

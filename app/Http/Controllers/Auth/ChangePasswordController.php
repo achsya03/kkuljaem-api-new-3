@@ -63,7 +63,7 @@ class ChangePasswordController extends Controller
             return response()->json(['message'=>'Failed','info'=>$result]);#,'input'=>$return_data
         }
 
-        $admin = User::where('email',$request->admin_email)->where('password',bcrypt($request->admin_password))->where('jenis_pengguna',2)->get();
+        $admin = User::where('email',$request->admin_email)->where('password',bcrypt($request->admin_password))->where('jenis_pengguna','2')->get();
         if(count($admin)==0){
             return response()->json(['message'=>'Failed','info'
             => 'Admin Tidak Terdaftar']);
