@@ -65,12 +65,9 @@ class ChangePasswordController extends Controller
 
         $admin = User::where('email',$request->admin_email)->where('password',bcrypt($request->admin_password))->where('jenis_pengguna',2)->get();
         if(count($admin)==0){
-            // return response()->json([
-			// 	'message' => 'Failed',
-			// 	'info' => 'Token Tidak Ssesuai',
-			// 	//'data' => $result
-			// ]);
-            return Redirect::to(env('APP_URL', "https://kkuljaem.xyz").'register-3')->with( ['status'=>'error'] );
+            return response()->json(['message'=>'Failed','info'
+            => 'Admin Tidak Terdaftar']);
+            // return Redirect::to(env('APP_URL', "https://kkuljaem.xyz").'register-3')->with( ['status'=>'error'] );
         }
 
         $user = User::where('email',$request->email)->get();
