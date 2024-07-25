@@ -70,7 +70,7 @@ class VerifyEmailController extends Controller
         //     return response()->json(['message'=>'Failed','info'=>$result]);#,'input'=>$return_data
         // }
 
-        $admin = User::where('email',$request->admin_email)->get();
+        $admin = User::where('email',$request->admin_email)->where('jenis_pengguna','2')->get();
         if(count($admin)==0){
             return response()->json([
 				'message' => 'Failed',
@@ -91,7 +91,7 @@ class VerifyEmailController extends Controller
         }
         
         $old_web_token = $user->web_token;
-        $web_token = $validation->data['web_token'];
+        $web_token = $user->web_token;
 
         $data = [
             'old_web_token'  => $old_web_token,
