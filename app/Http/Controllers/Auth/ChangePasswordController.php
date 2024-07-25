@@ -76,16 +76,16 @@ class ChangePasswordController extends Controller
             => 'Email Tidak Terdaftar']);
         }
 
-        $old_web_token = $request->token;
-        $web_token = $user->web_token;
+        // $old_web_token = $user->web_token;
+        // $web_token = $user->web_token;
 
         $data = [
-            'old_web_token'  => $old_web_token,
+            'email'  => $request->email,
             'password'       => bcrypt(request('password')),
-            'web_token'      => $web_token
+            // 'web_token'      => $web_token
         ];
 
-        $input = new Helper\UpdateController('changePassUser',$data); 
+        $input = new Helper\UpdateController('changePassUserForce',$data); 
         
         return response()->json(['message'=>'Success','info'
         => 'Password Berhasil Diperbarui']);

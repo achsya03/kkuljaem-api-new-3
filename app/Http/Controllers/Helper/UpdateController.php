@@ -14,8 +14,12 @@ class UpdateController extends Controller
         $this->pos = $pos;
         if($pos=='verifyUser'){
             $this->verifyUser(Models\User::class,$data);
+        }elseif($pos=='verifyUserForce'){
+            $this->verifyUserForce(Models\User::class,$data);
         }elseif($pos=='changePassUser'){
             $this->changePassUser(Models\User::class,$data);
+        }elseif($pos=='changePassUserForce'){
+            $this->changePassUserForce(Models\User::class,$data);
         }elseif($pos=='login'){
             $this->login(Models\User::class,$data);
         }elseif($pos=='banner'){
@@ -83,6 +87,14 @@ class UpdateController extends Controller
         ]);
     }
 
+    private function changePassUserForce($model,$data){
+        $model::where('email',$data['email'])
+        ->update([
+            // 'web_token'      => $data['web_token'],
+            'password'       => $data['password']
+        ]);
+    }
+
     private function changePassUserLogin($model,$data){
         $field = [
             //'id_question',
@@ -104,6 +116,14 @@ class UpdateController extends Controller
         ->update([
             'email_verified_at'  => DB::raw('CURRENT_TIMESTAMP'),
             'web_token'          => $data['web_token']
+        ]);
+    }
+
+    private function verifyUserForce(changePassUser$model,$data){
+        $model::where('email',$data['email'])
+        ->update([
+            'email_verified_at'  => DB::raw('CURRENT_TIMESTAMP'),
+            // 'web_token'          => $data['web_token']
         ]);
     }
 

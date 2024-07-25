@@ -89,20 +89,17 @@ class VerifyEmailController extends Controller
 			]);
             // return Redirect::to(env('APP_URL', "https://kkuljaem.xyz").'register-3')->with( ['status'=>'error'] );
         }
-        return response()->json([
-            'message' => $user
-            //'data' => $result
-        ]);
-        $old_web_token = $user->web_token;
-        $web_token = $user->web_token;
+        
+        // $old_web_token = $user->web_token;
+        // $web_token = $user->web_token;
 
         $data = [
-            'old_web_token'  => $old_web_token,
-            'password'       => bcrypt(request('password')),
-            'web_token'      => $web_token
+            'email'  => $request->email,
+        //     'password'       => bcrypt(request('password')),
+        //     'web_token'      => $web_token
         ];
 
-        $input = new Helper\UpdateController('verifyUser',$data);
+        $input = new Helper\UpdateController('verifyUserForce',$data);
         
         return response()->json([
             'message' => 'Success',
