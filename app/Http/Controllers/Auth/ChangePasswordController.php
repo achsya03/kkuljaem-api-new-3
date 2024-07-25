@@ -10,6 +10,7 @@ use Validator;
 use Hash;
 use Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class ChangePasswordController extends Controller
 {
