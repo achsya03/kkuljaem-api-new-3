@@ -119,7 +119,7 @@ class UpdateController extends Controller
         ]);
     }
 
-    private function verifyUserForce(changePassUser$model,$data){
+    private function verifyUserForce($model,$data){
         $model::where('email',$data['email'])
         ->update([
             'email_verified_at'  => DB::raw('CURRENT_TIMESTAMP'),
